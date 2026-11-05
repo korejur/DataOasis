@@ -1,0 +1,96 @@
+# STATUS – Krovovi za klimu
+
+> **Živi dokument.** Svaki član tima i svaki agent ga **čita na početku rada** i **ažurira na kraju**
+> (u istom commitu kao i sam rad). Pravila ažuriranja su na dnu.
+> Plan i podjela uloga: [`docs/PLAN_RADA.md`](docs/PLAN_RADA.md) · kriteriji i bodovi: [`docs/NATJECANJE.md`](docs/NATJECANJE.md) · upute za agente: [`AGENTS.md`](AGENTS.md)
+
+**Zadnje ažuriranje:** 2026-11-05 · uloga: aplikacija · Korak 1 gotov, dodani STATUS i AGENTS
+**Predaja:** pon 9. 11. 2026. do 24:00 · **Zamrzavanje funkcionalnosti:** ned 8. 11. u 18:00
+**Najviše bodova (30/60):** izvedivost (radni prototip na javnom linku), dojam UI/UX, video
+
+## Gotovo
+
+| Datum | Uloga | Što | Gdje |
+|---|---|---|---|
+| 2026-11-03 | – | Pipeline: preuzimanje ZG3D, krovne plohe, PVGIS, potencijal po zgradi (356 984 zgrade) | `pipeline/`, `data/processed/` |
+| 2026-11-03 | – | Pregled literature i metodologija | `docs/` |
+| 2026-11-05 | aplikacija | **Korak 1:** izvoz za kartu – `buildings.pmtiles` (z13–16), `districts.json`, `city.json` | `pipeline/export_app.py`, `app/public/data/` |
+| 2026-11-05 | – | Plan rada s rasporedom, STATUS, upute za agente | `docs/PLAN_RADA.md`, `STATUS.md`, `AGENTS.md` |
+| 2026-11-05 | – | Sažetak pravila i kriterija ocjenjivanja s planom za bodove | `docs/NATJECANJE.md` |
+
+## U tijeku
+
+| Uloga | Zadatak | Grana | Stanje / napomena |
+|---|---|---|---|
+| aplikacija | Karta (Vite + MapLibre + PMTiles) | | nije započeto |
+| podaci | Granice četvrti i MO → javne ustanove | | zadatak poslan |
+| metodologija | Parametri s `TODO izvor` | | nije započeto |
+
+## Sljedeće (redom)
+
+1. **aplikacija:** karta s karticom zgrade → geokodiranje baštine i ISGE adresa
+2. **podaci:** granice → `building_institutions.parquet` → LST/NDVI (`building_env.parquet`)
+3. **metodologija:** parametri i izvori → validacija (~200 zgrada, popis dobiva od aplikacije) → scenarij videa → UX test s osobom izvan tima
+
+## Blokirano / čeka
+
+| Tko čeka | Na što | Od koga |
+|---|---|---|
+| aplikacija (sloj četvrti) | `data/reference/granice/*.geojson` | podaci |
+| aplikacija (ponovni izvoz) | konačni `PARAMS` | metodologija |
+
+## Predane tablice (sučelje prema izvozu)
+
+Sve tablice vezane uz zgradu: `data/processed/<naziv>.parquet` sa stupcem `bldg_id`.
+Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.py`.
+
+| Datoteka | Stupci | Uloga | Stanje |
+|---|---|---|---|
+| `buildings_metrics.parquet` | sve metrike (vidi `pipeline/metrics.py`) | – | gotovo |
+| `building_institutions.parquet` | `bldg_id`, `institution_type`, `institution_name` | podaci | – |
+| `building_env.parquet` | `bldg_id`, `lst`, `ndvi`, `pop` | podaci | – |
+| `heritage_buildings.parquet` | `bldg_id`, `heritage_id`, `naziv`, `status` | aplikacija | – |
+| `isge_buildings.parquet` | `bldg_id`, `objekt`, `kwh_god`, `eur_god`, `fn_udio` | aplikacija | – |
+
+## Odluke
+
+| Datum | Odluka | Zašto |
+|---|---|---|
+| 2026-11-05 | Izazov **B – Okoliš i održivi prostor** | tema zelenih krovova i klime |
+| 2026-11-05 | 2D web karta (MapLibre) + panel s četvrtima; 3D samo ako ostane vremena | brže, pouzdan demo |
+| 2026-11-05 | Statička aplikacija bez backenda, sve se računa unaprijed u Pythonu | besplatan hosting, nema servera koji može pasti |
+| 2026-11-05 | Zgrade na karti od zuma 13; ispod toga četvrti | na z12 GDAL odbacuje ~45 % zgrada zbog veličine pločica |
+| 2026-11-05 | `buildings.pmtiles` nije u gitu (80 MB), regenerira se s `pipeline.export_app` | veličina |
+| 2026-11-05 | Dorada UI/UX i video su zasebni zadaci s vlastitim vremenom | zajedno s izvedivošću nose 30/60 bodova |
+
+## Otvorena pitanja (treba odluku tima)
+
+* **Licenca** (boduje se): prijedlog **MIT** za kod, **CC BY 4.0** za izvedene podatke.
+* **Hosting aplikacije i PMTiles** (80 MB, treba HTTP Range): GitHub Pages podnosi datoteke do 100 MB; alternativa Cloudflare R2/Netlify.
+* Kada repo postaje **javan** (najkasnije prije slanja e-pošte).
+* Koeficijent za fine čestice: NRW 1,4 g/m² ili Wuppertal 9,8 g/m² – navesti raspon?
+
+## Kontrolni popis za predaju (prema Pravilima, pogl. VIII)
+
+| # | Stavka | Uloga | Stanje |
+|---|---|---|---|
+| 1 | Javni GitHub repozitorij s izvornim kodom | aplikacija | repo postoji, privatan |
+| 2 | Licenca otvorenog koda (`LICENSE`) | svi – odluka | ☐ |
+| 3 | Tehnička dokumentacija `docs/ARHITEKTURA.md`: dijagram, standardi, integracija s javnim sustavima, tehnički/organizacijski/pravni preduvjeti | aplikacija | ☐ |
+| 4 | Projektna dokumentacija: problem, ciljni korisnici, vrijednost, daljnji razvoj | metodologija | ☐ |
+| 5 | **Popis svih skupova podataka** s izdavateljem, poveznicom i licencom | metodologija + podaci | djelomično (README) |
+| 6 | **Popis korištenih alata i biblioteka, uključujući AI alate** | svi | ☐ |
+| 7 | Demo: javni link na radni prototip | aplikacija | ☐ |
+| 8 | Demo: snimke zaslona | metodologija | ☐ |
+| 9 | **Video ≤ 3 min:** problem, korisnici, izvori podataka, funkcionalnosti, arhitektura, vrijednost, daljnji razvoj | metodologija | ☐ |
+| 10 | Video i veliki dodaci preko poveznice dostupne barem do objave rezultata (17. 11.) | metodologija | ☐ |
+| 11 | E-pošta na open.data@mpudt.hr do 9. 11. u 24:00 (šalje voditelj tima, mentor u kopiji) – cilj poslati do 20:00 | voditelj | ☐ |
+
+## Pravila ažuriranja (za ljude i agente)
+
+1. **Na početku rada:** pročitaj cijeli STATUS. Ako uzimaš zadatak, upiši ga u „U tijeku“ (uloga, grana) i pushaj, da se ne radi dvaput.
+2. **Na kraju rada (isti commit/PR):** premjesti stavku u „Gotovo“ (datum, uloga, putanja), ažuriraj „Sljedeće“, „Blokirano“ i tablicu predanih datoteka, promijeni redak „Zadnje ažuriranje“.
+3. **Odluke** koje utječu na druge upiši u „Odluke“ s razlogom; neodlučeno ide u „Otvorena pitanja“.
+4. Piši **kratko**, jedan redak po stavci, putanje u `backtickovima`. Ne briši tuđe retke, osim da ih premjestiš u „Gotovo“.
+5. Kod konflikta u ovoj datoteci pri spajanju **zadrži retke obje strane**.
+6. U ovu datoteku ne upisuj imena, samo uloge.

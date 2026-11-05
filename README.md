@@ -79,3 +79,16 @@ Pretpostavke su u `docs/METODOLOGIJA.md`.
 | Geoportal: vrtići, škole, domovi za starije, zdravstvo | Grad Zagreb | osjetljivi korisnici (planirano) |
 | Gradske četvrti, mjesni odbori (RPJ) | Grad Zagreb | agregacija (planirano) |
 | Planirana namjena 2023, Topografska osnova 2018 | Grad Zagreb | namjena prostora, vegetacija (planirano) |
+
+## Korišteni alati
+
+Sav softver je otvorenog koda, osim gdje je drukčije navedeno. Pravila natjecanja traže i navođenje AI alata.
+
+| Alat | Uporaba | Licenca |
+|---|---|---|
+| Python, NumPy, pandas, Shapely, pyproj, GeoPandas, pyogrio (GDAL), PyArrow | obrada geopodataka | BSD / MIT / Apache 2.0 |
+| GDAL (PMTiles/MVT driver) | izrada vektorskih pločica | MIT |
+| PVGIS v5.3 API (JRC) | prinos fotonapona | otvoreni podaci EK |
+| AI asistent za programiranje (Claude Code, Anthropic) | pomoć pri pisanju koda i dokumentacije | komercijalni alat |
+
+Dopuniti alatima aplikacije (Vite, MapLibre GL JS, PMTiles) kad se uvedu.

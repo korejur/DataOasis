@@ -17,6 +17,7 @@
 | 2026-11-05 | aplikacija | **Korak 1:** izvoz za kartu – `buildings.pmtiles` (z13–16), `districts.json`, `city.json` | `pipeline/export_app.py`, `app/public/data/` |
 | 2026-11-05 | – | Plan rada s rasporedom, STATUS, upute za agente | `docs/PLAN_RADA.md`, `STATUS.md`, `AGENTS.md` |
 | 2026-11-05 | – | Sažetak pravila i kriterija ocjenjivanja s planom za bodove | `docs/NATJECANJE.md` |
+| 2026-11-05 | – | `handoff.md` obrisan; otvorena pitanja prenesena u STATUS, napomene o podacima u `METODOLOGIJA.md` | – |
 
 ## U tijeku
 
@@ -69,6 +70,11 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 * **Hosting aplikacije i PMTiles** (80 MB, treba HTTP Range): GitHub Pages podnosi datoteke do 100 MB; alternativa Cloudflare R2/Netlify.
 * Kada repo postaje **javan** (najkasnije prije slanja e-pošte).
 * Koeficijent za fine čestice: NRW 1,4 g/m² ili Wuppertal 9,8 g/m² – navesti raspon?
+* **Predložene izmjene metodologije** (iz pregleda literature, nisu primijenjene): NRW klase nagiba
+  0–5 / 5–10 / 10–15 / 15–35 / > 35° s izračunom do 15° (sada do 20°); supstrat 10 / 20 / 30 cm
+  (masa 130/280/420 kg/m², zadržavanje 50/60/70 %, CO₂ 0,8/0,9/1,0 kg/m²); hlađenje isparavanjem
+  (~686 kWh/m³); razredi veličine i troška; minimalna površina plohe 10 m² (sada 50 m² po zgradi).
+  Odlučuje metodologija; primjena znači izmjenu `metrics.py` i ponovni izvoz.
 
 ## Kontrolni popis za predaju (prema Pravilima, pogl. VIII)
 
@@ -84,6 +90,7 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 | 8 | Demo: snimke zaslona | metodologija | ☐ |
 | 9 | **Video ≤ 3 min:** problem, korisnici, izvori podataka, funkcionalnosti, arhitektura, vrijednost, daljnji razvoj | metodologija | ☐ |
 | 10 | Video i veliki dodaci preko poveznice dostupne barem do objave rezultata (17. 11.) | metodologija | ☐ |
+| 10a | **Pospremanje repoa prije objave**: README prepisati kao predstavljanje projekta (problem, link na demo, snimka zaslona, arhitektura, podaci); `STATUS.md` i `PLAN_RADA.md` po želji u `docs/tim/`; provjeriti da nigdje nema imena, osobnih putanja ni tajni; obrisati privremene datoteke | aplikacija | ☐ |
 | 11 | E-pošta na open.data@mpudt.hr do 9. 11. u 24:00 (šalje voditelj tima, mentor u kopiji) – cilj poslati do 20:00 | voditelj | ☐ |
 
 ## Pravila ažuriranja (za ljude i agente)

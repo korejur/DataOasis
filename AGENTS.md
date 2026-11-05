@@ -8,8 +8,6 @@
 3. Pitaj korisnika **koju ulogu ima** (aplikacija / podaci / metodologija), ako to nije jasno. Radi samo na datotekama te uloge.
 4. Na kraju rada **ažuriraj `STATUS.md`** u istom commitu (pravila su na dnu te datoteke).
 
-`handoff.md` je povijesni zapis prve sesije (3. 11.). Za trenutno stanje vrijedi `STATUS.md`.
-
 ## Projekt u dvije rečenice
 
 „Krovovi za klimu“ je alat za urbaniste Grada Zagreba. Iz otvorenog 3D modela zgrada (ZG3D, LoD 2.2)

@@ -174,3 +174,16 @@ potrošnje** `E_FN / E_potrošnja`.
   samo paušalnim faktorom iskoristivosti.
 * Ekonomski parametri (cijene, subvencije, net-metering) se mijenjaju, pa
   ih treba prikazati kao pretpostavke i dopustiti promjenu u aplikaciji.
+* 547 objekata nema krovnu plohu (ploče niže od 0,3 m, otvorene ljuske poput
+  tornjeva i dimnjaka). Namjerno su izostavljeni.
+* U Donjem gradu se visina iz modela poklapa sa `Z_Delta` kod 79 % zgrada
+  (u Gornjem gradu ~100 %). Uzrok još nije istražen.
+
+## 7. Napomene o pomoćnim skupovima podataka
+
+* **Registar kulturnih dobara:** 763 zapisa za Zagreb, od toga 547 s adresom,
+  bez koordinata. Za spajanje sa zgradama treba geokodiranje adresa.
+* **ISGE potrošnja objekata Grada (2019.–2024.):** CSV sa separatorom `;`,
+  ~419 tisuća redaka (mjesečno po mjernom mjestu). Ima adrese, ali ne i koordinate.
+* **Topografska osnova 2018 – objekti:** stupac „Tip objekta“ je brojčani kod,
+  a šifrarnik nije pronađen.

@@ -1,0 +1,61 @@
+{
+ "zgrade": 356984.0,
+ "krovna_povrsina_m2": 40469811.8,
+ "ravni_krovovi_m2": 15979263.1,
+ "zgrade_ravni_krov": 142306.0,
+ "zk_kandidati": 82029.0,
+ "zk_prikladno_m2": 17859844.4,
+ "zk_iskoristivo_m2": 13394883.3,
+ "zk_zadrzana_voda_m3_god": 5893748.7,
+ "zk_trosak_eur": 1741334831.5,
+ "fn_kandidati": 209598.0,
+ "fn_snaga_MWp": 3406.2,
+ "fn_proizvodnja_GWh_god": 3817.1,
+ "fn_co2_t_god": 511487.0,
+ "fn_kucanstva": 1090590.5,
+ "fn_trosak_eur": 4428056951.5,
+ "parametri": {
+  "green_usable_fraction": 0.75,
+  "green_min_building_area": 50.0,
+  "annual_precip_mm": 880.0,
+  "green_retention_fraction": 0.5,
+  "pv_kwp_per_m2": 0.2,
+  "pv_pitched_coverage": 0.7,
+  "pv_flat_gcr": 0.5,
+  "pv_flat_tilt": 15.0,
+  "pv_flat_azimuth": 180.0,
+  "pv_flat_max_slope": 10.0,
+  "pv_max_slope": 60.0,
+  "pv_min_yield_kwh_kwp": 900.0,
+  "pv_min_face_area": 5.0,
+  "pv_min_building_kwp": 3.0,
+  "pv_system_loss_pct": 14.0,
+  "grid_co2_kg_per_kwh": 0.134,
+  "green_cost_eur_m2": 130.0,
+  "pv_cost_eur_kwp": 1300.0,
+  "electricity_price_eur_kwh": 0.15,
+  "household_kwh_year": 3500.0,
+  "green_slope_classes": [
+   [
+    "visoka",
+    0.0,
+    10.0
+   ],
+   [
+    "srednja",
+    10.0,
+    20.0
+   ],
+   [
+    "niska",
+    20.0,
+    35.0
+   ]
+  ]
+ },
+ "izvoz": {
+  "datum": "2026-11-05",
+  "minzoom": 13,
+  "maxzoom": 16
+ }
+}

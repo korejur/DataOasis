@@ -4,3 +4,6 @@ __pycache__/
 data/raw/
 data/processed/
 .ipynb_checkpoints/
+app/public/data/*.pmtiles
+node_modules/
+app/dist/

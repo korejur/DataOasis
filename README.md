@@ -17,6 +17,7 @@ pipeline/           obrada podataka (Python)
   extract_roofs.py  2) 3D plohe -> krovne plohe (nagib, azimut, površina)
   pvgis.py          3) tablica FN prinosa za Zagreb (PVGIS, JRC)
   metrics.py        4) potencijal po zgradi, četvrti i gradu
+  export_app.py     5) izvoz za web kartu (PMTiles + JSON sažeci)
 data/
   raw/              preuzeti izvorni podaci (nije u gitu)
   reference/        pomoćni skupovi (PVGIS, kulturna dobra, ISGE...)
@@ -36,6 +37,7 @@ python -m venv .venv
 .venv/Scripts/python -m pipeline.extract_roofs   # paralelno po četvrtima
 .venv/Scripts/python -m pipeline.pvgis           # ~300 upita prema PVGIS-u
 .venv/Scripts/python -m pipeline.metrics         # ~10 s, ponoviti nakon promjene parametara
+.venv/Scripts/python -m pipeline.export_app      # podaci za aplikaciju -> app/public/data/
 ```
 
 Na Windowsu za ispis dijakritika postaviti `PYTHONIOENCODING=utf-8`.

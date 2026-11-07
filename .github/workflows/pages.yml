@@ -1,0 +1,64 @@
+# Objava web aplikacije na GitHub Pages.
+#
+# buildings.pmtiles (~80 MB) nije u gitu, nego je prilog GitHub Releasea s oznakom
+# `podaci`. Nakon novog izvoza (python -m pipeline.export_app) zamijeniti ga s:
+#   gh release upload podaci app/public/data/buildings.pmtiles --clobber
+# i ponovno pokrenuti ovaj workflow (Actions -> Objava aplikacije -> Run workflow).
+name: Objava aplikacije
+
+on:
+  push:
+    branches: [main]
+    paths: ["app/**", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  PODACI_TAG: podaci
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Preuzmi pločice zgrada (GitHub Release)
+        run: gh release download "$PODACI_TAG" --pattern buildings.pmtiles --dir app/public/data
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Build
+        working-directory: app
+        run: |
+          npm ci
+          npm run build
+
+      - uses: actions/configure-pages@v6
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: app/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

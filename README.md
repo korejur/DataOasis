@@ -23,7 +23,12 @@ data/
   reference/        pomoćni skupovi (PVGIS, kulturna dobra, ISGE...)
   processed/        rezultati (nije u gitu)
 docs/               metodologija, bilješke
-app/                web aplikacija (u izradi)
+app/                web aplikacija: statička karta (Vite + MapLibre GL JS + PMTiles), bez backenda
+  src/main.js       karta, slojevi, odabir zgrade i četvrti
+  src/panel.js      brojke za grad i četvrti, scenarij, rang-lista
+  src/card.js       kartica zgrade
+  src/search.js     pretraga četvrti i adresa (Nominatim)
+  public/data/      izlaz iz export_app.py (buildings.pmtiles nije u gitu)
 ```
 
 ## Pokretanje
@@ -41,6 +46,17 @@ python -m venv .venv
 ```
 
 Na Windowsu za ispis dijakritika postaviti `PYTHONIOENCODING=utf-8`.
+
+### Web aplikacija
+
+Treba Node.js 20.19+ i `app/public/data/buildings.pmtiles` (izlaz `pipeline.export_app`, ~80 MB).
+
+```bash
+cd app
+npm install
+npm run dev       # razvoj: http://localhost:5173
+npm run build     # statički build u app/dist/ (može na bilo koji statički hosting s HTTP Range)
+```
 
 ## Izlazi (`data/processed/`)
 
@@ -79,6 +95,8 @@ Pretpostavke su u `docs/METODOLOGIJA.md`.
 | Geoportal: vrtići, škole, domovi za starije, zdravstvo | Grad Zagreb | osjetljivi korisnici (planirano) |
 | Gradske četvrti, mjesni odbori (RPJ) | Grad Zagreb | agregacija (planirano) |
 | Planirana namjena 2023, Topografska osnova 2018 | Grad Zagreb | namjena prostora, vegetacija (planirano) |
+| OpenStreetMap preko [OpenFreeMap](https://openfreemap.org) (stil Positron, OpenMapTiles) | suradnici OSM-a, ODbL | podloga karte u aplikaciji |
+| [Nominatim](https://nominatim.org) (OpenStreetMap) | suradnici OSM-a, ODbL | pretraga adresa u aplikaciji |
 
 ## Korišteni alati
 
@@ -89,6 +107,7 @@ Sav softver je otvorenog koda, osim gdje je drukčije navedeno. Pravila natjecan
 | Python, NumPy, pandas, Shapely, pyproj, GeoPandas, pyogrio (GDAL), PyArrow | obrada geopodataka | BSD / MIT / Apache 2.0 |
 | GDAL (PMTiles/MVT driver) | izrada vektorskih pločica | MIT |
 | PVGIS v5.3 API (JRC) | prinos fotonapona | otvoreni podaci EK |
+| MapLibre GL JS | web karta (vektorske pločice, 3D prikaz zgrada) | BSD-3-Clause |
+| PMTiles (protokol za MapLibre) | čitanje pločica iz jedne datoteke preko HTTP Range | BSD-3-Clause |
+| Vite | razvojni poslužitelj i build aplikacije | MIT |
 | AI asistent za programiranje (Claude Code, Anthropic) | pomoć pri pisanju koda i dokumentacije | komercijalni alat |
-
-Dopuniti alatima aplikacije (Vite, MapLibre GL JS, PMTiles) kad se uvedu.

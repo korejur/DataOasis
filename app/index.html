@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Krovovi za klimu – Zagreb</title>
+  <meta name="description" content="Karta krovova Zagreba pogodnih za zelene krovove i fotonapon, izračunata iz otvorenog 3D modela zgrada (ZG3D)." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <div id="map" aria-label="Karta krovova Zagreba"></div>
+
+  <!-- Lijevi panel: način prikaza, pretraga, brojke za grad i četvrti -->
+  <aside id="panel" class="panel" aria-label="Pregled">
+    <button id="panel-handle" class="panel-handle" aria-label="Proširi ili smanji panel"><span></span></button>
+    <header class="brand">
+      <svg class="brand-logo" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M3 17 16 6l13 11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 16.5c0 6 3.6 9.5 8 9.5s8-3.5 8-9.5c-3 .2-6 1.2-8 3.6-2-2.4-5-3.4-8-3.6Z" fill="currentColor" opacity=".9"/>
+      </svg>
+      <div>
+        <h1>Krovovi za klimu</h1>
+        <p class="brand-sub">Zagreb · gdje krovovi mogu hladiti grad, zadržati kišu i proizvoditi struju</p>
+      </div>
+    </header>
+
+    <div class="mode" role="tablist" aria-label="Što prikazati na karti">
+      <button role="tab" class="mode-btn" data-mode="zk" aria-selected="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Zm0 0 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Zeleni krovovi
+      </button>
+      <button role="tab" class="mode-btn" data-mode="fn" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Fotonapon
+      </button>
+    </div>
+
+    <form id="search" class="search" role="search" autocomplete="off">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="search-input" type="search" placeholder="Adresa ili gradska četvrt" aria-label="Pretraži adresu ili gradsku četvrt" />
+      <ul id="search-results" class="search-results" role="listbox" hidden></ul>
+    </form>
+
+    <div class="panel-body">
+      <section class="summary" aria-live="polite">
+        <div class="summary-head">
+          <button id="back-city" class="link-btn" hidden>← Cijeli grad</button>
+          <h2 id="summary-title">Cijeli grad</h2>
+        </div>
+        <div id="kpis" class="kpis"></div>
+        <div class="scenario">
+          <span class="scenario-label">Ako se iskoristi</span>
+          <div class="seg" id="scenario" role="radiogroup" aria-label="Scenarij">
+            <button role="radio" data-share="0.1" aria-checked="false">10 %</button>
+            <button role="radio" data-share="0.3" aria-checked="false">30 %</button>
+            <button role="radio" data-share="1" aria-checked="true">svi kandidati</button>
+          </div>
+        </div>
+        <p id="kpi-note" class="note"></p>
+      </section>
+
+      <section class="districts">
+        <div class="districts-head">
+          <h2>Gradske četvrti</h2>
+          <label class="sort">
+            <span class="visually-hidden">Rangiraj po</span>
+            <select id="district-sort"></select>
+          </label>
+        </div>
+        <ol id="district-list" class="district-list"></ol>
+      </section>
+
+      <footer class="panel-foot">
+        <button id="open-about" class="link-btn">O projektu, metodologiji i izvorima podataka</button>
+      </footer>
+    </div>
+  </aside>
+
+  <!-- Kartica zgrade -->
+  <aside id="card" class="card" aria-label="Podaci o zgradi" hidden>
+    <button id="card-close" class="icon-btn card-close" aria-label="Zatvori karticu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div id="card-body"></div>
+  </aside>
+
+  <!-- Legenda -->
+  <div id="legend" class="legend" aria-label="Legenda"></div>
+
+  <!-- Napomena kod malog zuma -->
+  <div id="zoom-hint" class="zoom-hint" hidden>Približite kartu da biste vidjeli pojedine zgrade</div>
+
+  <!-- Uvodni ekran / o projektu -->
+  <dialog id="about" class="about">
+    <form method="dialog" class="about-inner">
+      <h2>Krovovi za klimu</h2>
+      <p class="lead">Koji krovovi u Zagrebu mogu postati <strong>zeleni</strong> ili proizvoditi <strong>struju iz sunca</strong>, i koliko bi to pomoglo gradu?</p>
+      <p>Za svih ~357 000 zgrada iz otvorenog 3D modela Grada Zagreba izračunali smo nagib i orijentaciju svake krovne plohe.
+        Iz toga procjenjujemo površinu pogodnu za zeleni krov, količinu kišnice koju bi zadržao, snagu i proizvodnju sunčane elektrane te trošak.</p>
+      <ul class="how">
+        <li><strong>Odaberite sloj:</strong> zeleni krovovi ili fotonapon.</li>
+        <li><strong>Kliknite zgradu</strong> za njezine brojke ili <strong>četvrt</strong> u popisu za usporedbu.</li>
+        <li><strong>Scenarij</strong> pokazuje učinak ako se iskoristi samo dio pogodnih krovova.</li>
+      </ul>
+      <p class="small">Brojke su <em>tehnički potencijal</em>: gornja granica prije statičke provjere krova, zaštite kulturnih dobara i vlasničkih odnosa.
+        Dio modela potječe iz snimanja 2008., pa novije promjene na krovovima nisu vidljive.</p>
+      <h3>Izvori podataka</h3>
+      <ul class="sources">
+        <li>3D model zgrada ZG3D (LoD 2.2) – Grad Zagreb, <a href="https://data.gov.hr" target="_blank" rel="noopener">data.gov.hr</a></li>
+        <li>Prinos fotonapona PVGIS 5.3 – Zajednički istraživački centar EK (JRC)</li>
+        <li>Podloga karte – <a href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap</a>, © OpenMapTiles, © suradnici OpenStreetMapa</li>
+        <li>Pretraga adresa – Nominatim, © suradnici OpenStreetMapa</li>
+      </ul>
+      <p class="small">Datathon Portala otvorenih podataka 2026. · izazov B – Okoliš i održivi prostor</p>
+      <button class="primary" value="ok" autofocus>Otvori kartu</button>
+    </form>
+  </dialog>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

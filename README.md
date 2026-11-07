@@ -6,6 +6,8 @@ krovove** i **fotonapon**, procjenjuje njihov doprinos (zadržana oborinska
 voda, proizvedena energija, smanjenje CO₂, trošak) i pomaže odrediti gdje
 krenuti prvo.
 
+**Aplikacija:** https://korejur.github.io/DataOasis/
+
 Metodologija i formule: [docs/METODOLOGIJA.md](docs/METODOLOGIJA.md)
 
 ## Struktura

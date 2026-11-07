@@ -4,7 +4,7 @@
 > (u istom commitu kao i sam rad). Pravila ažuriranja su na dnu.
 > Plan i podjela uloga: [`docs/PLAN_RADA.md`](docs/PLAN_RADA.md) · kriteriji i bodovi: [`docs/NATJECANJE.md`](docs/NATJECANJE.md) · upute za agente: [`AGENTS.md`](AGENTS.md)
 
-**Zadnje ažuriranje:** 2026-11-07 · uloga: aplikacija · karta s karticom zgrade i panelom četvrti (grana `aplikacija/karta`)
+**Zadnje ažuriranje:** 2026-11-07 · uloga: aplikacija · karta objavljena: https://korejur.github.io/DataOasis/
 **Predaja:** pon 9. 11. 2026. do 24:00 · **Zamrzavanje funkcionalnosti:** ned 8. 11. u 18:00
 **Najviše bodova (30/60):** izvedivost (radni prototip na javnom linku), dojam UI/UX, video
 
@@ -21,6 +21,7 @@
 | 2026-11-07 | aplikacija | **Karta:** Vite + MapLibre + PMTiles; prekidač zeleni krov / FN, kartica zgrade, legenda, uvodni ekran s izvorima, 3D prikaz, prikaz na mobitelu | `app/` |
 | 2026-11-07 | aplikacija | **Panel s četvrtima:** brojke za grad i četvrt, scenarij 10 / 30 / 100 % kandidata, rang-lista (3 kriterija po sloju), pregled ispod z13 krugovima | `app/src/panel.js` |
 | 2026-11-07 | aplikacija | Pretraga četvrti (bez dijakritika) i adresa (Nominatim) s otvaranjem kartice pogođene zgrade | `app/src/search.js` |
+| 2026-11-07 | aplikacija | **Objava na GitHub Pages:** workflow pri pushu na `main`, `buildings.pmtiles` iz Releasea `podaci`; repo javan; `LICENSE` (MIT); uklonjen tuđi PDF (LANUV NRW) | `.github/workflows/pages.yml`, `LICENSE` |
 
 ## U tijeku
 
@@ -31,7 +32,7 @@
 
 ## Sljedeće (redom)
 
-1. **aplikacija:** objava na javnom linku (treba odluka o hostingu) → geokodiranje baštine i ISGE adresa → spajanje tablica u izvoz (oznake u kartici) → scenarij „samo javne zgrade“ → `docs/ARHITEKTURA.md`
+1. **aplikacija:** geokodiranje baštine i ISGE adresa → spajanje tablica u izvoz (oznake u kartici) → scenarij „samo javne zgrade“ → `docs/ARHITEKTURA.md`
 2. **podaci:** granice → `building_institutions.parquet` → LST/NDVI (`building_env.parquet`)
 3. **metodologija:** parametri i izvori → validacija (~200 zgrada, popis dobiva od aplikacije) → scenarij videa → UX test s osobom izvan tima
 
@@ -69,15 +70,15 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 | 2026-11-07 | Pretraga adresa preko Nominatima, samo na Enter (najviše 1 upit/s) | pravila korištenja Nominatima; nema vlastitog geokodera |
 | 2026-11-07 | Ispod z13 četvrti su krugovi u središtu (veličina = potencijal) dok ne stignu granice | granice još nisu predane |
 | 2026-11-07 | Scenarij u panelu linearno skalira brojke (10 / 30 / 100 % kandidata) | jednostavno i lako objasniti |
+| 2026-11-07 | **Hosting: GitHub Pages**; `buildings.pmtiles` je prilog GitHub Releasea `podaci` (ne u gitu) | besplatno, isti repo, HTTP Range; nakon novog izvoza `gh release upload podaci … --clobber` |
+| 2026-11-07 | **Repo javan** od 7. 11. | Pages na besplatnom računu traži javni repo; ionako uvjet predaje |
+| 2026-11-07 | **Licenca:** MIT za kod, CC BY 4.0 za izvedene podatke | prijedlog iz otvorenih pitanja, boduje se |
+| 2026-11-07 | Tuđi PDF (LANUV NRW) uklonjen iz repoa, poveznica u `PREGLED_LITERATURE.md` | autorska prava u javnom repou |
 
 ## Otvorena pitanja (treba odluku tima)
 
-* **Licenca** (boduje se): prijedlog **MIT** za kod, **CC BY 4.0** za izvedene podatke.
-* **Hosting aplikacije i PMTiles** (80 MB, treba HTTP Range): GitHub Pages podnosi datoteke do 100 MB; alternativa Cloudflare R2/Netlify.
-  Izmjereno 7. 11.: prvi prikaz (z14, središte) preuzme ~1,7 MB pločica; pločice na z13 imaju do 1,3 MB.
 * **„Struja za kućanstva“ za cijeli grad** (1,1 mil. uz 3 500 kWh) veća je od broja kućanstava u Zagrebu
   (tehnički potencijal). Prikazati kao udio potrošnje grada ili ostaviti uz napomenu? Odlučuje metodologija.
-* Kada repo postaje **javan** (najkasnije prije slanja e-pošte).
 * Koeficijent za fine čestice: NRW 1,4 g/m² ili Wuppertal 9,8 g/m² – navesti raspon?
 * **Predložene izmjene metodologije** (iz pregleda literature, nisu primijenjene): NRW klase nagiba
   0–5 / 5–10 / 10–15 / 15–35 / > 35° s izračunom do 15° (sada do 20°); supstrat 10 / 20 / 30 cm
@@ -89,13 +90,13 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 
 | # | Stavka | Uloga | Stanje |
 |---|---|---|---|
-| 1 | Javni GitHub repozitorij s izvornim kodom | aplikacija | repo postoji, privatan |
-| 2 | Licenca otvorenog koda (`LICENSE`) | svi – odluka | ☐ |
+| 1 | Javni GitHub repozitorij s izvornim kodom | aplikacija | ✔ javan od 7. 11. (github.com/korejur/DataOasis) |
+| 2 | Licenca otvorenog koda (`LICENSE`) | svi – odluka | ✔ MIT (kod), CC BY 4.0 (podaci) |
 | 3 | Tehnička dokumentacija `docs/ARHITEKTURA.md`: dijagram, standardi, integracija s javnim sustavima, tehnički/organizacijski/pravni preduvjeti | aplikacija | ☐ |
 | 4 | Projektna dokumentacija: problem, ciljni korisnici, vrijednost, daljnji razvoj | metodologija | ☐ |
 | 5 | **Popis svih skupova podataka** s izdavateljem, poveznicom i licencom | metodologija + podaci | djelomično (README) |
 | 6 | **Popis korištenih alata i biblioteka, uključujući AI alate** | svi | djelomično (README: pipeline + aplikacija) |
-| 7 | Demo: javni link na radni prototip | aplikacija | ☐ |
+| 7 | Demo: javni link na radni prototip | aplikacija | ✔ https://korejur.github.io/DataOasis/ |
 | 8 | Demo: snimke zaslona | metodologija | ☐ |
 | 9 | **Video ≤ 3 min:** problem, korisnici, izvori podataka, funkcionalnosti, arhitektura, vrijednost, daljnji razvoj | metodologija | ☐ |
 | 10 | Video i veliki dodaci preko poveznice dostupne barem do objave rezultata (17. 11.) | metodologija | ☐ |

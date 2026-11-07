@@ -111,3 +111,23 @@ Sav softver je otvorenog koda, osim gdje je drukčije navedeno. Pravila natjecan
 | PMTiles (protokol za MapLibre) | čitanje pločica iz jedne datoteke preko HTTP Range | BSD-3-Clause |
 | Vite | razvojni poslužitelj i build aplikacije | MIT |
 | AI asistent za programiranje (Claude Code, Anthropic) | pomoć pri pisanju koda i dokumentacije | komercijalni alat |
+
+## Objava aplikacije
+
+Aplikacija se objavljuje na GitHub Pages workflowom [`.github/workflows/pages.yml`](.github/workflows/pages.yml)
+pri svakom pushu na `main` koji mijenja `app/`. Datoteka `buildings.pmtiles` nije u gitu, nego je
+prilog GitHub Releasea s oznakom `podaci`. Nakon promjene parametara:
+
+```bash
+.venv/Scripts/python -m pipeline.metrics
+.venv/Scripts/python -m pipeline.export_app
+gh release upload podaci app/public/data/buildings.pmtiles --clobber
+gh workflow run "Objava aplikacije"
+```
+
+## Licenca
+
+* **Kod** (pipeline i aplikacija): [MIT](LICENSE)
+* **Izvedeni podaci** (`app/public/data/`, tablice iz `pipeline/`): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.hr)
+  uz navođenje izvora iz tablice „Izvori podataka“
+* **Izvorni podaci** u `data/reference/` zadržavaju licence svojih izdavatelja

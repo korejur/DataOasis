@@ -4,7 +4,7 @@
 > (u istom commitu kao i sam rad). Pravila ažuriranja su na dnu.
 > Plan i podjela uloga: [`docs/PLAN_RADA.md`](docs/PLAN_RADA.md) · kriteriji i bodovi: [`docs/NATJECANJE.md`](docs/NATJECANJE.md) · upute za agente: [`AGENTS.md`](AGENTS.md)
 
-**Zadnje ažuriranje:** 2026-11-08 · uloga: aplikacija · novi naziv „Krov+“ i tekst uvoda
+**Zadnje ažuriranje:** 2026-11-08 · uloga: metodologija · scenarij videa
 **Predaja:** pon 9. 11. 2026. do 24:00 · **Zamrzavanje funkcionalnosti:** ned 8. 11. u 18:00
 **Najviše bodova (30/60):** izvedivost (radni prototip na javnom linku), dojam UI/UX, video
 
@@ -33,6 +33,7 @@
 | 2026-11-08 | aplikacija | **Prikaz „samo objekti Grada“** (ISGE, 853 zgrade): brojke, rang-lista četvrti i karta samo za objekte Grada; pokrivenost vlastite potrošnje struje FN-om ≈ 75 % (objekti ≥ 20 MWh/god); `export_app.py --samo-json` za brzi izvoz sažetaka | `app/src/panel.js`, `app/src/main.js`, `pipeline/export_app.py`, `docs/METODOLOGIJA.md` 7.2 |
 | 2026-11-08 | aplikacija | „O projektu i izvorima podataka“ uvijek vidljivo na dnu panela | `app/index.html`, `app/src/style.css` |
 | 2026-11-08 | aplikacija | Novi naziv **Krov+** i tekst (podnaslov, uvod, „O projektu“, naslov stranice); poveznica na repozitorij u „O projektu“ | `app/index.html`, `app/src/onboarding.js`, README, LICENSE |
+| 2026-11-08 | metodologija | **Scenarij videa** (3:00): tekst u pasivu, kadrovi, demo na javnom linku (OŠ Središće, objekti Grada 75 %), provjera brojki | `docs/VIDEO_SCENARIJ.md` |
 
 ## U tijeku
 
@@ -44,7 +45,7 @@
 
 1. **aplikacija:** `docs/ARHITEKTURA.md`
 2. **podaci:** granice → `building_institutions.parquet` → LST/NDVI (`building_env.parquet`)
-3. **metodologija:** validacija (~200 zgrada, popis dobiva od aplikacije) → scenarij videa → UX test s osobom izvan tima
+3. **metodologija:** snimanje i montaža videa (`docs/VIDEO_SCENARIJ.md`) → snimke zaslona → projektna dokumentacija → validacija ako ostane vremena
 
 **Za preuzimanje aplikacije:** `cd app && npm install && npm run dev` (treba `app/public/data/buildings.pmtiles`, vidi README).
 Ako Vite javi „Cannot find native binding“ (npm greška s opcionalnim ovisnostima): `npm i --no-save @rolldown/binding-win32-x64-msvc@<verzija rolldowna>`.
@@ -120,7 +121,7 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 | 6 | **Popis korištenih alata i biblioteka, uključujući AI alate** | svi | djelomično (README: pipeline + aplikacija) |
 | 7 | Demo: javni link na radni prototip | aplikacija | ✔ https://korejur.github.io/DataOasis/ |
 | 8 | Demo: snimke zaslona | metodologija | ☐ |
-| 9 | **Video ≤ 3 min:** problem, korisnici, izvori podataka, funkcionalnosti, arhitektura, vrijednost, daljnji razvoj | metodologija | ☐ |
+| 9 | **Video ≤ 3 min:** problem, korisnici, izvori podataka, funkcionalnosti, arhitektura, vrijednost, daljnji razvoj | metodologija | scenarij gotov (`docs/VIDEO_SCENARIJ.md`), snimanje ☐ |
 | 10 | Video i veliki dodaci preko poveznice dostupne barem do objave rezultata (17. 11.) | metodologija | ☐ |
 | 10a | **Pospremanje repoa prije objave**: README prepisati kao predstavljanje projekta (problem, link na demo, snimka zaslona, arhitektura, podaci); `STATUS.md` i `PLAN_RADA.md` po želji u `docs/tim/`; provjeriti da nigdje nema imena, osobnih putanja ni tajni; obrisati privremene datoteke | aplikacija | ☐ |
 | 11 | E-pošta na open.data@mpudt.hr do 9. 11. u 24:00 (šalje voditelj tima, mentor u kopiji) – cilj poslati do 20:00 | voditelj | ☐ |

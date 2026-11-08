@@ -41,6 +41,13 @@
           <button id="back-city" class="link-btn" hidden>← Cijeli grad</button>
           <h2 id="summary-title">Cijeli grad</h2>
         </div>
+        <div class="scope">
+          <span class="scenario-label">Zgrade</span>
+          <div class="seg" id="scope" role="radiogroup" aria-label="Koje zgrade prikazati">
+            <button role="radio" data-scope="sve" aria-checked="true">sve</button>
+            <button role="radio" data-scope="javno" aria-checked="false">samo objekti Grada</button>
+          </div>
+        </div>
         <div id="kpis" class="kpis"></div>
         <div class="scenario">
           <span class="scenario-label">Ako se iskoristi</span>
@@ -63,11 +70,12 @@
         </div>
         <ol id="district-list" class="district-list"></ol>
       </section>
-
-      <footer class="panel-foot">
-        <button id="open-about" class="link-btn">O projektu, metodologiji i izvorima podataka</button>
-      </footer>
     </div>
+
+    <!-- uvijek vidljivo na dnu panela -->
+    <footer class="panel-foot">
+      <button id="open-about" class="link-btn">O projektu i izvorima podataka</button>
+    </footer>
   </aside>
 
   <!-- Kartica zgrade -->
@@ -95,6 +103,8 @@
         <li><strong>Odaberite sloj:</strong> zeleni krovovi ili fotonapon.</li>
         <li><strong>Kliknite zgradu</strong> za njezine brojke ili <strong>četvrt</strong> u popisu za usporedbu.</li>
         <li><strong>Scenarij</strong> pokazuje učinak ako se iskoristi samo dio pogodnih krovova.</li>
+        <li><strong>Samo objekti Grada</strong> prikazuje zgrade koje koristi Grad Zagreb (potrošnja iz ISGE-a) i koliki bi dio
+          njihove potrošnje struje pokrile sunčane elektrane na krovu.</li>
       </ul>
       <p class="small">Brojke su <em>tehnički potencijal</em>: gornja granica prije statičke provjere krova, zaštite kulturnih dobara i vlasničkih odnosa.
         Dio modela potječe iz snimanja 2008., pa novije promjene na krovovima nisu vidljive.</p>
@@ -105,7 +115,9 @@
         <li>Podloga karte – <a href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap</a>, © OpenMapTiles, © suradnici OpenStreetMapa</li>
         <li>Pretraga adresa – Nominatim, © suradnici OpenStreetMapa</li>
       </ul>
-      <p class="small">Datathon Portala otvorenih podataka 2026. · izazov B – Okoliš i održivi prostor</p>
+      <p class="small">Datathon Portala otvorenih podataka 2026. · izazov B – Okoliš i održivi prostor<br />
+        Izvorni kod (MIT) i izvedeni podaci (CC BY 4.0):
+        <a href="https://github.com/korejur/DataOasis" target="_blank" rel="noopener">github.com/korejur/DataOasis</a></p>
       <button class="primary" value="ok" autofocus>Zatvori</button>
     </form>
   </dialog>

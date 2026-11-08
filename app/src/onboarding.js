@@ -18,7 +18,7 @@ const STEPS = [
 ];
 
 /** Prikazuje uvod ako ga korisnik još nije vidio. `city` daje brojke za grad. */
-export function startOnboarding({ city, openAbout }) {
+export function startOnboarding({ city }) {
   if (seen()) return;
   const el = document.createElement('section');
   el.className = 'intro';
@@ -35,7 +35,6 @@ export function startOnboarding({ city, openAbout }) {
     </ol>
     <div class="intro-actions">
       <button type="button" class="primary" data-start>Istraži kartu</button>
-      <button type="button" class="link-btn" data-about>Metodologija i izvori</button>
     </div>
     <p class="intro-note">Brojke su tehnički potencijal: gornja granica prije statičke provjere,
       zaštite kulturnih dobara i vlasničkih odnosa.</p>`;
@@ -48,6 +47,5 @@ export function startOnboarding({ city, openAbout }) {
     markSeen();
   };
   el.querySelector('[data-start]').addEventListener('click', close);
-  el.querySelector('[data-about]').addEventListener('click', openAbout);
   document.addEventListener('kzk:building', close, { once: true });
 }

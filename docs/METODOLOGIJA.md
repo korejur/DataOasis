@@ -214,6 +214,22 @@ Registar kulturnih dobara i ISGE imaju adrese, ali ne i koordinate (`pipeline/ge
 **≥ 20 MWh/god**. Manji potrošači (npr. uredi mjesne samouprave, knjižnice) koriste samo dio zgrade,
 pa bi omjer prema proizvodnji cijelog krova bio višestruko prevelik (medijan ~250 %, nakon praga 104 %).
 
+### 7.2 Prikaz „samo objekti Grada“
+
+Prekidač u panelu ograničava brojke, rang-listu četvrti i kartu na zgrade povezane s ISGE-om
+(853 zgrade u izvozu; jedna od 854 povezanih, Gradsko kazalište Trešnja, vezana je uz primjerak zgrade
+koji je uklonjen kao duplikat na granici četvrti, vidi `pipeline/metrics.py`). Zbrojevi se računaju istom
+funkcijom kao za cijeli grad (`pipeline/metrics.py`, `summarize`) i spremaju u `city.json` i
+`districts.json` pod ključem `javno` (`pipeline/export_app.py --samo-json`).
+
+* **Pokrivenost potrošnje** = `Σ E_FN / Σ E_potrošnja` samo za objekte s potrošnjom **≥ 20 MWh/god**
+  (452 zgrade), uz isti razlog kao u 7.1; `E_FN` se zbraja samo za krovove pogodne za FN.
+  Za cijeli grad: 54,4 GWh / 72,9 GWh ≈ **75 %** (tehnički potencijal, bez pohrane i vremenskog
+  usklađivanja proizvodnje i potrošnje).
+* Obuhvat su samo objekti čiju potrošnju Grad prati u ISGE-u. Državne zgrade (ministarstva,
+  fakulteti, bolnice u vlasništvu države) i objekti bez zapisa u ISGE-u nisu uključeni.
+* Scenarij (10 / 30 / 100 %) skalira proizvodnju linearno, kao i za cijeli grad.
+
 ## 8. Izvori parametara
 
 Provjereno 8. 11. 2026. Vrijednosti su u `pipeline/config.py` (`PARAMS`).

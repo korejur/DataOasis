@@ -4,7 +4,7 @@
 > (u istom commitu kao i sam rad). Pravila ažuriranja su na dnu.
 > Plan i podjela uloga: [`docs/PLAN_RADA.md`](docs/PLAN_RADA.md) · kriteriji i bodovi: [`docs/NATJECANJE.md`](docs/NATJECANJE.md) · upute za agente: [`AGENTS.md`](AGENTS.md)
 
-**Zadnje ažuriranje:** 2026-11-08 · uloga: metodologija · parametri s izvorima, geokodiranje u metodologiji, zajednički izvoz s oznakama kulturnih dobara i ISGE
+**Zadnje ažuriranje:** 2026-11-08 · uloga: aplikacija (UI) · redizajn „Atlas“, uvod u panelu umjesto prozora, tekst u pasivu
 **Predaja:** pon 9. 11. 2026. do 24:00 · **Zamrzavanje funkcionalnosti:** ned 8. 11. u 18:00
 **Najviše bodova (30/60):** izvedivost (radni prototip na javnom linku), dojam UI/UX, video
 
@@ -29,6 +29,7 @@
 | 2026-11-08 | metodologija | **Parametri s izvorima:** uklonjeni svi `TODO izvor` (DHMZ, FLL/LANUV NRW, Mentens i sur. 2006, EEA, Eurostat); cijena struje 0,15 → 0,18 €/kWh, potrošnja kućanstva 3 500 → 4 630 kWh; tablica izvora | `pipeline/config.py`, `docs/METODOLOGIJA.md` (pogl. 8) |
 | 2026-11-08 | metodologija | Ponovni izračun i izvoz: ekvivalent kućanstava za grad 1,09 mil. → 824 tis., povrat FN ~7,7 → ~6,4 god.; kartica zgrade čita potrošnju kućanstva iz `city.json` | `app/public/data/`, Release `podaci` |
 | 2026-11-08 | metodologija | Opis geokodiranja i povezivanja s ISGE u metodologiji (zahtjev aplikacije) | `docs/METODOLOGIJA.md` 7.1 |
+| 2026-11-08 | aplikacija | **Redizajn „Atlas“:** Source Serif 4 + Source Sans 3 (Fontsource, bez Google Fonts), panel uz lijevi rub, tanke crte bez sjena i zaobljenja; uvod pri prvom posjetu kao naslovnica u panelu (zatvara se gumbom ili klikom na zgradu), „O projektu“ samo na klik; tekst u pasivu. Provjereno na 1440 / 900 / 390 px | `app/src/style.css`, `app/src/onboarding.js`, `app/index.html` |
 
 ## U tijeku
 
@@ -90,6 +91,9 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 | 2026-11-08 | „Struja za kućanstva“ za cijeli grad ostaje kao tehnički potencijal uz napomenu (`METODOLOGIJA.md` 4.3); u videu navoditi scenarij 10 % ili 30 % | brojka je usporediva s drugim pokazateljima; scenariji daju realan red veličine |
 | 2026-11-08 | Iskoristivi udio krova 0,75 ostaje kao vlastita pretpostavka | izvor nije pronađen; jasno označeno u metodologiji |
 | 2026-11-08 | Predložene izmjene metodologije (NRW klase, supstrat, hlađenje isparavanjem) ne primjenjuju se prije predaje | zamrzavanje funkcionalnosti; navode se kao daljnji razvoj |
+| 2026-11-08 | Izgled „Atlas“ (odabran od tri prijedloga: Atlas, Gradski servis, Teren) | manje generičko sučelje, karta i brojke čitljive i na videu |
+| 2026-11-08 | Uvod nije prozor preko karte, nego naslovnica u lijevom panelu | prozor je djelovao kao otvorene postavke; karta je odmah upotrebljiva |
+| 2026-11-08 | Tekstovi u aplikaciji i materijalima bez 1. lica množine, u pasivu („izračunato je“, „procjenjuje se“) | odluka tima o tonu |
 
 ## Otvorena pitanja (treba odluku tima)
 

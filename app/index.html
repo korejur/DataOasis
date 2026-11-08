@@ -14,14 +14,8 @@
   <aside id="panel" class="panel" aria-label="Pregled">
     <button id="panel-handle" class="panel-handle" aria-label="Proširi ili smanji panel"><span></span></button>
     <header class="brand">
-      <svg class="brand-logo" viewBox="0 0 32 32" aria-hidden="true">
-        <path d="M3 17 16 6l13 11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M8 16.5c0 6 3.6 9.5 8 9.5s8-3.5 8-9.5c-3 .2-6 1.2-8 3.6-2-2.4-5-3.4-8-3.6Z" fill="currentColor" opacity=".9"/>
-      </svg>
-      <div>
-        <h1>Krovovi za klimu</h1>
-        <p class="brand-sub">Zagreb · gdje krovovi mogu hladiti grad, zadržati kišu i proizvoditi struju</p>
-      </div>
+      <h1>Krovovi za klimu</h1>
+      <p class="brand-sub">Zagreb · gdje krovovi mogu hladiti grad, zadržati kišu i proizvoditi struju</p>
     </header>
 
     <div class="mode" role="tablist" aria-label="Što prikazati na karti">
@@ -90,13 +84,13 @@
   <!-- Napomena kod malog zuma -->
   <div id="zoom-hint" class="zoom-hint" hidden>Približite kartu da biste vidjeli pojedine zgrade</div>
 
-  <!-- Uvodni ekran / o projektu -->
+  <!-- O projektu, metodologija i izvori (otvara se na klik) -->
   <dialog id="about" class="about">
     <form method="dialog" class="about-inner">
       <h2>Krovovi za klimu</h2>
       <p class="lead">Koji krovovi u Zagrebu mogu postati <strong>zeleni</strong> ili proizvoditi <strong>struju iz sunca</strong>, i koliko bi to pomoglo gradu?</p>
-      <p>Za svih ~357 000 zgrada iz otvorenog 3D modela Grada Zagreba izračunali smo nagib i orijentaciju svake krovne plohe.
-        Iz toga procjenjujemo površinu pogodnu za zeleni krov, količinu kišnice koju bi zadržao, snagu i proizvodnju sunčane elektrane te trošak.</p>
+      <p>Za svih ~357 000 zgrada iz otvorenog 3D modela Grada Zagreba izračunati su nagib i orijentacija svake krovne plohe.
+        Iz toga se procjenjuju površina pogodna za zeleni krov, količina kišnice koju bi zadržao, snaga i proizvodnja sunčane elektrane te trošak.</p>
       <ul class="how">
         <li><strong>Odaberite sloj:</strong> zeleni krovovi ili fotonapon.</li>
         <li><strong>Kliknite zgradu</strong> za njezine brojke ili <strong>četvrt</strong> u popisu za usporedbu.</li>
@@ -112,7 +106,7 @@
         <li>Pretraga adresa – Nominatim, © suradnici OpenStreetMapa</li>
       </ul>
       <p class="small">Datathon Portala otvorenih podataka 2026. · izazov B – Okoliš i održivi prostor</p>
-      <button class="primary" value="ok" autofocus>Otvori kartu</button>
+      <button class="primary" value="ok" autofocus>Zatvori</button>
     </form>
   </dialog>
 

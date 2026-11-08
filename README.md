@@ -10,7 +10,13 @@ krenuti prvo.
 
 **Aplikacija:** https://korejur.github.io/DataOasis/
 
-Metodologija i formule: [docs/METODOLOGIJA.md](docs/METODOLOGIJA.md)
+## Dokumentacija
+
+| Dokument | Sadržaj |
+|---|---|
+| [docs/PROJEKTNA_DOKUMENTACIJA.md](docs/PROJEKTNA_DOKUMENTACIJA.md) | problem, rješenje, korisnici, aplikacija korak po korak sa snimkama zaslona, rezultati, vrijednost, ograničenja, daljnji razvoj |
+| [docs/TEHNICKA_DOKUMENTACIJA.md](docs/TEHNICKA_DOKUMENTACIJA.md) | arhitektura, obrada podataka s formulama, model podataka, aplikacija, standardi, popis svih skupova podataka, alati, integracija, preduvjeti, parametri |
+| [docs/METODOLOGIJA.md](docs/METODOLOGIJA.md) | formule, parametri i njihovi izvori, ograničenja |
 
 ## Struktura
 
@@ -92,17 +98,16 @@ Pretpostavke su u `docs/METODOLOGIJA.md`.
 
 ## Izvori podataka
 
-| Skup podataka | Izdavač | Uporaba |
+Puni popis s izdavateljima, poveznicama i licencama: [Tehnička dokumentacija, poglavlje 8](docs/TEHNICKA_DOKUMENTACIJA.md#8-popis-skupova-podataka).
+
+| Skup podataka | Izdavatelj | Licenca |
 |---|---|---|
-| ZG3D 3D model zgrada (17 četvrti), LoD 2.2 | Grad Zagreb, data.gov.hr | geometrija krovova |
-| PVGIS v5.3 (SARAH3, 2005.–2023.) | JRC, Europska komisija | prinos FN po nagibu/orijentaciji |
-| Podaci o potrošnji i trošku za objekte Grada Zagreba (ISGE) | Grad Zagreb | potrošnja struje javnih zgrada (2023.), udio koji FN može pokriti (`pipeline/geocode.py`) |
-| Registar kulturnih dobara | Ministarstvo kulture i medija | oznaka zaštićenih zgrada (`pipeline/geocode.py`) |
-| Geoportal: vrtići, škole, domovi za starije, zdravstvo | Grad Zagreb | osjetljivi korisnici (planirano) |
-| Gradske četvrti, mjesni odbori (RPJ) | Grad Zagreb | agregacija (planirano) |
-| Planirana namjena 2023, Topografska osnova 2018 | Grad Zagreb | namjena prostora, vegetacija (planirano) |
-| OpenStreetMap preko [OpenFreeMap](https://openfreemap.org) (stil Positron, OpenMapTiles) | suradnici OSM-a, ODbL | podloga karte u aplikaciji |
-| [Nominatim](https://nominatim.org) (OpenStreetMap) | suradnici OSM-a, ODbL | pretraga adresa u aplikaciji; geokodiranje adresa kulturnih dobara i ISGE objekata (predmemorija u `data/reference/geocode/`) |
+| [ZG3D – 3D model zgrada](https://data.gov.hr/ckan/dataset/zg3d-gradska-cetvrt-donji-grad-2022), LoD 2.2, 17 gradskih četvrti | Grad Zagreb, data.gov.hr | Otvorena dozvola |
+| [Podaci o potrošnji i trošku za objekte Grada Zagreba](https://data.gov.hr/ckan/dataset/podaci-o-potrosnji-i-trosku-za-objekte-grada-zagreba) (ISGE) | Grad Zagreb, data.gov.hr | Otvorena dozvola |
+| [Registar kulturnih dobara](https://data.gov.hr/ckan/dataset/kulturna-dobra) | Ministarstvo kulture i medija, data.gov.hr | Otvorena dozvola |
+| [PVGIS 5.3](https://re.jrc.ec.europa.eu/pvg_tools/en/) | JRC, Europska komisija | uz navođenje izvora |
+| Parametri: DHMZ (oborine), EEA (emisije), Eurostat (cijena struje, potrošnja kućanstva) | DHMZ, EEA, Eurostat | uz navođenje izvora |
+| OpenStreetMap: podloga [OpenFreeMap](https://openfreemap.org), geokodiranje [Nominatim](https://nominatim.org) | suradnici OSM-a | ODbL |
 
 ## Korišteni alati
 

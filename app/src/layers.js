@@ -42,7 +42,7 @@ export const LEGEND = {
   zk: {
     title: 'Pogodnost za zeleni krov',
     items: [
-      { color: COLORS.zk.visoka, label: 'Visoka', desc: 'pretežno ravan krov (0–10°)' },
+      { color: COLORS.zk.visoka, label: 'Visoka', desc: 'ravni dijelovi krova (0–10°)' },
       { color: COLORS.zk.srednja, label: 'Srednja', desc: 'blagi nagib (10–20°)' },
       { color: COLORS.zk.niska, label: 'Niska', desc: '20–35°, samo uz zaštitu od klizanja' },
       { color: COLORS.zk.nije, label: 'Nije pogodno', desc: 'strm krov ili premala površina' },

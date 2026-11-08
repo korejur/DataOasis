@@ -254,6 +254,7 @@ h1, h2, h3, p { margin: 0; }
 .about .lead { font-family: var(--serif); font-size: 19px; line-height: 1.45; }
 .about ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 .about .small { font-size: 12.5px; color: var(--muted); }
+.about .small a { color: inherit; }
 .about a { color: var(--ink); }
 .primary { justify-self: start; border: 0; background: var(--ink); color: #fff; font-weight: 600; padding: 11px 22px; font-size: 15px; margin-top: 6px; }
 .primary:hover { background: #000; }

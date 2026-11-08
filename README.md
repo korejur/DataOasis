@@ -1,6 +1,6 @@
 # Krov+
 
-*Krov može više: zadržava kišu, hladi zgradu i proizvodi struju.*
+*Krov za zelenije sutra.* Zelenilo, zadržana kišnica i struja sa sunčanih elektrana na krovovima.
 
 Datathon Portala otvorenih podataka 2026. Alat za urbaniste koji iz 3D modela
 zgrada Grada Zagreba (ZG3D, LoD 2.2) pronalazi krovove pogodne za **zelene

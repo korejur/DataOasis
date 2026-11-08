@@ -316,6 +316,11 @@ function renderLegend() {
     <p>${L.foot}</p>`;
 }
 
+// Visina legende za CSS (kartica se na srednjim širinama skraćuje da legenda stane ispod nje).
+new ResizeObserver(([e]) => {
+  document.documentElement.style.setProperty('--legend-h', `${Math.ceil(e.borderBoxSize?.[0]?.blockSize ?? e.target.offsetHeight)}px`);
+}).observe($('legend'));
+
 function setMode(mode) {
   state.mode = mode;
   document.body.dataset.mode = mode;

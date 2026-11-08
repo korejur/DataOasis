@@ -23,6 +23,7 @@
 | 2026-11-07 | aplikacija | Pretraga četvrti (bez dijakritika) i adresa (Nominatim) s otvaranjem kartice pogođene zgrade | `app/src/search.js` |
 | 2026-11-07 | aplikacija | **Objava na GitHub Pages:** workflow pri pushu na `main`, `buildings.pmtiles` iz Releasea `podaci`; repo javan; `LICENSE` (MIT); uklonjen tuđi PDF (LANUV NRW) | `.github/workflows/pages.yml`, `LICENSE` |
 | 2026-11-07 | aplikacija | Javni link provjeren u pregledniku: zgrade se iscrtavaju (z14 središte: ~2,4 MB pločica), kartica zgrade radi; HTTP Range na Pages radi | – |
+| 2026-11-08 | aplikacija | Legenda na širinama 761–1040 px uz otvorenu karticu ide ispod kartice (prije pod lijevi panel); provjereno na 400 / 800 / 1000 / 1280 px | `app/src/style.css`, `app/src/main.js` |
 | 2026-11-08 | aplikacija | **Geokodiranje** (Nominatim, predmemorija u gitu): kulturna dobra 368/470 spojeno (393 zgrade), ISGE 854 zgrade od 1 082 objekta | `pipeline/geocode.py`, `data/reference/geocode/` |
 | 2026-11-08 | aplikacija | **Spajanje tablica u izvoz** (baština, ISGE, ustanove kad stignu); kartica: kulturno dobro, objekt Grada s potrošnjom i udjelom FN; obrub na karti + legenda | `pipeline/export_app.py`, `app/src/card.js` |
 
@@ -40,6 +41,7 @@
 3. **metodologija:** parametri i izvori → validacija (~200 zgrada, popis dobiva od aplikacije) → scenarij videa → UX test s osobom izvan tima
 
 **Za preuzimanje aplikacije:** `cd app && npm install && npm run dev` (treba `app/public/data/buildings.pmtiles`, vidi README).
+Ako Vite javi „Cannot find native binding“ (npm greška s opcionalnim ovisnostima): `npm i --no-save @rolldown/binding-win32-x64-msvc@<verzija rolldowna>`.
 Objava ide sama pri spajanju u `main` (workflow „Objava aplikacije“). Nakon novog izvoza zamijeniti prilog Releasea `podaci`
 (README → „Objava aplikacije“). Pages uz `Accept-Encoding: gzip` vraća Range iz sažete datoteke; preglednici to ne šalju,
 ali alati poput `curl --compressed` ili Node `fetch` trebaju `Accept-Encoding: identity`.

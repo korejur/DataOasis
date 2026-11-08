@@ -196,6 +196,14 @@ h1, h2, h3, p { margin: 0; }
 .ctrl-3d[aria-pressed="true"] { background: var(--ink) !important; color: #fff; }
 .maplibregl-ctrl-attrib { font-size: 11px; }
 
+/* Srednje širine (tablet, usko okno): između panela i kartice nema mjesta za legendu,
+   pa se uz otvorenu karticu legenda slaže ispod nje u istoj širini, a kartica se skrati.
+   --legend-h postavlja main.js (ResizeObserver na legendi). */
+@media (min-width: 761px) and (max-width: 1040px) {
+  .has-card .legend { right: var(--gap); width: var(--card-w); }
+  .has-card .card { max-height: calc(100% - 2 * var(--gap) - 38px - var(--legend-h, 160px)); }
+}
+
 /* ---------------------------------------------------------------- uvodni ekran */
 .about {
   border: 0; padding: 0; border-radius: 18px; box-shadow: 0 24px 60px rgba(10, 25, 18, .35);

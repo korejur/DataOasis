@@ -4,7 +4,7 @@
 > (u istom commitu kao i sam rad). Pravila ažuriranja su na dnu.
 > Plan i podjela uloga: [`docs/PLAN_RADA.md`](docs/PLAN_RADA.md) · kriteriji i bodovi: [`docs/NATJECANJE.md`](docs/NATJECANJE.md) · upute za agente: [`AGENTS.md`](AGENTS.md)
 
-**Zadnje ažuriranje:** 2026-11-08 · uloga: aplikacija · geokodirana kulturna dobra i ISGE, oznake u kartici i na karti; sljedeće scenarij „samo javne zgrade“
+**Zadnje ažuriranje:** 2026-11-08 · uloga: metodologija · parametri s izvorima, geokodiranje u metodologiji, zajednički izvoz s oznakama kulturnih dobara i ISGE
 **Predaja:** pon 9. 11. 2026. do 24:00 · **Zamrzavanje funkcionalnosti:** ned 8. 11. u 18:00
 **Najviše bodova (30/60):** izvedivost (radni prototip na javnom linku), dojam UI/UX, video
 
@@ -26,19 +26,21 @@
 | 2026-11-08 | aplikacija | Legenda na širinama 761–1040 px uz otvorenu karticu ide ispod kartice (prije pod lijevi panel); provjereno na 400 / 800 / 1000 / 1280 px | `app/src/style.css`, `app/src/main.js` |
 | 2026-11-08 | aplikacija | **Geokodiranje** (Nominatim, predmemorija u gitu): kulturna dobra 368/470 spojeno (393 zgrade), ISGE 854 zgrade od 1 082 objekta | `pipeline/geocode.py`, `data/reference/geocode/` |
 | 2026-11-08 | aplikacija | **Spajanje tablica u izvoz** (baština, ISGE, ustanove kad stignu); kartica: kulturno dobro, objekt Grada s potrošnjom i udjelom FN; obrub na karti + legenda | `pipeline/export_app.py`, `app/src/card.js` |
+| 2026-11-08 | metodologija | **Parametri s izvorima:** uklonjeni svi `TODO izvor` (DHMZ, FLL/LANUV NRW, Mentens i sur. 2006, EEA, Eurostat); cijena struje 0,15 → 0,18 €/kWh, potrošnja kućanstva 3 500 → 4 630 kWh; tablica izvora | `pipeline/config.py`, `docs/METODOLOGIJA.md` (pogl. 8) |
+| 2026-11-08 | metodologija | Ponovni izračun i izvoz: ekvivalent kućanstava za grad 1,09 mil. → 824 tis., povrat FN ~7,7 → ~6,4 god.; kartica zgrade čita potrošnju kućanstva iz `city.json` | `app/public/data/`, Release `podaci` |
+| 2026-11-08 | metodologija | Opis geokodiranja i povezivanja s ISGE u metodologiji (zahtjev aplikacije) | `docs/METODOLOGIJA.md` 7.1 |
 
 ## U tijeku
 
 | Uloga | Zadatak | Grana | Stanje / napomena |
 |---|---|---|---|
 | podaci | Granice četvrti i MO → javne ustanove | | zadatak poslan |
-| metodologija | Parametri s `TODO izvor` | | nije započeto |
 
 ## Sljedeće (redom)
 
 1. **aplikacija:** zamijeniti `buildings.pmtiles` u Releaseu `podaci` nakon spajanja PR-a → scenarij „samo javne zgrade“ → `docs/ARHITEKTURA.md`
 2. **podaci:** granice → `building_institutions.parquet` → LST/NDVI (`building_env.parquet`)
-3. **metodologija:** parametri i izvori → validacija (~200 zgrada, popis dobiva od aplikacije) → scenarij videa → UX test s osobom izvan tima
+3. **metodologija:** validacija (~200 zgrada, popis dobiva od aplikacije) → scenarij videa → UX test s osobom izvan tima
 
 **Za preuzimanje aplikacije:** `cd app && npm install && npm run dev` (treba `app/public/data/buildings.pmtiles`, vidi README).
 Ako Vite javi „Cannot find native binding“ (npm greška s opcionalnim ovisnostima): `npm i --no-save @rolldown/binding-win32-x64-msvc@<verzija rolldowna>`.
@@ -51,8 +53,6 @@ ali alati poput `curl --compressed` ili Node `fetch` trebaju `Accept-Encoding: i
 | Tko čeka | Na što | Od koga |
 |---|---|---|
 | aplikacija (sloj četvrti) | `data/reference/granice/*.geojson` | podaci |
-| aplikacija (ponovni izvoz) | konačni `PARAMS` | metodologija |
-| metodologija | upisati u `METODOLOGIJA.md`: geokodiranje (Nominatim, samo pogodak s kućnim brojem, tlocrt ili najbliža zgrada do 15 m), ISGE = struja 2023., udio FN samo za ≥ 20 MWh/god | aplikacija (podaci u `pipeline/geocode.py`) |
 
 ## Predane tablice (sučelje prema izvozu)
 
@@ -87,13 +87,14 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 | 2026-11-07 | Tuđi PDF (LANUV NRW) uklonjen iz repoa, poveznica u `PREGLED_LITERATURE.md` | autorska prava u javnom repou |
 | 2026-11-08 | Geokodiranje preko Nominatima uz predmemoriju u gitu; prihvaća se samo pogodak s kućnim brojem | nema otvorenog adresnog registra s koordinatama pri ruci; bolje bez oznake nego s krivom |
 | 2026-11-08 | ISGE: potrošnja **struje u 2023.** (2024. ima samo 6 mjeseci); udio FN samo za objekte s ≥ 20 MWh/god | manji potrošači koriste dio zgrade, omjer prema cijelom krovu bio bi višestruko prevelik |
+| 2026-11-08 | „Struja za kućanstva“ za cijeli grad ostaje kao tehnički potencijal uz napomenu (`METODOLOGIJA.md` 4.3); u videu navoditi scenarij 10 % ili 30 % | brojka je usporediva s drugim pokazateljima; scenariji daju realan red veličine |
+| 2026-11-08 | Iskoristivi udio krova 0,75 ostaje kao vlastita pretpostavka | izvor nije pronađen; jasno označeno u metodologiji |
+| 2026-11-08 | Predložene izmjene metodologije (NRW klase, supstrat, hlađenje isparavanjem) ne primjenjuju se prije predaje | zamrzavanje funkcionalnosti; navode se kao daljnji razvoj |
 
 ## Otvorena pitanja (treba odluku tima)
 
-* **„Struja za kućanstva“ za cijeli grad** (1,1 mil. uz 3 500 kWh) veća je od broja kućanstava u Zagrebu
-  (tehnički potencijal). Prikazati kao udio potrošnje grada ili ostaviti uz napomenu? Odlučuje metodologija.
 * Koeficijent za fine čestice: NRW 1,4 g/m² ili Wuppertal 9,8 g/m² – navesti raspon?
-* **Predložene izmjene metodologije** (iz pregleda literature, nisu primijenjene): NRW klase nagiba
+* **Predložene izmjene metodologije** (iz pregleda literature, ne primjenjuju se prije predaje – vidi Odluke): NRW klase nagiba
   0–5 / 5–10 / 10–15 / 15–35 / > 35° s izračunom do 15° (sada do 20°); supstrat 10 / 20 / 30 cm
   (masa 130/280/420 kg/m², zadržavanje 50/60/70 %, CO₂ 0,8/0,9/1,0 kg/m²); hlađenje isparavanjem
   (~686 kWh/m³); razredi veličine i troška; minimalna površina plohe 10 m² (sada 50 m² po zgradi).

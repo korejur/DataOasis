@@ -12,7 +12,7 @@
  "fn_snaga_MWp": 3406.2,
  "fn_proizvodnja_GWh_god": 3817.1,
  "fn_co2_t_god": 511487.0,
- "fn_kucanstva": 1090590.5,
+ "fn_kucanstva": 824420.5,
  "fn_trosak_eur": 4428056951.5,
  "parametri": {
   "green_usable_fraction": 0.75,
@@ -33,8 +33,8 @@
   "grid_co2_kg_per_kwh": 0.134,
   "green_cost_eur_m2": 130.0,
   "pv_cost_eur_kwp": 1300.0,
-  "electricity_price_eur_kwh": 0.15,
-  "household_kwh_year": 3500.0,
+  "electricity_price_eur_kwh": 0.18,
+  "household_kwh_year": 4630.0,
   "green_slope_classes": [
    [
     "visoka",

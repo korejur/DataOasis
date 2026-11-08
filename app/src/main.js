@@ -261,7 +261,7 @@ function selectBuilding(props) {
   state.selected = props.id;
   state.selectedProps = props;
   map.setFilter('bld-sel', ['==', ['get', 'id'], props.id]);
-  cardBody.innerHTML = renderCard(props, state.mode);
+  cardBody.innerHTML = renderCard(props, state.mode, city.parametri);
   card.hidden = false;
   card.scrollTop = 0;
   document.body.classList.add('has-card');
@@ -328,7 +328,7 @@ function setMode(mode) {
   renderPanel();
   renderLegend();
   refreshMapStyle();
-  if (state.selectedProps) cardBody.innerHTML = renderCard(state.selectedProps, mode);
+  if (state.selectedProps) cardBody.innerHTML = renderCard(state.selectedProps, mode, city.parametri);
 }
 
 for (const b of document.querySelectorAll('.mode-btn')) b.addEventListener('click', () => setMode(b.dataset.mode));

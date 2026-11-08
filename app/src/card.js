@@ -53,7 +53,7 @@ function linked(p) {
   return out.length ? `<div class="tags">${out.join('')}</div>` : '';
 }
 
-export function renderCard(p, mode) {
+export function renderCard(p, mode, params) {
   const zk = ZK_CLASS[p.zk] ?? ZK_CLASS.nije;
   const fn = fnClass(p);
   const zkCand = p.zk === 'visoka' || p.zk === 'srednja';
@@ -76,7 +76,7 @@ export function renderCard(p, mode) {
       ${p.fn === 1 ? `<dl>
         ${row('Snaga elektrane', `${num(p.fn_kwp, 1)} kWp`)}
         ${row('Proizvodnja', `${kwh(p.fn_kwh)} godišnje`, `${num(p.fn_prinos)} kWh po kWp`)}
-        ${row('Struja za kućanstva', `≈ ${num(p.fn_kuc, p.fn_kuc < 10 ? 1 : 0)}`, 'pri 3 500 kWh godišnje')}
+        ${row('Struja za kućanstva', `≈ ${num(p.fn_kuc, p.fn_kuc < 10 ? 1 : 0)}`, `pri ${num(params.household_kwh_year)} kWh godišnje`)}
         ${row('Manje CO₂', `${num(p.fn_co2_t, p.fn_co2_t < 10 ? 1 : 0)} t godišnje`)}
         ${row('Okvirna investicija', eur(p.fn_eur))}
         ${row('Jednostavni povrat', `${num(p.fn_povrat_god, 1)} god.`, 'bez subvencija')}

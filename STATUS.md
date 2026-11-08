@@ -4,7 +4,7 @@
 > (u istom commitu kao i sam rad). Pravila ažuriranja su na dnu.
 > Plan i podjela uloga: [`docs/PLAN_RADA.md`](docs/PLAN_RADA.md) · kriteriji i bodovi: [`docs/NATJECANJE.md`](docs/NATJECANJE.md) · upute za agente: [`AGENTS.md`](AGENTS.md)
 
-**Zadnje ažuriranje:** 2026-11-07 · uloga: aplikacija · karta objavljena i provjerena (https://korejur.github.io/DataOasis/); aplikaciju dalje preuzima drugi član tima
+**Zadnje ažuriranje:** 2026-11-08 · uloga: aplikacija · popravljena legenda na srednjim širinama; sljedeće geokodiranje baštine i ISGE
 **Predaja:** pon 9. 11. 2026. do 24:00 · **Zamrzavanje funkcionalnosti:** ned 8. 11. u 18:00
 **Najviše bodova (30/60):** izvedivost (radni prototip na javnom linku), dojam UI/UX, video
 
@@ -23,6 +23,7 @@
 | 2026-11-07 | aplikacija | Pretraga četvrti (bez dijakritika) i adresa (Nominatim) s otvaranjem kartice pogođene zgrade | `app/src/search.js` |
 | 2026-11-07 | aplikacija | **Objava na GitHub Pages:** workflow pri pushu na `main`, `buildings.pmtiles` iz Releasea `podaci`; repo javan; `LICENSE` (MIT); uklonjen tuđi PDF (LANUV NRW) | `.github/workflows/pages.yml`, `LICENSE` |
 | 2026-11-07 | aplikacija | Javni link provjeren u pregledniku: zgrade se iscrtavaju (z14 središte: ~2,4 MB pločica), kartica zgrade radi; HTTP Range na Pages radi | – |
+| 2026-11-08 | aplikacija | Legenda na širinama 761–1040 px uz otvorenu karticu ide ispod kartice (prije pod lijevi panel); provjereno na 400 / 800 / 1000 / 1280 px | `app/src/style.css`, `app/src/main.js` |
 
 ## U tijeku
 
@@ -33,11 +34,12 @@
 
 ## Sljedeće (redom)
 
-1. **aplikacija:** popraviti legendu (na širini ~800 px s otvorenom karticom ide pod lijevi panel) → geokodiranje baštine i ISGE adresa → spajanje tablica u izvoz (oznake u kartici) → scenarij „samo javne zgrade“ → `docs/ARHITEKTURA.md`
+1. **aplikacija:** geokodiranje baštine i ISGE adresa → spajanje tablica u izvoz (oznake u kartici) → scenarij „samo javne zgrade“ → `docs/ARHITEKTURA.md`
 2. **podaci:** granice → `building_institutions.parquet` → LST/NDVI (`building_env.parquet`)
 3. **metodologija:** parametri i izvori → validacija (~200 zgrada, popis dobiva od aplikacije) → scenarij videa → UX test s osobom izvan tima
 
 **Za preuzimanje aplikacije:** `cd app && npm install && npm run dev` (treba `app/public/data/buildings.pmtiles`, vidi README).
+Ako Vite javi „Cannot find native binding“ (npm greška s opcionalnim ovisnostima): `npm i --no-save @rolldown/binding-win32-x64-msvc@<verzija rolldowna>`.
 Objava ide sama pri spajanju u `main` (workflow „Objava aplikacije“). Nakon novog izvoza zamijeniti prilog Releasea `podaci`
 (README → „Objava aplikacije“). Pages uz `Accept-Encoding: gzip` vraća Range iz sažete datoteke; preglednici to ne šalju,
 ali alati poput `curl --compressed` ili Node `fetch` trebaju `Accept-Encoding: identity`.

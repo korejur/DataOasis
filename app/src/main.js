@@ -11,7 +11,7 @@ import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
 import { Protocol } from 'pmtiles';
 
 import { renderCard } from './card.js';
-import { gwh, ha } from './format.js';
+import { gwh, ha, num } from './format.js';
 import { LEGEND, LEGEND_TAGS, TAG_COLORS, fillColor, isCandidate } from './layers.js';
 import { SORTS, renderDistricts, renderKpis, renderSortOptions } from './panel.js';
 import { initSearch } from './search.js';
@@ -30,6 +30,7 @@ const mobile = () => window.matchMedia('(max-width: 760px)').matches;
 const state = {
   mode: 'zk',          // 'zk' zeleni krovovi | 'fn' fotonapon
   share: 1,            // scenarij: udio iskorištenih kandidata
+  pub: false,          // samo objekti Grada (ISGE)
   district: null,      // slug odabrane četvrti
   sort: { zk: SORTS.zk[0].key, fn: SORTS.fn[0].key },
   selected: null,      // id odabrane zgrade
@@ -40,6 +41,12 @@ const state = {
 let city;
 let districts = [];
 const bySlug = new Map();
+
+/** Brojke za grad ili četvrt u odabranom obuhvatu (sve zgrade ili samo objekti Grada). */
+const scoped = (d) => (state.pub ? { ...d.javno, slug: d.slug, naziv: d.naziv, centar: d.centar } : d);
+const IS_PUBLIC = ['has', 'javno'];
+// obrub: objekti Grada i kulturna dobra; u prikazu „samo objekti Grada“ samo oni
+const tagFilter = () => (state.pub ? IS_PUBLIC : ['any', IS_PUBLIC, ['has', 'bastina']]);
 
 // ---------------------------------------------------------------------------
 // Karta
@@ -110,7 +117,7 @@ function addLayers() {
   // Obrub zgrada iz povezanih izvora: objekt Grada (ISGE) plavo, kulturno dobro ljubičasto.
   map.addLayer({
     id: 'bld-tag', type: 'line', ...src, minzoom: 14,
-    filter: ['any', ['has', 'javno'], ['has', 'bastina']],
+    filter: tagFilter(),
     paint: {
       'line-color': ['case', ['has', 'javno'], TAG_COLORS.javno, TAG_COLORS.bastina],
       'line-width': ['interpolate', ['linear'], ['zoom'], 14, 1.2, 17, 2.6],
@@ -187,16 +194,17 @@ function addLayers() {
 function opacityExpr() {
   const name = state.district ? bySlug.get(state.district)?.naziv : null;
   const cand = isCandidate[state.mode];
-  const base = ['case', cand, 0.92, 0.6];
+  let base = ['case', cand, 0.92, 0.6];
+  if (state.pub) base = ['case', IS_PUBLIC, base, 0.1];
   if (!name) return base;
-  return ['case', ['==', ['get', 'cetvrt'], name], base, 0.18];
+  return ['case', ['==', ['get', 'cetvrt'], name], base, state.pub ? 0.06 : 0.18];
 }
 
 const metricFor = (mode) => (mode === 'zk' ? 'zk_iskoristivo_m2' : 'fn_proizvodnja_GWh_god');
 
 function circleRadius() {
   const key = metricFor(state.mode);
-  const max = Math.max(...districts.map((d) => d[key]));
+  const max = Math.max(...districts.map((d) => scoped(d)[key])) || 1;
   return ['interpolate', ['linear'], ['zoom'],
     10, ['*', 30, ['sqrt', ['/', ['get', key], max]]],
     13, ['*', 60, ['sqrt', ['/', ['get', key], max]]]];
@@ -205,7 +213,7 @@ function circleRadius() {
 function districtsGeojson() {
   return {
     type: 'FeatureCollection',
-    features: districts.map((d) => ({
+    features: districts.map(scoped).map((d) => ({
       type: 'Feature',
       geometry: { type: 'Point', coordinates: d.centar },
       properties: {
@@ -225,6 +233,8 @@ function refreshMapStyle() {
   map.setPaintProperty('bld-fill', 'fill-color', fillColor[state.mode]);
   map.setPaintProperty('bld-fill', 'fill-opacity', opacityExpr());
   map.setPaintProperty('bld-3d', 'fill-extrusion-color', fillColor[state.mode]);
+  map.setFilter('bld-3d', state.pub ? IS_PUBLIC : null);
+  map.setFilter('bld-tag', tagFilter()); // prozirnost 3D sloja ne ovisi o atributima
   map.setPaintProperty('d-circle', 'circle-color', state.mode === 'zk' ? '#2f9a55' : '#ef8a1f');
   map.setPaintProperty('d-circle', 'circle-radius', circleRadius());
   map.getSource('districts').setData(districtsGeojson());
@@ -305,11 +315,12 @@ function selectDistrict(slug, { fly = false } = {}) {
 // ---------------------------------------------------------------------------
 function renderPanel() {
   const d = state.district ? bySlug.get(state.district) : city;
-  $('summary-title').textContent = state.district ? d.naziv : 'Cijeli grad';
+  const place = state.district ? d.naziv : 'Cijeli grad';
+  $('summary-title').textContent = state.pub ? `${place} · objekti Grada` : place;
   $('back-city').hidden = !state.district;
-  renderKpis($('kpis'), $('kpi-note'), d, state.mode, state.share, city.parametri);
+  renderKpis($('kpis'), $('kpi-note'), state.pub ? d.javno : d, state.mode, state.share, city.parametri, state.pub);
   renderSortOptions($('district-sort'), state.mode, state.sort[state.mode]);
-  renderDistricts($('district-list'), districts, state.mode, state.sort[state.mode], state.share, state.district);
+  renderDistricts($('district-list'), districts.map(scoped), state.mode, state.sort[state.mode], state.share, state.district);
 }
 
 function renderLegend() {
@@ -318,7 +329,7 @@ function renderLegend() {
     <h3>${L.title}</h3>
     <ul>${L.items.map((i) => `<li><i style="background:${i.color}"></i><span><b>${i.label}</b> <small>${i.desc}</small></span></li>`).join('')}</ul>
     <ul class="legend-tags">${LEGEND_TAGS.map((i) => `<li><i class="outline" style="border-color:${i.color}"></i><span><b>${i.label}</b> <small>${i.desc}</small></span></li>`).join('')}</ul>
-    <p>${L.foot}</p>`;
+    <p>${state.pub ? `Prikazani su samo objekti Grada (${num(city.javno.zgrade)} zgrada iz ISGE-a); ostale zgrade su prigušene.` : L.foot}</p>`;
 }
 
 // Visina legende za CSS (kartica se na srednjim širinama skraćuje da legenda stane ispod nje).
@@ -344,6 +355,16 @@ $('scenario').addEventListener('click', (e) => {
   state.share = +b.dataset.share;
   for (const x of $('scenario').querySelectorAll('button')) x.setAttribute('aria-checked', String(x === b));
   renderPanel();
+  refreshMapStyle();
+});
+
+$('scope').addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-scope]');
+  if (!b) return;
+  state.pub = b.dataset.scope === 'javno';
+  for (const x of $('scope').querySelectorAll('button')) x.setAttribute('aria-checked', String(x === b));
+  renderPanel();
+  renderLegend();
   refreshMapStyle();
 });
 
@@ -426,7 +447,7 @@ async function init() {
   syncThreeD();
   map.on('pitchend', syncThreeD);
   updateZoomHint();
-  startOnboarding({ city, openAbout });
+  startOnboarding({ city });
   // sažeta atribucija (MapLibre je na početku otvara)
   document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
 }

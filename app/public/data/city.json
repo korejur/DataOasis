@@ -53,6 +53,27 @@
    ]
   ]
  },
+ "javno": {
+  "zgrade": 853.0,
+  "krovna_povrsina_m2": 728375.752,
+  "ravni_krovovi_m2": 400798.626,
+  "zgrade_ravni_krov": 354.0,
+  "zk_kandidati": 611.0,
+  "zk_prikladno_m2": 495374.977,
+  "zk_iskoristivo_m2": 371531.233,
+  "zk_zadrzana_voda_m3_god": 163473.742,
+  "zk_trosak_eur": 48299060.277,
+  "fn_kandidati": 833.0,
+  "fn_snaga_MWp": 68.921,
+  "fn_proizvodnja_GWh_god": 77.881,
+  "fn_co2_t_god": 10436.073,
+  "fn_kucanstva": 16820.981,
+  "fn_trosak_eur": 89597440.823,
+  "potrosnja_GWh_god": 75.457,
+  "veliki_potrosaci": 452,
+  "veliki_potrosnja_GWh_god": 72.871,
+  "veliki_fn_GWh_god": 54.441
+ },
  "izvoz": {
   "datum": "2026-11-08",
   "minzoom": 13,

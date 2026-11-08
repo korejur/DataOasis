@@ -7,11 +7,14 @@ Izlaz (app/public/data/):
     buildings.pmtiles   vektorske pločice zgrada (sloj "buildings", zoom 13-16)
     districts.json      sažetak po četvrtima + bbox/središte za zumiranje
     city.json           ukupno za grad + parametri izračuna
+    (oba imaju i ključ "javno": isti zbrojevi samo za objekte Grada iz ISGE-a)
 
 Pokrenuti nakon `pipeline.metrics` (ponovno nakon svake promjene parametara):
 
-    python -m pipeline.export_app
+    python -m pipeline.export_app               # JSON + pločice (~7 min)
+    python -m pipeline.export_app --samo-json   # samo JSON sažeci (nekoliko sekundi)
 """
+import argparse
 import json
 import time
 
@@ -21,6 +24,7 @@ import pandas as pd
 import pyogrio
 
 from .config import CRS_WGS84, PARAMS, PROCESSED, ROOT
+from .metrics import summarize
 
 OUT = ROOT / "app" / "public" / "data"
 
@@ -111,7 +115,35 @@ def linked_tables() -> pd.DataFrame:
     return pd.concat(parts, axis=1) if parts else pd.DataFrame(index=pd.Index([], name="bldg_id"))
 
 
-def district_json(b: gpd.GeoDataFrame) -> list[dict]:
+def _public(g: pd.DataFrame) -> dict:
+    """Zbrojevi za objekte Grada (isti ključevi kao za grad) + potrošnja struje iz ISGE-a.
+
+    Udio potrošnje koji FN može pokriti računa se samo na objektima s >= 20 MWh/god
+    (stupac fn_udio postoji samo za njih, vidi pipeline/geocode.py i METODOLOGIJA.md 7.1).
+    """
+    out = {k: round(float(v), 3) for k, v in summarize(g).items()}
+    big = g[g["fn_udio"].notna()]
+    out["potrosnja_GWh_god"] = round(float(g["kwh_god"].sum()) / 1e6, 3)
+    out["veliki_potrosaci"] = len(big)
+    out["veliki_potrosnja_GWh_god"] = round(float(big["kwh_god"].sum()) / 1e6, 3)
+    out["veliki_fn_GWh_god"] = round(float(big.loc[big["pv_candidate"], "pv_kwh"].sum()) / 1e6, 3)
+    return out
+
+
+def public_summary(b: pd.DataFrame) -> tuple[dict, dict[str, dict]]:
+    """Scenarij „samo objekti Grada“: zbrojevi za grad i po četvrtima (prazno bez ISGE tablice)."""
+    p = PROCESSED / "isge_buildings.parquet"
+    if not p.exists():
+        return {}, {}
+    i = pd.read_parquet(p, columns=["bldg_id", "kwh_god", "fn_udio"])
+    j = pd.DataFrame(b.drop(columns="geometry")).merge(i, on="bldg_id", how="inner")
+    by_district = {name: _public(g) for name, g in j.groupby("district_name")}
+    by_district[None] = _public(j.iloc[0:0])  # četvrt bez objekata Grada
+    print(f"[javno] {len(j)} zgrada, {int(j['fn_udio'].notna().sum())} s >= 20 MWh/god")
+    return _public(j), by_district
+
+
+def district_json(b: gpd.GeoDataFrame, public: dict[str, dict]) -> list[dict]:
     summary = pd.read_csv(PROCESSED / "district_summary.csv", encoding="utf-8-sig", index_col=0)
     w = b[["district", "district_name", "geometry"]].to_crs(CRS_WGS84)
     bounds = w.geometry.bounds.join(w[["district", "district_name"]])
@@ -124,11 +156,15 @@ def district_json(b: gpd.GeoDataFrame) -> list[dict]:
         out.append({"slug": g["district"].iloc[0], "naziv": name,
                     "bbox": [round(v, 5) for v in bbox],
                     "centar": [round((bbox[0] + bbox[2]) / 2, 5), round((bbox[1] + bbox[3]) / 2, 5)],
-                    **{k: round(float(v), 1) for k, v in row.items()}})
+                    **{k: round(float(v), 1) for k, v in row.items()},
+                    **({"javno": public.get(name, public[None])} if public else {})})
     return sorted(out, key=lambda d: d["naziv"])
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--samo-json", action="store_true", help="samo districts.json i city.json, bez pločica")
+    args = ap.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     t = time.time()
     b = gpd.read_parquet(PROCESSED / "buildings_metrics.parquet")
@@ -136,13 +172,18 @@ def main() -> None:
     print(f"Zgrada: {len(b)}")
 
     # --- JSON sažeci ---------------------------------------------------------------
-    districts = district_json(b)
+    public_city, public_districts = public_summary(b)
+    districts = district_json(b, public_districts)
     (OUT / "districts.json").write_text(json.dumps(districts, ensure_ascii=False), encoding="utf-8")
     city = json.loads((PROCESSED / "city_summary.json").read_text(encoding="utf-8"))
     city["parametri"]["green_slope_classes"] = PARAMS["green_slope_classes"]
+    if public_city:
+        city["javno"] = public_city
     city["izvoz"] = {"datum": time.strftime("%Y-%m-%d"), "minzoom": MINZOOM, "maxzoom": MAXZOOM}
     (OUT / "city.json").write_text(json.dumps(city, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"[ok] districts.json ({len(districts)} četvrti), city.json")
+    if args.samo_json:
+        return
 
     # --- vektorske pločice ---------------------------------------------------------
     t2 = building_table(b).to_crs("EPSG:3857")

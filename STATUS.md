@@ -34,6 +34,7 @@
 | 2026-11-08 | aplikacija | „O projektu i izvorima podataka“ uvijek vidljivo na dnu panela | `app/index.html`, `app/src/style.css` |
 | 2026-11-08 | aplikacija | Novi naziv **Krov+** i tekst (podnaslov, uvod, „O projektu“, naslov stranice); poveznica na repozitorij u „O projektu“ | `app/index.html`, `app/src/onboarding.js`, README, LICENSE |
 | 2026-11-08 | aplikacija | **Tehnička i projektna dokumentacija** (službeni dokumenti za PDF, 15 snimki zaslona, 3 dijagrama): arhitektura, obrada podataka s formulama, model podataka, aplikacija korak po korak, standardi, integracija, preduvjeti, popis svih skupova s izdavateljem, poveznicom i licencom (provjereno preko CKAN API-ja) | `docs/PROJEKTNA_DOKUMENTACIJA.md`, `docs/TEHNICKA_DOKUMENTACIJA.md`, `docs/slike/`, README |
+| 2026-11-08 | aplikacija | Kartica zgrade: za razred „visoka“ kod pretežno kosog krova tekst više ne piše „Pretežno ravan krov“, nego da su pogodni ravni dijelovi; legenda „ravni dijelovi krova (0–10°)“ | `app/src/card.js`, `app/src/layers.js` |
 
 ## U tijeku
 

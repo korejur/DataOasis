@@ -212,7 +212,7 @@ Rajna-Vestfalija:
 
 | Razred | Uvjet | Značenje |
 |---|---|---|
-| **Visoka** | zgrada je kandidat, a većina pogodne površine je nagiba 0–10° | ravan krov: ekstenzivni i intenzivni zeleni krov |
+| **Visoka** | zgrada je kandidat, a većina pogodne površine je nagiba 0–10° | ravni dijelovi krova: ekstenzivni i intenzivni zeleni krov |
 | **Srednja** | zgrada je kandidat, pretežno nagiba 10–20° | blagi nagib: ekstenzivni zeleni krov (sedumi, trave) |
 | **Niska** | nije kandidat, ali ima barem 50 m² ploha nagiba 20–35° | moguće samo uz zaštitu supstrata od klizanja |
 | **Nije pogodno** | ostalo | prestrm krov ili premalo površine |
@@ -309,8 +309,9 @@ Kulturno dobro nije isključeno iz izračuna, nego je označeno: odluku o zahvat
 
 **Napomena o razredu.** Razred pogodnosti odnosi se na **pogodni dio krova**. Katedrala ima pretežno
 kosi krov (10 % ravno), ali ravni i blago nagnuti dijelovi krova zajedno imaju više od 50 m², pa je
-zgrada kandidat s 361 m² površine za zelenilo. Razred „visoka“ znači da je većina te pogodne površine
-ravna, a ne da je cijeli krov ravan. Brojke u kartici uvijek se odnose samo na pogodne plohe.
+zgrada kandidat s 361 m² površine za zelenilo. Kad je ravnog krova manje od polovice, kartica to izričito
+navodi („Veći dio krova je kos …, ali ravni dijelovi pogodni su …“). Brojke u kartici uvijek se odnose
+samo na pogodne plohe.
 
 ### 5.7 Usporedba gradskih četvrti
 

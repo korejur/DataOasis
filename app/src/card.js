@@ -12,6 +12,14 @@ const ZK_CLASS = {
   nije: { label: 'Nije pogodno', text: 'Krov je prestrm ili ima premalo površine s malim nagibom.' },
 };
 
+/** Razred se određuje prema pogodnom dijelu krova, pa tekst za „visoka“ ovisi o tome je li i cijeli krov pretežno ravan. */
+function zkText(p, zk) {
+  if (p.zk === 'visoka' && p.ravno_pct < 50) {
+    return `Veći dio krova je kos (${num(p.ravno_pct)} % ravno), ali ravni dijelovi pogodni su za ekstenzivni i intenzivni zeleni krov.`;
+  }
+  return zk.text;
+}
+
 function fnClass(p) {
   if (p.fn !== 1) return { key: 'nije', label: 'Nije pogodno' };
   if (p.fn_prinos >= FN_BREAKS.odlican) return { key: 'odlican', label: 'Odličan prinos' };
@@ -62,7 +70,7 @@ export function renderCard(p, mode, params) {
   const green = `
     <section class="card-sec ${mode === 'zk' ? 'is-active' : ''}">
       <h3>Zeleni krov ${badge(COLORS.zk[p.zk] ?? COLORS.zk.nije, zk.label)}</h3>
-      <p class="card-text">${zk.text}</p>
+      <p class="card-text">${zkText(p, zk)}</p>
       ${zkCand ? `<dl>
         ${row('Površina za zelenilo', `${num(p.zk_m2)} m²`, 'iskoristivo, bez rubova i instalacija')}
         ${row('Zadržana kišnica', `${num(p.zk_voda_m3)} m³ godišnje`, 'ne opterećuje kanalizaciju')}

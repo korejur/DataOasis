@@ -35,6 +35,7 @@
 | Uloga | Zadatak | Grana | Stanje / napomena |
 |---|---|---|---|
 | podaci | Granice četvrti i MO → javne ustanove | | zadatak poslan |
+| aplikacija (UI) | **Redizajn:** 3 prijedloga izgleda s novim fontovima (`?dizajn=atlas\|grad\|teren`), uvod bez prozora preko karte | `aplikacija/redizajn` | čeka odabir prijedloga; zatim ostaje jedan, prekidač i `themes.css` se brišu |
 
 ## Sljedeće (redom)
 

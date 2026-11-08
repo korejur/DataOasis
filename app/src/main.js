@@ -1,14 +1,7 @@
 import 'maplibre-gl/dist/maplibre-gl.css';
 import '@fontsource-variable/source-serif-4';
 import '@fontsource-variable/source-sans-3';
-import '@fontsource-variable/public-sans';
-import '@fontsource/ibm-plex-sans-condensed/400.css';
-import '@fontsource/ibm-plex-sans-condensed/500.css';
-import '@fontsource/ibm-plex-sans-condensed/600.css';
-import '@fontsource/ibm-plex-mono/400.css';
-import '@fontsource/ibm-plex-mono/500.css';
 import './style.css';
-import './themes.css';
 
 import {
   AttributionControl, GeolocateControl, Map as MapLibre, Marker, NavigationControl,
@@ -22,8 +15,7 @@ import { gwh, ha } from './format.js';
 import { LEGEND, LEGEND_TAGS, TAG_COLORS, fillColor, isCandidate } from './layers.js';
 import { SORTS, renderDistricts, renderKpis, renderSortOptions } from './panel.js';
 import { initSearch } from './search.js';
-import { mountSwitcher, mountTopbar, theme } from './themes.js';
-import { resetIntro, startOnboarding } from './onboarding.js';
+import { startOnboarding } from './onboarding.js';
 
 setWorkerUrl(workerUrl);
 const protocol = new Protocol();
@@ -292,7 +284,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 function fitPadding() {
-  const top = 40 + (document.querySelector('.topbar')?.offsetHeight ?? 0);
+  const top = 40;
   if (mobile()) return { top, bottom: window.innerHeight * 0.35, left: 20, right: 20 };
   return { top, bottom: 40, left: $('panel').offsetWidth + 40, right: card.hidden ? 60 : card.offsetWidth + 40 };
 }
@@ -401,20 +393,12 @@ function goToPlace({ lon, lat }) {
 }
 
 // ---------------------------------------------------------------------------
-// Uvodni ekran
+// O projektu (na klik; uvod za prvi posjet je u panelu, onboarding.js)
 // ---------------------------------------------------------------------------
 const about = $('about');
 const openAbout = () => about.showModal();
 $('open-about').addEventListener('click', openAbout);
-mountTopbar(openAbout);
-mountSwitcher(resetIntro);
 about.addEventListener('click', (e) => { if (e.target === about) about.close(); });
-about.addEventListener('close', () => {
-  try { localStorage.setItem('kzk-intro', '1'); } catch { /* privatni način rada */ }
-});
-let seen = false;
-try { seen = localStorage.getItem('kzk-intro') === '1'; } catch { /* ignore */ }
-if (!seen && !theme) about.showModal(); // sadašnji izgled: prozor pri prvom posjetu
 
 // ---------------------------------------------------------------------------
 // Pokretanje
@@ -442,7 +426,7 @@ async function init() {
   syncThreeD();
   map.on('pitchend', syncThreeD);
   updateZoomHint();
-  startOnboarding(theme, { map, Marker, city, openAbout, getMode: () => state.mode });
+  startOnboarding({ city, openAbout });
   // sažeta atribucija (MapLibre je na početku otvara)
   document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');
 }

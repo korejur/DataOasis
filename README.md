@@ -114,6 +114,7 @@ Sav softver je otvorenog koda, osim gdje je drukčije navedeno. Pravila natjecan
 | MapLibre GL JS | web karta (vektorske pločice, 3D prikaz zgrada) | BSD-3-Clause |
 | PMTiles (protokol za MapLibre) | čitanje pločica iz jedne datoteke preko HTTP Range | BSD-3-Clause |
 | Vite | razvojni poslužitelj i build aplikacije | MIT |
+| Fontovi Source Serif 4 i Source Sans 3 (Adobe), paketi Fontsource | pismo sučelja, poslužuje se iz aplikacije (bez Google Fonts) | SIL OFL 1.1 (fontovi), MIT (Fontsource) |
 | AI asistent za programiranje (Claude Code, Anthropic) | pomoć pri pisanju koda i dokumentacije | komercijalni alat |
 
 ## Objava aplikacije

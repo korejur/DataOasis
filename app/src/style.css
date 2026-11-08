@@ -138,11 +138,9 @@ h1, h2, h3, p { margin: 0; }
 .d-bar i { display: block; height: 100%; background: var(--accent); transition: width .3s; }
 
 .panel-foot {
-  flex: none; display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  flex: none;
   margin: 0 26px; padding: 12px 0 14px; border-top: 1px solid var(--ink); background: var(--surface);
 }
-.panel-foot a { font-size: 13px; color: var(--muted); text-underline-offset: 3px; white-space: nowrap; }
-.panel-foot a:hover { color: var(--ink); }
 
 /* ---------------------------------------------------------------- uvod (naslovnica u panelu) */
 /* Pri prvom posjetu panel umjesto brojki prikazuje kratki uvod; karta je odmah upotrebljiva,

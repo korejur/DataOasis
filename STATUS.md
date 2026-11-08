@@ -31,7 +31,7 @@
 | 2026-11-08 | metodologija | Opis geokodiranja i povezivanja s ISGE u metodologiji (zahtjev aplikacije) | `docs/METODOLOGIJA.md` 7.1 |
 | 2026-11-08 | aplikacija | **Redizajn „Atlas“:** Source Serif 4 + Source Sans 3 (Fontsource, bez Google Fonts), panel uz lijevi rub, tanke crte bez sjena i zaobljenja; uvod pri prvom posjetu kao naslovnica u panelu (zatvara se gumbom ili klikom na zgradu), „O projektu“ samo na klik; tekst u pasivu. Provjereno na 1440 / 900 / 390 px | `app/src/style.css`, `app/src/onboarding.js`, `app/index.html` |
 | 2026-11-08 | aplikacija | **Prikaz „samo objekti Grada“** (ISGE, 853 zgrade): brojke, rang-lista četvrti i karta samo za objekte Grada; pokrivenost vlastite potrošnje struje FN-om ≈ 75 % (objekti ≥ 20 MWh/god); `export_app.py --samo-json` za brzi izvoz sažetaka | `app/src/panel.js`, `app/src/main.js`, `pipeline/export_app.py`, `docs/METODOLOGIJA.md` 7.2 |
-| 2026-11-08 | aplikacija | „O projektu i izvorima podataka“ i poveznica na izvorni kod uvijek vidljivi na dnu panela | `app/index.html`, `app/src/style.css` |
+| 2026-11-08 | aplikacija | „O projektu i izvorima podataka“ uvijek vidljivo na dnu panela | `app/index.html`, `app/src/style.css` |
 
 ## U tijeku
 

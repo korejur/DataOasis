@@ -4,7 +4,7 @@
 > (u istom commitu kao i sam rad). Pravila ažuriranja su na dnu.
 > Plan i podjela uloga: [`docs/PLAN_RADA.md`](docs/PLAN_RADA.md) · kriteriji i bodovi: [`docs/NATJECANJE.md`](docs/NATJECANJE.md) · upute za agente: [`AGENTS.md`](AGENTS.md)
 
-**Zadnje ažuriranje:** 2026-11-08 · uloga: aplikacija · tehnička i projektna dokumentacija, popis skupova podataka
+**Zadnje ažuriranje:** 2026-11-08 · uloga: aplikacija · projektna i tehnička dokumentacija za PDF, sa snimkama zaslona i dijagramima
 **Predaja:** pon 9. 11. 2026. do 24:00 · **Zamrzavanje funkcionalnosti:** ned 8. 11. u 18:00
 **Najviše bodova (30/60):** izvedivost (radni prototip na javnom linku), dojam UI/UX, video
 
@@ -14,26 +14,26 @@
 |---|---|---|---|
 | 2026-11-03 | – | Pipeline: preuzimanje ZG3D, krovne plohe, PVGIS, potencijal po zgradi (356 984 zgrade) | `pipeline/`, `data/processed/` |
 | 2026-11-03 | – | Pregled literature i metodologija | `docs/` |
-| 2026-11-05 | aplikacija | ✔ `docs/PROJEKT.md` || **Korak 1:** izvoz za kartu – `buildings.pmtiles` (z13–16), `districts.json`, `city.json` | `pipeline/export_app.py`, `app/public/data/` |
+| 2026-11-05 | aplikacija | **Korak 1:** izvoz za kartu – `buildings.pmtiles` (z13–16), `districts.json`, `city.json` | `pipeline/export_app.py`, `app/public/data/` |
 | 2026-11-05 | – | Plan rada s rasporedom, STATUS, upute za agente | `docs/PLAN_RADA.md`, `STATUS.md`, `AGENTS.md` |
 | 2026-11-05 | – | Sažetak pravila i kriterija ocjenjivanja s planom za bodove | `docs/NATJECANJE.md` |
 | 2026-11-05 | – | `handoff.md` obrisan; otvorena pitanja prenesena u STATUS, napomene o podacima u `METODOLOGIJA.md` | – |
-| 2026-11-07 | aplikacija | ✔ `docs/PROJEKT.md` || **Karta:** Vite + MapLibre + PMTiles; prekidač zeleni krov / FN, kartica zgrade, legenda, uvodni ekran s izvorima, 3D prikaz, prikaz na mobitelu | `app/` |
-| 2026-11-07 | aplikacija | ✔ `docs/PROJEKT.md` || **Panel s četvrtima:** brojke za grad i četvrt, scenarij 10 / 30 / 100 % kandidata, rang-lista (3 kriterija po sloju), pregled ispod z13 krugovima | `app/src/panel.js` |
-| 2026-11-07 | aplikacija | ✔ `docs/PROJEKT.md` || Pretraga četvrti (bez dijakritika) i adresa (Nominatim) s otvaranjem kartice pogođene zgrade | `app/src/search.js` |
-| 2026-11-07 | aplikacija | ✔ `docs/PROJEKT.md` || **Objava na GitHub Pages:** workflow pri pushu na `main`, `buildings.pmtiles` iz Releasea `podaci`; repo javan; `LICENSE` (MIT); uklonjen tuđi PDF (LANUV NRW) | `.github/workflows/pages.yml`, `LICENSE` |
-| 2026-11-07 | aplikacija | ✔ `docs/PROJEKT.md` || Javni link provjeren u pregledniku: zgrade se iscrtavaju (z14 središte: ~2,4 MB pločica), kartica zgrade radi; HTTP Range na Pages radi | – |
-| 2026-11-08 | aplikacija | ✔ `docs/PROJEKT.md` || Legenda na širinama 761–1040 px uz otvorenu karticu ide ispod kartice (prije pod lijevi panel); provjereno na 400 / 800 / 1000 / 1280 px | `app/src/style.css`, `app/src/main.js` |
-| 2026-11-08 | aplikacija | ✔ `docs/PROJEKT.md` || **Geokodiranje** (Nominatim, predmemorija u gitu): kulturna dobra 368/470 spojeno (393 zgrade), ISGE 854 zgrade od 1 082 objekta | `pipeline/geocode.py`, `data/reference/geocode/` |
-| 2026-11-08 | aplikacija | ✔ `docs/PROJEKT.md` || **Spajanje tablica u izvoz** (baština, ISGE, ustanove kad stignu); kartica: kulturno dobro, objekt Grada s potrošnjom i udjelom FN; obrub na karti + legenda | `pipeline/export_app.py`, `app/src/card.js` |
+| 2026-11-07 | aplikacija | **Karta:** Vite + MapLibre + PMTiles; prekidač zeleni krov / FN, kartica zgrade, legenda, uvodni ekran s izvorima, 3D prikaz, prikaz na mobitelu | `app/` |
+| 2026-11-07 | aplikacija | **Panel s četvrtima:** brojke za grad i četvrt, scenarij 10 / 30 / 100 % kandidata, rang-lista (3 kriterija po sloju), pregled ispod z13 krugovima | `app/src/panel.js` |
+| 2026-11-07 | aplikacija | Pretraga četvrti (bez dijakritika) i adresa (Nominatim) s otvaranjem kartice pogođene zgrade | `app/src/search.js` |
+| 2026-11-07 | aplikacija | **Objava na GitHub Pages:** workflow pri pushu na `main`, `buildings.pmtiles` iz Releasea `podaci`; repo javan; `LICENSE` (MIT); uklonjen tuđi PDF (LANUV NRW) | `.github/workflows/pages.yml`, `LICENSE` |
+| 2026-11-07 | aplikacija | Javni link provjeren u pregledniku: zgrade se iscrtavaju (z14 središte: ~2,4 MB pločica), kartica zgrade radi; HTTP Range na Pages radi | – |
+| 2026-11-08 | aplikacija | Legenda na širinama 761–1040 px uz otvorenu karticu ide ispod kartice (prije pod lijevi panel); provjereno na 400 / 800 / 1000 / 1280 px | `app/src/style.css`, `app/src/main.js` |
+| 2026-11-08 | aplikacija | **Geokodiranje** (Nominatim, predmemorija u gitu): kulturna dobra 368/470 spojeno (393 zgrade), ISGE 854 zgrade od 1 082 objekta | `pipeline/geocode.py`, `data/reference/geocode/` |
+| 2026-11-08 | aplikacija | **Spajanje tablica u izvoz** (baština, ISGE, ustanove kad stignu); kartica: kulturno dobro, objekt Grada s potrošnjom i udjelom FN; obrub na karti + legenda | `pipeline/export_app.py`, `app/src/card.js` |
 | 2026-11-08 | metodologija | **Parametri s izvorima:** uklonjeni svi `TODO izvor` (DHMZ, FLL/LANUV NRW, Mentens i sur. 2006, EEA, Eurostat); cijena struje 0,15 → 0,18 €/kWh, potrošnja kućanstva 3 500 → 4 630 kWh; tablica izvora | `pipeline/config.py`, `docs/METODOLOGIJA.md` (pogl. 8) |
 | 2026-11-08 | metodologija | Ponovni izračun i izvoz: ekvivalent kućanstava za grad 1,09 mil. → 824 tis., povrat FN ~7,7 → ~6,4 god.; kartica zgrade čita potrošnju kućanstva iz `city.json` | `app/public/data/`, Release `podaci` |
 | 2026-11-08 | metodologija | Opis geokodiranja i povezivanja s ISGE u metodologiji (zahtjev aplikacije) | `docs/METODOLOGIJA.md` 7.1 |
-| 2026-11-08 | aplikacija | ✔ `docs/PROJEKT.md` || **Redizajn „Atlas“:** Source Serif 4 + Source Sans 3 (Fontsource, bez Google Fonts), panel uz lijevi rub, tanke crte bez sjena i zaobljenja; uvod pri prvom posjetu kao naslovnica u panelu (zatvara se gumbom ili klikom na zgradu), „O projektu“ samo na klik; tekst u pasivu. Provjereno na 1440 / 900 / 390 px | `app/src/style.css`, `app/src/onboarding.js`, `app/index.html` |
-| 2026-11-08 | aplikacija | ✔ `docs/PROJEKT.md` || **Prikaz „samo objekti Grada“** (ISGE, 853 zgrade): brojke, rang-lista četvrti i karta samo za objekte Grada; pokrivenost vlastite potrošnje struje FN-om ≈ 75 % (objekti ≥ 20 MWh/god); `export_app.py --samo-json` za brzi izvoz sažetaka | `app/src/panel.js`, `app/src/main.js`, `pipeline/export_app.py`, `docs/METODOLOGIJA.md` 7.2 |
-| 2026-11-08 | aplikacija | ✔ `docs/PROJEKT.md` || „O projektu i izvorima podataka“ uvijek vidljivo na dnu panela | `app/index.html`, `app/src/style.css` |
-| 2026-11-08 | aplikacija | ✔ `docs/PROJEKT.md` || Novi naziv **Krov+** i tekst (podnaslov, uvod, „O projektu“, naslov stranice); poveznica na repozitorij u „O projektu“ | `app/index.html`, `app/src/onboarding.js`, README, LICENSE |
-| 2026-11-08 | aplikacija | ✔ `docs/PROJEKT.md` || **Tehnička i projektna dokumentacija:** arhitektura (dijagram, standardi, integracija, preduvjeti), projekt (problem, korisnici, vrijednost, daljnji razvoj), popis svih skupova s izdavateljem, poveznicom i licencom (provjereno preko CKAN API-ja) | `docs/ARHITEKTURA.md`, `docs/PROJEKT.md`, `docs/PODACI.md`, README |
+| 2026-11-08 | aplikacija | **Redizajn „Atlas“:** Source Serif 4 + Source Sans 3 (Fontsource, bez Google Fonts), panel uz lijevi rub, tanke crte bez sjena i zaobljenja; uvod pri prvom posjetu kao naslovnica u panelu (zatvara se gumbom ili klikom na zgradu), „O projektu“ samo na klik; tekst u pasivu. Provjereno na 1440 / 900 / 390 px | `app/src/style.css`, `app/src/onboarding.js`, `app/index.html` |
+| 2026-11-08 | aplikacija | **Prikaz „samo objekti Grada“** (ISGE, 853 zgrade): brojke, rang-lista četvrti i karta samo za objekte Grada; pokrivenost vlastite potrošnje struje FN-om ≈ 75 % (objekti ≥ 20 MWh/god); `export_app.py --samo-json` za brzi izvoz sažetaka | `app/src/panel.js`, `app/src/main.js`, `pipeline/export_app.py`, `docs/METODOLOGIJA.md` 7.2 |
+| 2026-11-08 | aplikacija | „O projektu i izvorima podataka“ uvijek vidljivo na dnu panela | `app/index.html`, `app/src/style.css` |
+| 2026-11-08 | aplikacija | Novi naziv **Krov+** i tekst (podnaslov, uvod, „O projektu“, naslov stranice); poveznica na repozitorij u „O projektu“ | `app/index.html`, `app/src/onboarding.js`, README, LICENSE |
+| 2026-11-08 | aplikacija | **Tehnička i projektna dokumentacija** (službeni dokumenti za PDF, 15 snimki zaslona, 3 dijagrama): arhitektura, obrada podataka s formulama, model podataka, aplikacija korak po korak, standardi, integracija, preduvjeti, popis svih skupova s izdavateljem, poveznicom i licencom (provjereno preko CKAN API-ja) | `docs/PROJEKTNA_DOKUMENTACIJA.md`, `docs/TEHNICKA_DOKUMENTACIJA.md`, `docs/slike/`, README |
 
 ## U tijeku
 
@@ -43,7 +43,7 @@
 
 ## Sljedeće (redom)
 
-1. **aplikacija:** pospremanje repoa i README (stavka 10a); snimke zaslona u dokumentaciju kad budu gotove
+1. **aplikacija:** pretvoriti dokumentaciju u PDF za e-poštu → pospremanje repoa i README (stavka 10a)
 2. **podaci:** granice → `building_institutions.parquet` → LST/NDVI (`building_env.parquet`)
 3. **metodologija:** validacija (~200 zgrada, popis dobiva od aplikacije) → scenarij videa → UX test s osobom izvan tima
 
@@ -57,7 +57,7 @@ ali alati poput `curl --compressed` ili Node `fetch` trebaju `Accept-Encoding: i
 
 | Tko čeka | Na što | Od koga |
 |---|---|---|
-| aplikacija | ✔ `docs/PROJEKT.md` |(sloj četvrti) | `data/reference/granice/*.geojson` | podaci |
+| aplikacija (sloj četvrti) | `data/reference/granice/*.geojson` | podaci |
 
 ## Predane tablice (sučelje prema izvozu)
 
@@ -69,8 +69,8 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 | `buildings_metrics.parquet` | sve metrike (vidi `pipeline/metrics.py`) | – | gotovo |
 | `building_institutions.parquet` | `bldg_id`, `institution_type`, `institution_name` | podaci | – |
 | `building_env.parquet` | `bldg_id`, `lst`, `ndvi`, `pop` | podaci | – |
-| `heritage_buildings.parquet` | `bldg_id`, `heritage_id`, `naziv`, `status`, `adresa`, `nacin` | aplikacija | ✔ `docs/PROJEKT.md` || gotovo (393 zgrade) |
-| `isge_buildings.parquet` | `bldg_id`, `objekt`, `adresa`, `kwh_god`, `eur_god`, `fn_udio`, `nacin` | aplikacija | ✔ `docs/PROJEKT.md` || gotovo (854 zgrade) |
+| `heritage_buildings.parquet` | `bldg_id`, `heritage_id`, `naziv`, `status`, `adresa`, `nacin` | aplikacija | gotovo (393 zgrade) |
+| `isge_buildings.parquet` | `bldg_id`, `objekt`, `adresa`, `kwh_god`, `eur_god`, `fn_udio`, `nacin` | aplikacija | gotovo (854 zgrade) |
 
 ## Odluke
 
@@ -113,17 +113,17 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 
 | # | Stavka | Uloga | Stanje |
 |---|---|---|---|
-| 1 | Javni GitHub repozitorij s izvornim kodom | aplikacija | ✔ `docs/PROJEKT.md` || ✔ javan od 7. 11. (github.com/korejur/DataOasis) |
+| 1 | Javni GitHub repozitorij s izvornim kodom | aplikacija | ✔ javan od 7. 11. (github.com/korejur/DataOasis) |
 | 2 | Licenca otvorenog koda (`LICENSE`) | svi – odluka | ✔ MIT (kod), CC BY 4.0 (podaci) |
-| 3 | Tehnička dokumentacija `docs/ARHITEKTURA.md`: dijagram, standardi, integracija s javnim sustavima, tehnički/organizacijski/pravni preduvjeti | aplikacija | ✔ `docs/PROJEKT.md` || ✔ `docs/ARHITEKTURA.md` |
-| 4 | Projektna dokumentacija: problem, ciljni korisnici, vrijednost, daljnji razvoj | aplikacija | ✔ `docs/PROJEKT.md` |
-| 5 | **Popis svih skupova podataka** s izdavateljem, poveznicom i licencom | metodologija + podaci | ✔ `docs/PODACI.md` |
-| 6 | **Popis korištenih alata i biblioteka, uključujući AI alate** | svi | djelomično (README → „Korišteni alati“; svaka uloga dopisuje svoje alate, posebno AI alate) |
-| 7 | Demo: javni link na radni prototip | aplikacija | ✔ `docs/PROJEKT.md` || ✔ https://korejur.github.io/DataOasis/ |
-| 8 | Demo: snimke zaslona | metodologija | ☐ |
+| 3 | Tehnička dokumentacija: dijagram, standardi, integracija s javnim sustavima, tehnički/organizacijski/pravni preduvjeti | aplikacija | ✔ `docs/TEHNICKA_DOKUMENTACIJA.md` |
+| 4 | Projektna dokumentacija: problem, ciljni korisnici, vrijednost, daljnji razvoj | aplikacija | ✔ `docs/PROJEKTNA_DOKUMENTACIJA.md` |
+| 5 | **Popis svih skupova podataka** s izdavateljem, poveznicom i licencom | metodologija + podaci | ✔ `docs/TEHNICKA_DOKUMENTACIJA.md` pogl. 8 |
+| 6 | **Popis korištenih alata i biblioteka, uključujući AI alate** | svi | djelomično (README → „Korišteni alati“ i tehnička dokumentacija pogl. 9; svaka uloga dopisuje svoje AI alate) |
+| 7 | Demo: javni link na radni prototip | aplikacija | ✔ https://korejur.github.io/DataOasis/ |
+| 8 | Demo: snimke zaslona | aplikacija | ✔ `docs/slike/` (15 snimki, i u projektnoj dokumentaciji) |
 | 9 | **Video ≤ 3 min:** problem, korisnici, izvori podataka, funkcionalnosti, arhitektura, vrijednost, daljnji razvoj | metodologija | ☐ |
 | 10 | Video i veliki dodaci preko poveznice dostupne barem do objave rezultata (17. 11.) | metodologija | ☐ |
-| 10a | **Pospremanje repoa prije objave**: README prepisati kao predstavljanje projekta (problem, link na demo, snimka zaslona, arhitektura, podaci); `STATUS.md` i `PLAN_RADA.md` po želji u `docs/tim/`; provjeriti da nigdje nema imena, osobnih putanja ni tajni; obrisati privremene datoteke | aplikacija | ✔ `docs/PROJEKT.md` || ☐ |
+| 10a | **Pospremanje repoa prije objave**: README prepisati kao predstavljanje projekta (problem, link na demo, snimka zaslona, arhitektura, podaci); `STATUS.md` i `PLAN_RADA.md` po želji u `docs/tim/`; provjeriti da nigdje nema imena, osobnih putanja ni tajni; obrisati privremene datoteke | aplikacija | ☐ |
 | 11 | E-pošta na open.data@mpudt.hr do 9. 11. u 24:00 (šalje voditelj tima, mentor u kopiji) – cilj poslati do 20:00 | voditelj | ☐ |
 
 ## Pravila ažuriranja (za ljude i agente)

@@ -14,9 +14,8 @@ krenuti prvo.
 
 | Dokument | Sadržaj |
 |---|---|
-| [docs/PROJEKT.md](docs/PROJEKT.md) | problem, rješenje i funkcionalnosti, ciljni korisnici, vrijednost, daljnji razvoj |
-| [docs/ARHITEKTURA.md](docs/ARHITEKTURA.md) | tehnička arhitektura: dijagram, pipeline, aplikacija, standardi, integracija, preduvjeti |
-| [docs/PODACI.md](docs/PODACI.md) | popis svih skupova podataka s izdavateljem, poveznicom i licencom |
+| [docs/PROJEKTNA_DOKUMENTACIJA.md](docs/PROJEKTNA_DOKUMENTACIJA.md) | problem, rješenje, korisnici, aplikacija korak po korak sa snimkama zaslona, rezultati, vrijednost, ograničenja, daljnji razvoj |
+| [docs/TEHNICKA_DOKUMENTACIJA.md](docs/TEHNICKA_DOKUMENTACIJA.md) | arhitektura, obrada podataka s formulama, model podataka, aplikacija, standardi, popis svih skupova podataka, alati, integracija, preduvjeti, parametri |
 | [docs/METODOLOGIJA.md](docs/METODOLOGIJA.md) | formule, parametri i njihovi izvori, ograničenja |
 
 ## Struktura
@@ -99,7 +98,7 @@ Pretpostavke su u `docs/METODOLOGIJA.md`.
 
 ## Izvori podataka
 
-Puni popis s izdavateljima, poveznicama i licencama: [docs/PODACI.md](docs/PODACI.md).
+Puni popis s izdavateljima, poveznicama i licencama: [Tehnička dokumentacija, poglavlje 8](docs/TEHNICKA_DOKUMENTACIJA.md#8-popis-skupova-podataka).
 
 | Skup podataka | Izdavatelj | Licenca |
 |---|---|---|

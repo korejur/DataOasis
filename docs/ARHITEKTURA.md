@@ -11,46 +11,46 @@ bazom ni API-ja koji bi trebalo održavati: aplikacija je skup datoteka na stati
 ## 1. Pregled
 
 ```mermaid
-flowchart LR
+flowchart TB
   subgraph izvori["Otvoreni podaci"]
+    direction LR
     ZG3D["ZG3D LoD 2.2<br/>17 četvrti, FGDB<br/>data.gov.hr"]
     PVGIS["PVGIS 5.3<br/>JRC"]
     ISGE["ISGE potrošnja<br/>objekata Grada<br/>data.gov.hr"]
-    KD["Registar kulturnih<br/>dobara<br/>data.gov.hr"]
+    KD["Registar kulturnih<br/>dobara, data.gov.hr"]
     OSM["Nominatim<br/>OpenStreetMap"]
   end
 
-  subgraph pipeline["Pipeline (Python, jednom po izmjeni podataka)"]
-    D["download.py<br/>CKAN API"]
-    E["extract_roofs.py<br/>3D plohe → krovovi"]
-    P["pvgis.py<br/>tablica prinosa"]
-    M["metrics.py<br/>potencijal po zgradi,<br/>četvrti, gradu"]
-    G["geocode.py<br/>adrese → zgrade"]
-    X["export_app.py<br/>pločice + sažeci"]
+  subgraph pipeline["Pipeline (Python), pokreće se nakon izmjene podataka ili parametara"]
+    direction LR
+    D["1 download.py<br/>CKAN API"] --> E["2 extract_roofs.py<br/>3D plohe → krovovi"]
+    E --> M["4 metrics.py<br/>potencijal po zgradi,<br/>četvrti i gradu"]
+    P["3 pvgis.py<br/>tablica prinosa"] --> M
+    M --> G["5 geocode.py<br/>adrese → zgrade"]
+    M --> X["6 export_app.py<br/>pločice i sažeci"]
+    G --> X
   end
 
-  subgraph objava["Statički hosting (GitHub Pages + Release)"]
+  subgraph objava["Statički hosting: GitHub Pages i Release"]
+    direction LR
     T[("buildings.pmtiles<br/>~80 MB, MVT z13–16")]
     J[("city.json<br/>districts.json")]
     A["Web aplikacija<br/>Vite + MapLibre GL JS"]
+    T -- HTTP Range --> A
+    J --> A
   end
 
-  ZG3D --> D --> E --> M
-  PVGIS --> P --> M
+  ZG3D --> D
+  PVGIS --> P
   ISGE --> G
   KD --> G
   OSM --> G
-  E -- tlocrti --> G
-  M --> G
-  M --> X
-  G --> X
   X --> T
   X --> J
-  T -- HTTP Range --> A
-  J --> A
-  U(["Korisnik:<br/>preglednik na računalu<br/>ili mobitelu"]) --> A
-  A -. pretraga adrese .-> OSM
+  A --> U(["Korisnik u pregledniku<br/>na računalu ili mobitelu"])
 ```
+
+Pretraga adrese u aplikaciji šalje upit izravno Nominatimu; ostalo se čita iz objavljenih datoteka.
 
 **Zašto ovako:** svi izračuni (356 984 zgrade, ~1,2 GB ulaznih podataka) traju nekoliko minuta i
 mijenjaju se samo kad se promijene ulazni podaci ili parametri. Zato se rade unaprijed, a aplikacija

@@ -1,7 +1,7 @@
 # Metodologija izračuna
 
 Svi parametri navedeni ovdje nalaze se u `pipeline/config.py` (`GEOM`, `PARAMS`).
-Vrijednosti označene s **TODO izvor** treba potvrditi i citirati prije predaje.
+Izvori svih parametara su u poglavlju 8. Gdje izvora nema, vrijednost je označena kao vlastita pretpostavka.
 
 ## 1. Tok obrade
 
@@ -75,18 +75,22 @@ se okreću.
 | niska | 20–35° | ekstenzivni uz protuklizne mjere (ne ulazi u kandidate) |
 | neprikladno | > 35° | — |
 
-Okvirno prema FLL smjernicama (Njemačka): do ~15° bez posebnih mjera, iznad
-treba zaštita od klizanja supstrata. **TODO izvor**
+Prema FLL smjernicama (2018), kako ih prenosi metodologija Gründachkataster NRW
+(LANUV): do ~15° bez posebnih mjera, iznad treba zaštita od klizanja supstrata,
+a iznad ~35° zeleni krov praktički nije izvediv. Naše klase su grublje od NRW-ovih.
 
 * `prikladna površina = Σ A (visoka + srednja)`
-* `iskoristiva površina = prikladna × 0,75` (rubovi, instalacije, izlazi na krov)
+* `iskoristiva površina = prikladna × 0,75` (rubovi, instalacije, izlazi na krov;
+  **vlastita pretpostavka**, nije iz literature)
 * zgrada je **kandidat** ako je prikladna površina ≥ 50 m²
 
 ### 3.2 Doprinosi
 
 * **Zadržana oborinska voda** [m³/god]: `V = A_isk × P × r`,
   gdje je `P` = 880 mm/god, a `r` = 0,50 (udio zadržane godišnje oborine).
-  Literatura za ekstenzivne krovove daje 35–90 % pa je 50 % konzervativno.
+  `P`: DHMZ, zbroj srednjih mjesečnih oborina: Zagreb-Grič 887 mm (1861.–2024.),
+  Zagreb-Maksimir 868 mm (1949.–2024.). `r`: FLL (2018) daje 50 % za 10 cm supstrata,
+  a Mentens i sur. (2006) ~45 % za ekstenzivne krovove.
   To je voda koja ne opterećuje kanalizaciju (Zagreb ima mješoviti sustav).
 * **Trošak** [€]: `A_isk × 130 €/m²` (eMajstor 2026.: 108–180 €/m² bez hidroizolacije)
 * **Hlađenje / toplinski otok** (planirano): povezivanje s temperaturom
@@ -117,10 +121,14 @@ Optimum: 35° prema jugu, 1242 kWh/kWp. Vodoravno: 1053 kWh/kWp.
 
 ### 4.3 Doprinosi
 
-* **CO₂** [t/god] = `E × 0,134 kg/kWh / 1000` (EEA, intenzitet emisija proizvodnje el. energije RH, 2020.) **TODO ažurirati**
-* **Ekvivalent kućanstava** = `E / 3500 kWh` **TODO izvor (DZS/HERA)**
+* **CO₂** [t/god] = `E × 0,134 kg/kWh / 1000` (EEA, intenzitet emisija proizvodnje el. energije RH, 2020.;
+  novije godine EEA objavljuje samo u interaktivnom grafikonu)
+* **Ekvivalent kućanstava** = `E / 4630 kWh` (Eurostat: potrošnja el. energije kućanstava u RH 2024.
+  6 818 GWh / 1 471,9 tis. kućanstava). Za cijeli grad je to tehnički potencijal, veći od broja kućanstava u Zagrebu.
 * **Investicija** = `P × 1300 €/kWp` (hrvatski izvori 2025.: 1200–1500 €/kWp)
-* **Jednostavni povrat** = `investicija / (E × 0,15 €/kWh)`. Bez subvencija.
+* **Jednostavni povrat** = `investicija / (E × 0,18 €/kWh)` (Eurostat, cijena za kućanstva u RH,
+  razred 2 500–4 999 kWh, sa svim porezima, 1. pol. 2026.). Bez subvencija. Pretpostavlja da se
+  sva proizvedena energija troši na mjestu, pa je za zgrade s viškom proizvodnje optimistično.
   FZOEU sufinancira do 600 €/kW za obiteljske kuće.
 
 ### 4.4 Zeleno ili solarno?
@@ -129,7 +137,8 @@ Na ravnim krovovima obje mjere se natječu za istu površinu. Aplikacija
 prikazuje oba potencijala odvojeno i nudi tri scenarija:
 (a) samo zeleno, (b) samo FN, (c) **biosolarni krov**, gdje FN na nosačima
 stoji iznad ekstenzivnog zelenog krova. Zelenilo hladi module, pa raste
-učinkovitost. Literatura navodi nekoliko posto. **TODO izvor**
+učinkovitost: na krovu u Sydneyju prosječno +3,6 % (UTS, 2021.), na većem krovu u Bradfieldu
+prosječno +11 %, a u toplinskim valovima do +23 % (UTS, 2026.). Taj učinak ne ulazi u izračun.
 
 ### 4.5 Usporedba s postojećim alatom
 
@@ -187,3 +196,38 @@ potrošnje** `E_FN / E_potrošnja`.
   ~419 tisuća redaka (mjesečno po mjernom mjestu). Ima adrese, ali ne i koordinate.
 * **Topografska osnova 2018 – objekti:** stupac „Tip objekta“ je brojčani kod,
   a šifrarnik nije pronađen.
+
+### 7.1 Povezivanje adresa sa zgradama (geokodiranje)
+
+Registar kulturnih dobara i ISGE imaju adrese, ali ne i koordinate (`pipeline/geocode.py`):
+
+* adrese se čiste (vodeće nule, više adresa u jednom zapisu, rasponi kućnih brojeva, kratice „Av.“ i „Al.“)
+  i geokodiraju preko **Nominatima** (OpenStreetMap), najviše 1 upit u sekundi; odgovori se čuvaju u
+  `data/reference/geocode/nominatim.json`, pa je postupak ponovljiv;
+* prihvaća se samo pogodak **s kućnim brojem**; točka se veže uz tlocrt zgrade u kojem leži ili uz
+  najbližu zgradu udaljenu **do 15 m**;
+* rezultat: kulturna dobra **368 od 470** zapisa s adresom vezano je uz zgradu (393 zgrade);
+  ISGE **854 zgrade** od 1 082 objekta s potrošnjom struje.
+
+**ISGE:** koristi se potrošnja **električne energije u 2023.** (za 2024. postoji samo siječanj–lipanj).
+**Udio koji FN može pokriti** = `E_FN / E_potrošnja` prikazuje se samo za objekte s potrošnjom
+**≥ 20 MWh/god**. Manji potrošači (npr. uredi mjesne samouprave, knjižnice) koriste samo dio zgrade,
+pa bi omjer prema proizvodnji cijelog krova bio višestruko prevelik (medijan ~250 %, nakon praga 104 %).
+
+## 8. Izvori parametara
+
+Provjereno 8. 11. 2026. Vrijednosti su u `pipeline/config.py` (`PARAMS`).
+
+| Parametar | Vrijednost | Izvor |
+|---|---|---|
+| Klase nagiba za zeleni krov | 0–10 / 10–20 / 20–35° | FLL (2018) *Dachbegrünungsrichtlinien*, preko [LANUV NRW: Methodik Gründachkataster NRW](https://www.klimaatlas.nrw.de/sites/default/files/2022-11/Methodik_Planung_Bau_GruendachkatasterNRW_0.pdf) |
+| Iskoristivi udio krova | 0,75 | vlastita pretpostavka (rubovi, instalacije, izlazi) |
+| Godišnja oborina | 880 mm | DHMZ, klimatološki podaci: [Zagreb-Grič](https://meteo.hr/klima.php?section=klima_podaci&param=k1&Grad=zagreb_gric) 887 mm (1861.–2024.), [Zagreb-Maksimir](https://meteo.hr/klima.php?section=klima_podaci&param=k1&Grad=zagreb_maksimir) 868 mm (1949.–2024.); zbroj srednjih mjesečnih vrijednosti |
+| Godišnje zadržavanje (ekstenzivni krov) | 50 % | FLL (2018) preko LANUV NRW (50 % za 10 cm supstrata); Mentens, Raes i Hermy (2006), *Landscape and Urban Planning* 77(3), 217–226 (~45 %) |
+| Trošak zelenog krova | 130 €/m² | eMajstor (2026.): 108–180 €/m² bez hidroizolacije |
+| Prinos FN | PVGIS | [PVGIS 5.3, JRC](https://re.jrc.ec.europa.eu/pvg_tools/en/) (SARAH3, 2005.–2023.) |
+| Trošak FN | 1 300 €/kWp | hrvatski izvori 2025.: 1 200–1 500 €/kWp |
+| Emisije el. energije | 0,134 kg CO₂e/kWh | [EEA: intenzitet emisija proizvodnje el. energije](https://www.eea.europa.eu/en/analysis/indicators/greenhouse-gas-emission-intensity-of-1/greenhouse-gas-emission-intensity-of-electricity-generation-country-level), RH 2020.: 133,8 g/kWh |
+| Cijena el. energije za kućanstva | 0,18 €/kWh | [Eurostat nrg_pc_204](https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table): RH, 2 500–4 999 kWh, svi porezi, 2026-S1: 0,1816 (2025-S2: 0,1652) |
+| Potrošnja kućanstva | 4 630 kWh/god | [Eurostat nrg_bal_c](https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table) (kućanstva, el. energija, RH 2024.: 6 818 GWh) / [Eurostat lfst_hhnhtych](https://ec.europa.eu/eurostat/databrowser/view/lfst_hhnhtych/default/table) (1 471,9 tis. kućanstava, 2024.) |
+| Biosolarni krov (samo u tekstu) | +3,6 % do +11 % | UTS (Sydney, 2021.); UTS (Bradfield, 2026.), [pv magazine, 11. 8. 2026.](https://www.pv-magazine.com/2026/08/11/biosolar-design-boosts-rooftop-pv-performance-by-23-25/) |

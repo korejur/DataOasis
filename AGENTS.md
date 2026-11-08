@@ -10,7 +10,7 @@
 
 ## Projekt u dvije rečenice
 
-„Krovovi za klimu“ je alat za urbaniste Grada Zagreba. Iz otvorenog 3D modela zgrada (ZG3D, LoD 2.2)
+„Krov+“ (ranije „Krovovi za klimu“) je alat za urbaniste, prvi put primijenjen na Zagreb. Iz otvorenog 3D modela zgrada (ZG3D, LoD 2.2)
 pronalazi krovove pogodne za **zelene krovove** (srž) i **fotonapon** (dodatni sloj), procjenjuje doprinos
 (kišnica, energija, CO₂, trošak) i pomaže odrediti gdje krenuti prvo. Natjecanje: Datathon Portala
 otvorenih podataka 2026., izazov **B – Okoliš i održivi prostor**.

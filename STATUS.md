@@ -1,10 +1,10 @@
-# STATUS – Krovovi za klimu
+# STATUS – Krov+
 
 > **Živi dokument.** Svaki član tima i svaki agent ga **čita na početku rada** i **ažurira na kraju**
 > (u istom commitu kao i sam rad). Pravila ažuriranja su na dnu.
 > Plan i podjela uloga: [`docs/PLAN_RADA.md`](docs/PLAN_RADA.md) · kriteriji i bodovi: [`docs/NATJECANJE.md`](docs/NATJECANJE.md) · upute za agente: [`AGENTS.md`](AGENTS.md)
 
-**Zadnje ažuriranje:** 2026-11-08 · uloga: aplikacija · prikaz „samo objekti Grada“, „O projektu“ uvijek vidljivo na dnu panela
+**Zadnje ažuriranje:** 2026-11-08 · uloga: aplikacija · novi naziv „Krov+“ i tekst uvoda
 **Predaja:** pon 9. 11. 2026. do 24:00 · **Zamrzavanje funkcionalnosti:** ned 8. 11. u 18:00
 **Najviše bodova (30/60):** izvedivost (radni prototip na javnom linku), dojam UI/UX, video
 
@@ -32,6 +32,7 @@
 | 2026-11-08 | aplikacija | **Redizajn „Atlas“:** Source Serif 4 + Source Sans 3 (Fontsource, bez Google Fonts), panel uz lijevi rub, tanke crte bez sjena i zaobljenja; uvod pri prvom posjetu kao naslovnica u panelu (zatvara se gumbom ili klikom na zgradu), „O projektu“ samo na klik; tekst u pasivu. Provjereno na 1440 / 900 / 390 px | `app/src/style.css`, `app/src/onboarding.js`, `app/index.html` |
 | 2026-11-08 | aplikacija | **Prikaz „samo objekti Grada“** (ISGE, 853 zgrade): brojke, rang-lista četvrti i karta samo za objekte Grada; pokrivenost vlastite potrošnje struje FN-om ≈ 75 % (objekti ≥ 20 MWh/god); `export_app.py --samo-json` za brzi izvoz sažetaka | `app/src/panel.js`, `app/src/main.js`, `pipeline/export_app.py`, `docs/METODOLOGIJA.md` 7.2 |
 | 2026-11-08 | aplikacija | „O projektu i izvorima podataka“ uvijek vidljivo na dnu panela | `app/index.html`, `app/src/style.css` |
+| 2026-11-08 | aplikacija | Novi naziv **Krov+** i tekst (podnaslov, uvod, „O projektu“, naslov stranice); poveznica na repozitorij u „O projektu“ | `app/index.html`, `app/src/onboarding.js`, README, LICENSE |
 
 ## U tijeku
 
@@ -96,6 +97,7 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 | 2026-11-08 | Izgled „Atlas“ (odabran od tri prijedloga: Atlas, Gradski servis, Teren) | manje generičko sučelje, karta i brojke čitljive i na videu |
 | 2026-11-08 | Uvod nije prozor preko karte, nego naslovnica u lijevom panelu | prozor je djelovao kao otvorene postavke; karta je odmah upotrebljiva |
 | 2026-11-08 | Tekstovi u aplikaciji i materijalima bez 1. lica množine, u pasivu („izračunato je“, „procjenjuje se“) | odluka tima o tonu |
+| 2026-11-08 | Naziv projekta **Krov+** (umjesto „Krovovi za klimu“); naslov bez imena grada, Zagreb u podnaslovu | projekt se predstavlja kao primjenjiv na cijelu Hrvatsku; repozitorij i javni link ostaju `DataOasis` |
 
 ## Otvorena pitanja (treba odluku tima)
 

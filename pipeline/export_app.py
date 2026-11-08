@@ -194,7 +194,7 @@ def main() -> None:
         t2, dst, driver="PMTiles", layer="buildings", encoding="UTF-8",  # inače na Windowsu cp1252
         dataset_options={
             "MINZOOM": MINZOOM, "MAXZOOM": MAXZOOM,
-            "NAME": "Krovovi za klimu - zgrade Zagreba",
+            "NAME": "Krov+ - zgrade Zagreba",
             "DESCRIPTION": "Potencijal zelenih krovova i fotonapona (ZG3D 2022, LoD 2.2)",
             "MAX_SIZE": MAX_TILE_BYTES, "MAX_FEATURES": 400_000,
         },

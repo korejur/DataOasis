@@ -1,4 +1,6 @@
-# Krovovi za klimu – Zagreb
+# Krov+
+
+*Krov može više: zadržava kišu, hladi zgradu i proizvodi struju.*
 
 Datathon Portala otvorenih podataka 2026. Alat za urbaniste koji iz 3D modela
 zgrada Grada Zagreba (ZG3D, LoD 2.2) pronalazi krovove pogodne za **zelene

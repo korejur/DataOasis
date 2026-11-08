@@ -24,10 +24,10 @@ export function startOnboarding({ city }) {
   el.className = 'intro';
   el.setAttribute('aria-label', 'Uvod');
   el.innerHTML = `
-    <p class="intro-lead">Koji krovovi u Zagrebu mogu postati zeleni ili proizvoditi struju iz sunca,
-      i koliko bi to pomoglo gradu?</p>
-    <p class="intro-fact">Iz otvorenog 3D modela Grada izračunati su nagib i orijentacija krovova za
-      ${num(city.zgrade)} ${plural(city.zgrade, 'zgradu', 'zgrade', 'zgrada')}. Za zeleni krov pogodno je
+    <p class="intro-lead">Krov štiti od kiše, ali može činiti i više: zadržati kišnicu, hladiti zgradu i okolicu
+      i proizvoditi struju. Koji su krovovi za to pogodni i koliko bi to pomoglo gradu?</p>
+    <p class="intro-fact">Iz otvorenog 3D modela izračunati su nagib i orijentacija krovova za
+      ${num(city.zgrade)} ${plural(city.zgrade, 'zgradu', 'zgrade', 'zgrada')} u Zagrebu. Za zeleni krov pogodno je
       <b>${num(city.zk_kandidati)}</b> ${plural(city.zk_kandidati, 'krov', 'krova', 'krovova')},
       a za sunčanu elektranu <b>${num(city.fn_kandidati)}</b>.</p>
     <ol class="intro-steps">

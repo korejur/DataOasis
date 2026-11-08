@@ -5,6 +5,9 @@ export const COLORS = {
   fn: { odlican: '#de5a12', dobar: '#f4a12c', umjeren: '#fbd789', nije: '#cdd2d6' },
 };
 
+// Obrub zgrada iz povezanih izvora (ISGE, Registar kulturnih dobara).
+export const TAG_COLORS = { javno: '#2f6fb3', bastina: '#7b4fa8' };
+
 // Granice specifičnog prinosa FN [kWh/kWp godišnje]. Ravni krovovi s modulima na
 // nosačima (15° prema jugu) daju ~1174, optimum za Zagreb je 1242 (PVGIS).
 export const FN_BREAKS = { dobar: 1050, odlican: 1150 };
@@ -29,6 +32,11 @@ export const isCandidate = {
   zk: ['match', ['get', 'zk'], ['visoka', 'srednja'], true, false],
   fn: isFn,
 };
+
+export const LEGEND_TAGS = [
+  { color: TAG_COLORS.javno, label: 'Objekt Grada', desc: 'poznata potrošnja (ISGE)' },
+  { color: TAG_COLORS.bastina, label: 'Kulturno dobro', desc: 'zaštićena zgrada' },
+];
 
 export const LEGEND = {
   zk: {

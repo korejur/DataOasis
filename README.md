@@ -19,7 +19,8 @@ pipeline/           obrada podataka (Python)
   extract_roofs.py  2) 3D plohe -> krovne plohe (nagib, azimut, površina)
   pvgis.py          3) tablica FN prinosa za Zagreb (PVGIS, JRC)
   metrics.py        4) potencijal po zgradi, četvrti i gradu
-  export_app.py     5) izvoz za web kartu (PMTiles + JSON sažeci)
+  geocode.py        5) geokodiranje kulturnih dobara i ISGE objekata, spajanje sa zgradama
+  export_app.py     6) izvoz za web kartu (PMTiles + JSON sažeci)
 data/
   raw/              preuzeti izvorni podaci (nije u gitu)
   reference/        pomoćni skupovi (PVGIS, kulturna dobra, ISGE...)
@@ -44,6 +45,7 @@ python -m venv .venv
 .venv/Scripts/python -m pipeline.extract_roofs   # paralelno po četvrtima
 .venv/Scripts/python -m pipeline.pvgis           # ~300 upita prema PVGIS-u
 .venv/Scripts/python -m pipeline.metrics         # ~10 s, ponoviti nakon promjene parametara
+.venv/Scripts/python -m pipeline.geocode         # Nominatim 1 upit/s; s predmemorijom iz gita ~1 min
 .venv/Scripts/python -m pipeline.export_app      # podaci za aplikaciju -> app/public/data/
 ```
 
@@ -92,13 +94,13 @@ Pretpostavke su u `docs/METODOLOGIJA.md`.
 |---|---|---|
 | ZG3D 3D model zgrada (17 četvrti), LoD 2.2 | Grad Zagreb, data.gov.hr | geometrija krovova |
 | PVGIS v5.3 (SARAH3, 2005.–2023.) | JRC, Europska komisija | prinos FN po nagibu/orijentaciji |
-| Podaci o potrošnji i trošku za objekte Grada Zagreba (ISGE) | Grad Zagreb | potrošnja javnih zgrada (planirano) |
-| Registar kulturnih dobara | Ministarstvo kulture i medija | isključenje/oznaka zaštićenih zgrada (planirano) |
+| Podaci o potrošnji i trošku za objekte Grada Zagreba (ISGE) | Grad Zagreb | potrošnja struje javnih zgrada (2023.), udio koji FN može pokriti (`pipeline/geocode.py`) |
+| Registar kulturnih dobara | Ministarstvo kulture i medija | oznaka zaštićenih zgrada (`pipeline/geocode.py`) |
 | Geoportal: vrtići, škole, domovi za starije, zdravstvo | Grad Zagreb | osjetljivi korisnici (planirano) |
 | Gradske četvrti, mjesni odbori (RPJ) | Grad Zagreb | agregacija (planirano) |
 | Planirana namjena 2023, Topografska osnova 2018 | Grad Zagreb | namjena prostora, vegetacija (planirano) |
 | OpenStreetMap preko [OpenFreeMap](https://openfreemap.org) (stil Positron, OpenMapTiles) | suradnici OSM-a, ODbL | podloga karte u aplikaciji |
-| [Nominatim](https://nominatim.org) (OpenStreetMap) | suradnici OSM-a, ODbL | pretraga adresa u aplikaciji |
+| [Nominatim](https://nominatim.org) (OpenStreetMap) | suradnici OSM-a, ODbL | pretraga adresa u aplikaciji; geokodiranje adresa kulturnih dobara i ISGE objekata (predmemorija u `data/reference/geocode/`) |
 
 ## Korišteni alati
 

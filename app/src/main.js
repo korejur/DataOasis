@@ -10,7 +10,7 @@ import { Protocol } from 'pmtiles';
 
 import { renderCard } from './card.js';
 import { gwh, ha } from './format.js';
-import { LEGEND, fillColor, isCandidate } from './layers.js';
+import { LEGEND, LEGEND_TAGS, TAG_COLORS, fillColor, isCandidate } from './layers.js';
 import { SORTS, renderDistricts, renderKpis, renderSortOptions } from './panel.js';
 import { initSearch } from './search.js';
 
@@ -102,6 +102,15 @@ function addLayers() {
       'line-color': '#ffffff',
       'line-width': ['interpolate', ['linear'], ['zoom'], 15, 0.3, 18, 1.2],
       'line-opacity': 0.8,
+    },
+  }, before);
+  // Obrub zgrada iz povezanih izvora: objekt Grada (ISGE) plavo, kulturno dobro ljubičasto.
+  map.addLayer({
+    id: 'bld-tag', type: 'line', ...src, minzoom: 14,
+    filter: ['any', ['has', 'javno'], ['has', 'bastina']],
+    paint: {
+      'line-color': ['case', ['has', 'javno'], TAG_COLORS.javno, TAG_COLORS.bastina],
+      'line-width': ['interpolate', ['linear'], ['zoom'], 14, 1.2, 17, 2.6],
     },
   }, before);
   map.addLayer({
@@ -227,6 +236,7 @@ function applyThreeD() {
   map.setLayoutProperty('bld-3d', 'visibility', on ? 'visible' : 'none');
   map.setLayoutProperty('bld-fill', 'visibility', on ? 'none' : 'visible');
   map.setLayoutProperty('bld-line', 'visibility', on ? 'none' : 'visible');
+  map.setLayoutProperty('bld-tag', 'visibility', on ? 'none' : 'visible');
 }
 
 function setThreeD(on) {
@@ -302,6 +312,7 @@ function renderLegend() {
   $('legend').innerHTML = `
     <h3>${L.title}</h3>
     <ul>${L.items.map((i) => `<li><i style="background:${i.color}"></i><span><b>${i.label}</b> <small>${i.desc}</small></span></li>`).join('')}</ul>
+    <ul class="legend-tags">${LEGEND_TAGS.map((i) => `<li><i class="outline" style="border-color:${i.color}"></i><span><b>${i.label}</b> <small>${i.desc}</small></span></li>`).join('')}</ul>
     <p>${L.foot}</p>`;
 }
 

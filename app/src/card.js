@@ -25,6 +25,34 @@ const row = (k, v, hint = '') =>
 const badge = (color, label) =>
   `<span class="badge"><i style="background:${color}"></i>${label}</span>`;
 
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+
+/** Oznake iz povezanih izvora: kulturno dobro, javna zgrada (ISGE), ustanova. */
+function linked(p) {
+  const out = [];
+  if (p.bastina) {
+    out.push(`<div class="tag tag-heritage">
+      <b>Zaštićeno kulturno dobro</b>
+      <span>${esc(p.bastina)}${p.bastina_id ? ` <small>(${esc(p.bastina_id)})</small>` : ''}</span>
+      <small>Svaki zahvat na krovu traži suglasnost konzervatora.</small></div>`);
+  }
+  if (p.ustanova) {
+    out.push(`<div class="tag"><b>${esc(p.ustanova_tip ?? 'Ustanova')}</b><span>${esc(p.ustanova)}</span></div>`);
+  }
+  if (p.javno) {
+    const share = p.javno_udio;
+    const cover = share == null ? 'Manji potrošač: vjerojatno koristi samo dio zgrade, pa udio nije izračunat.'
+      : p.fn !== 1 ? ''
+      : share >= 100 ? 'Sunčana elektrana na krovu mogla bi proizvesti <b>više struje nego što zgrada troši</b>.'
+      : `Sunčana elektrana na krovu mogla bi pokriti <b>${num(share)} %</b> te potrošnje.`;
+    out.push(`<div class="tag tag-public">
+      <b>Objekt Grada Zagreba</b><span>${esc(p.javno)}</span>
+      <span>Troši ${kwh(p.javno_kwh)} struje godišnje <small>(ISGE, 2023.)</small></span>
+      ${cover ? `<span>${cover}</span>` : ''}</div>`);
+  }
+  return out.length ? `<div class="tags">${out.join('')}</div>` : '';
+}
+
 export function renderCard(p, mode) {
   const zk = ZK_CLASS[p.zk] ?? ZK_CLASS.nije;
   const fn = fnClass(p);
@@ -65,6 +93,7 @@ export function renderCard(p, mode) {
         ${row('Tip krova', ROOF[p.krov] ?? p.krov)}
         ${row('Podaci snimljeni', p.god ? `${p.god}.` : '–', old ? 'moguće su novije promjene' : '')}
       </dl>
+      ${linked(p)}
     </header>
     ${mode === 'zk' ? green + solar : solar + green}
     <p class="card-foot">Tehnički potencijal iz 3D modela. Prije izvedbe potrebna je statička provjera krova.

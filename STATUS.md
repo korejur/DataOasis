@@ -4,7 +4,7 @@
 > (u istom commitu kao i sam rad). Pravila ažuriranja su na dnu.
 > Plan i podjela uloga: [`docs/PLAN_RADA.md`](docs/PLAN_RADA.md) · kriteriji i bodovi: [`docs/NATJECANJE.md`](docs/NATJECANJE.md) · upute za agente: [`AGENTS.md`](AGENTS.md)
 
-**Zadnje ažuriranje:** 2026-11-07 · uloga: aplikacija · karta objavljena i provjerena (https://korejur.github.io/DataOasis/); aplikaciju dalje preuzima drugi član tima
+**Zadnje ažuriranje:** 2026-11-08 · uloga: aplikacija · geokodirana kulturna dobra i ISGE, oznake u kartici i na karti; sljedeće scenarij „samo javne zgrade“
 **Predaja:** pon 9. 11. 2026. do 24:00 · **Zamrzavanje funkcionalnosti:** ned 8. 11. u 18:00
 **Najviše bodova (30/60):** izvedivost (radni prototip na javnom linku), dojam UI/UX, video
 
@@ -23,6 +23,8 @@
 | 2026-11-07 | aplikacija | Pretraga četvrti (bez dijakritika) i adresa (Nominatim) s otvaranjem kartice pogođene zgrade | `app/src/search.js` |
 | 2026-11-07 | aplikacija | **Objava na GitHub Pages:** workflow pri pushu na `main`, `buildings.pmtiles` iz Releasea `podaci`; repo javan; `LICENSE` (MIT); uklonjen tuđi PDF (LANUV NRW) | `.github/workflows/pages.yml`, `LICENSE` |
 | 2026-11-07 | aplikacija | Javni link provjeren u pregledniku: zgrade se iscrtavaju (z14 središte: ~2,4 MB pločica), kartica zgrade radi; HTTP Range na Pages radi | – |
+| 2026-11-08 | aplikacija | **Geokodiranje** (Nominatim, predmemorija u gitu): kulturna dobra 368/470 spojeno (393 zgrade), ISGE 854 zgrade od 1 082 objekta | `pipeline/geocode.py`, `data/reference/geocode/` |
+| 2026-11-08 | aplikacija | **Spajanje tablica u izvoz** (baština, ISGE, ustanove kad stignu); kartica: kulturno dobro, objekt Grada s potrošnjom i udjelom FN; obrub na karti + legenda | `pipeline/export_app.py`, `app/src/card.js` |
 
 ## U tijeku
 
@@ -33,7 +35,7 @@
 
 ## Sljedeće (redom)
 
-1. **aplikacija:** popraviti legendu (na širini ~800 px s otvorenom karticom ide pod lijevi panel) → geokodiranje baštine i ISGE adresa → spajanje tablica u izvoz (oznake u kartici) → scenarij „samo javne zgrade“ → `docs/ARHITEKTURA.md`
+1. **aplikacija:** zamijeniti `buildings.pmtiles` u Releaseu `podaci` nakon spajanja PR-a → scenarij „samo javne zgrade“ → `docs/ARHITEKTURA.md`
 2. **podaci:** granice → `building_institutions.parquet` → LST/NDVI (`building_env.parquet`)
 3. **metodologija:** parametri i izvori → validacija (~200 zgrada, popis dobiva od aplikacije) → scenarij videa → UX test s osobom izvan tima
 
@@ -48,6 +50,7 @@ ali alati poput `curl --compressed` ili Node `fetch` trebaju `Accept-Encoding: i
 |---|---|---|
 | aplikacija (sloj četvrti) | `data/reference/granice/*.geojson` | podaci |
 | aplikacija (ponovni izvoz) | konačni `PARAMS` | metodologija |
+| metodologija | upisati u `METODOLOGIJA.md`: geokodiranje (Nominatim, samo pogodak s kućnim brojem, tlocrt ili najbliža zgrada do 15 m), ISGE = struja 2023., udio FN samo za ≥ 20 MWh/god | aplikacija (podaci u `pipeline/geocode.py`) |
 
 ## Predane tablice (sučelje prema izvozu)
 
@@ -59,8 +62,8 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 | `buildings_metrics.parquet` | sve metrike (vidi `pipeline/metrics.py`) | – | gotovo |
 | `building_institutions.parquet` | `bldg_id`, `institution_type`, `institution_name` | podaci | – |
 | `building_env.parquet` | `bldg_id`, `lst`, `ndvi`, `pop` | podaci | – |
-| `heritage_buildings.parquet` | `bldg_id`, `heritage_id`, `naziv`, `status` | aplikacija | – |
-| `isge_buildings.parquet` | `bldg_id`, `objekt`, `kwh_god`, `eur_god`, `fn_udio` | aplikacija | – |
+| `heritage_buildings.parquet` | `bldg_id`, `heritage_id`, `naziv`, `status`, `adresa`, `nacin` | aplikacija | gotovo (393 zgrade) |
+| `isge_buildings.parquet` | `bldg_id`, `objekt`, `adresa`, `kwh_god`, `eur_god`, `fn_udio`, `nacin` | aplikacija | gotovo (854 zgrade) |
 
 ## Odluke
 
@@ -80,6 +83,8 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 | 2026-11-07 | **Repo javan** od 7. 11. | Pages na besplatnom računu traži javni repo; ionako uvjet predaje |
 | 2026-11-07 | **Licenca:** MIT za kod, CC BY 4.0 za izvedene podatke | prijedlog iz otvorenih pitanja, boduje se |
 | 2026-11-07 | Tuđi PDF (LANUV NRW) uklonjen iz repoa, poveznica u `PREGLED_LITERATURE.md` | autorska prava u javnom repou |
+| 2026-11-08 | Geokodiranje preko Nominatima uz predmemoriju u gitu; prihvaća se samo pogodak s kućnim brojem | nema otvorenog adresnog registra s koordinatama pri ruci; bolje bez oznake nego s krivom |
+| 2026-11-08 | ISGE: potrošnja **struje u 2023.** (2024. ima samo 6 mjeseci); udio FN samo za objekte s ≥ 20 MWh/god | manji potrošači koriste dio zgrade, omjer prema cijelom krovu bio bi višestruko prevelik |
 
 ## Otvorena pitanja (treba odluku tima)
 

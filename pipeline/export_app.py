@@ -1,6 +1,8 @@
 """Izvoz rezultata za web aplikaciju.
 
 Ulaz:  data/processed/buildings_metrics.parquet, data/processed/district_summary.csv
+       ako postoje: heritage_buildings.parquet, isge_buildings.parquet (pipeline.geocode),
+       building_institutions.parquet (uloga podaci)
 Izlaz (app/public/data/):
     buildings.pmtiles   vektorske pločice zgrada (sloj "buildings", zoom 13-16)
     districts.json      sažetak po četvrtima + bbox/središte za zumiranje
@@ -70,8 +72,43 @@ def building_table(b: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
         "fn_eur": r(b["pv_cost_eur"], -2).astype("int64"),
         "fn_povrat_god": r(b["pv_payback_years"].fillna(0), 1),
     })
+    out = out.merge(linked_tables(), left_on="id", right_index=True, how="left")
     geom = b.geometry.simplify(SIMPLIFY_M, preserve_topology=True)
     return gpd.GeoDataFrame(out, geometry=geom.values, crs=b.crs)
+
+
+def _join_names(s: pd.Series, limit: int = 3) -> str:
+    names = list(dict.fromkeys(s.dropna()))
+    return " · ".join(names[:limit]) + (f" (+{len(names) - limit})" if len(names) > limit else "")
+
+
+def linked_tables() -> pd.DataFrame:
+    """Atributi iz tablica drugih izvora (STATUS → „Predane tablice“), indeks bldg_id.
+
+    Spaja se samo ono što postoji u data/processed/; nedostajuća tablica se preskače.
+    """
+    parts = []
+    p = PROCESSED / "heritage_buildings.parquet"
+    if p.exists():  # Registar kulturnih dobara
+        h = pd.read_parquet(p).groupby("bldg_id").agg(
+            bastina=("naziv", _join_names), bastina_id=("heritage_id", _join_names))
+        parts.append(h)
+    p = PROCESSED / "isge_buildings.parquet"
+    if p.exists():  # ISGE: potrošnja struje objekata Grada
+        i = pd.read_parquet(p).set_index("bldg_id")
+        parts.append(pd.DataFrame({
+            "javno": i["objekt"].str.slice(0, 120),
+            "javno_kwh": i["kwh_god"].round(-1).astype("int64"),
+            "javno_udio": (i["fn_udio"] * 100).round().clip(upper=9999).astype("Int32"),  # prazno za male potrošače
+        }))
+    p = PROCESSED / "building_institutions.parquet"
+    if p.exists():  # javne ustanove (uloga podaci)
+        u = pd.read_parquet(p).groupby("bldg_id").agg(
+            ustanova=("institution_name", _join_names), ustanova_tip=("institution_type", _join_names))
+        parts.append(u)
+    for t in parts:
+        print(f"[spoj] {', '.join(t.columns)}: {len(t)} zgrada")
+    return pd.concat(parts, axis=1) if parts else pd.DataFrame(index=pd.Index([], name="bldg_id"))
 
 
 def district_json(b: gpd.GeoDataFrame) -> list[dict]:
@@ -113,7 +150,7 @@ def main() -> None:
     dst = OUT / "buildings.pmtiles"
     dst.unlink(missing_ok=True)
     pyogrio.write_dataframe(
-        t2, dst, driver="PMTiles", layer="buildings",
+        t2, dst, driver="PMTiles", layer="buildings", encoding="UTF-8",  # inače na Windowsu cp1252
         dataset_options={
             "MINZOOM": MINZOOM, "MAXZOOM": MAXZOOM,
             "NAME": "Krovovi za klimu - zgrade Zagreba",

@@ -24,8 +24,6 @@ export function startOnboarding({ city }) {
   el.className = 'intro';
   el.setAttribute('aria-label', 'Uvod');
   el.innerHTML = `
-    <p class="intro-lead">Krov štiti od kiše, ali može činiti i više: zadržati kišnicu, hladiti zgradu i okolicu
-      i proizvoditi struju. Koji su krovovi za to pogodni i koliko bi to pomoglo gradu?</p>
     <p class="intro-fact">Iz otvorenog 3D modela izračunati su nagib i orijentacija krovova za
       ${num(city.zgrade)} ${plural(city.zgrade, 'zgradu', 'zgrade', 'zgrada')} u Zagrebu. Za zeleni krov pogodno je
       <b>${num(city.zk_kandidati)}</b> ${plural(city.zk_kandidati, 'krov', 'krova', 'krovova')},

@@ -7,6 +7,8 @@
 **Natjecanje:** Datathon Portala otvorenih podataka 2026.  
 **Izazov:** B – Okoliš i održivi prostor  
 **Područje primjene:** Grad Zagreb (postupak primjenjiv na svaki grad s 3D modelom zgrada)  
+**Tim:** Korina Jurić, Marko Ćurković, Mario Mrvčić  
+**Mentor:** prof. dr. sc. Boris Milašinović  
 **Aplikacija:** https://korejur.github.io/DataOasis/  
 **Izvorni kod:** https://github.com/korejur/DataOasis (licenca MIT)  
 **Izvedeni podaci:** CC BY 4.0  
@@ -513,7 +515,7 @@ službenim 2D tlocrtom (medijan omjera 1,000) i visina zgrade s atributom modela
 
 ## 10. Tim, alati i izvori
 
-**Tim** je radio u tri uloge: aplikacija (karta, povezivanje podataka, objava), podaci (otvoreni skupovi
+**Tim** (Korina Jurić, Marko Ćurković, Mario Mrvčić; mentor prof. dr. sc. Boris Milašinović) radio je u tri uloge: aplikacija (karta, povezivanje podataka, objava), podaci (otvoreni skupovi
 i prostorni podaci) i metodologija (parametri, izvori, validacija, video).
 
 **Alati.** Sav korišteni softver je otvorenog koda: Python (NumPy, pandas, GeoPandas, Shapely, pyproj,

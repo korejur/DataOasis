@@ -10,6 +10,14 @@ krenuti prvo.
 
 **Aplikacija:** https://korejur.github.io/DataOasis/
 
+## Tim
+
+* Korina Jurić
+* Marko Ćurković
+* Mario Mrvčić
+
+**Mentor:** prof. dr. sc. Boris Milašinović
+
 ## Dokumentacija
 
 | Dokument | Sadržaj |

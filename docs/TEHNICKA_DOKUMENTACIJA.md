@@ -5,6 +5,8 @@
 **Arhitektura sustava, obrada podataka, standardi, integracija i popis skupova podataka**
 
 **Natjecanje:** Datathon Portala otvorenih podataka 2026., izazov B – Okoliš i održivi prostor  
+**Tim:** Korina Jurić, Marko Ćurković, Mario Mrvčić  
+**Mentor:** prof. dr. sc. Boris Milašinović  
 **Aplikacija:** https://korejur.github.io/DataOasis/  
 **Izvorni kod:** https://github.com/korejur/DataOasis (licenca MIT)  
 **Izvedeni podaci:** CC BY 4.0, prilog Releasea [`podaci`](https://github.com/korejur/DataOasis/releases/tag/podaci)  

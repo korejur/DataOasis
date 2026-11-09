@@ -119,7 +119,7 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 | 3 | Tehnička dokumentacija: dijagram, standardi, integracija s javnim sustavima, tehnički/organizacijski/pravni preduvjeti | aplikacija | ✔ `docs/TEHNICKA_DOKUMENTACIJA.md` |
 | 4 | Projektna dokumentacija: problem, ciljni korisnici, vrijednost, daljnji razvoj | aplikacija | ✔ `docs/PROJEKTNA_DOKUMENTACIJA.md` |
 | 5 | **Popis svih skupova podataka** s izdavateljem, poveznicom i licencom | metodologija + podaci | ✔ `docs/TEHNICKA_DOKUMENTACIJA.md` pogl. 8 |
-| 6 | **Popis korištenih alata i biblioteka, uključujući AI alate** | svi | djelomično (README → „Korišteni alati“ i tehnička dokumentacija pogl. 9; svaka uloga dopisuje svoje AI alate) |
+| 6 | **Popis korištenih alata i biblioteka, uključujući AI alate** | svi | ☑ (README → „Korišteni alati“, tehnička dokumentacija pogl. 9, projektna pogl. 10: Claude Code, GPT, Kling AI 4.0) |
 | 7 | Demo: javni link na radni prototip | aplikacija | ✔ https://korejur.github.io/DataOasis/ |
 | 8 | Demo: snimke zaslona | aplikacija | ✔ `docs/slike/` (15 snimki, i u projektnoj dokumentaciji) |
 | 9 | **Video ≤ 3 min:** problem, korisnici, izvori podataka, funkcionalnosti, arhitektura, vrijednost, daljnji razvoj | metodologija | ☐ |

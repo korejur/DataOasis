@@ -518,7 +518,8 @@ i prostorni podaci) i metodologija (parametri, izvori, validacija, video).
 
 **Alati.** Sav korišteni softver je otvorenog koda: Python (NumPy, pandas, GeoPandas, Shapely, pyproj,
 pyogrio/GDAL, PyArrow) za obradu podataka te MapLibre GL JS, PMTiles i Vite za web aplikaciju.
-Kao pomoć pri pisanju koda i dokumentacije korišten je **AI asistent Claude Code (Anthropic)**.
+Korišteni AI alati: **Claude Code (Anthropic)** kao pomoć pri pisanju koda i dokumentacije, **GPT (OpenAI)**
+za generiranje likova za video i **Kling AI 4.0 (Kuaishou)** za generiranje dvaju kadrova s likovima u videu.
 Potpun popis alata s verzijama i licencama nalazi se u Tehničkoj dokumentaciji, poglavlje 9.
 
 **Izvori podataka:**

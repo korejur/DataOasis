@@ -123,6 +123,8 @@ Sav softver je otvorenog koda, osim gdje je drukčije navedeno. Pravila natjecan
 | Vite | razvojni poslužitelj i build aplikacije | MIT |
 | Fontovi Source Serif 4 i Source Sans 3 (Adobe), paketi Fontsource | pismo sučelja, poslužuje se iz aplikacije (bez Google Fonts) | SIL OFL 1.1 (fontovi), MIT (Fontsource) |
 | AI asistent za programiranje (Claude Code, Anthropic) | pomoć pri pisanju koda i dokumentacije | komercijalni alat |
+| GPT (OpenAI) | generiranje likova za video | komercijalni alat |
+| Kling AI 4.0 (Kuaishou) | generiranje dvaju kadrova s likovima u videu | komercijalni alat |
 
 ## Objava aplikacije
 

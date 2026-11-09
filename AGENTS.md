@@ -60,7 +60,8 @@ PYTHONIOENCODING=utf-8 .venv/Scripts/python -m pipeline.export_app
   licenca). Pravila natjecanja to traže, a skupljati izvore na kraju je spor posao.
 * **Alati:** novu biblioteku ili alat upiši u `requirements.txt` / `package.json` i u README → „Korišteni alati“.
   Samo softver otvorenog koda.
-* **Imena:** u dokumentima repozitorija ne pišu se imena članova tima, samo uloge.
+* **Imena:** imena članova tima i mentora navode se samo u README → „Tim“ i na naslovnicama projektne i
+  tehničke dokumentacije. Drugdje (STATUS, plan rada, komentari) pišu se samo uloge.
 * **Jezik:** dokumentacija, komentari i poruke commitova na hrvatskom. Imena varijabli mogu biti engleska.
 * **Brojke koje idu u aplikaciju ili video** moraju imati izvor u `docs/METODOLOGIJA.md`. Parametri s oznakom
   `TODO izvor` su privremeni.

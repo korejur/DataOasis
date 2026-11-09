@@ -476,6 +476,8 @@ Sav softver je otvorenog koda, osim AI asistenta, koji se navodi prema pravilima
 | Source Serif 4, Source Sans 3 (Fontsource) | 5.x | pismo sučelja, poslužuje se iz aplikacije | SIL OFL 1.1 / MIT |
 | GitHub Actions, GitHub Pages | – | automatska objava | usluga |
 | **Claude Code (Anthropic)** | – | **AI asistent** za pisanje koda i dokumentacije | komercijalni alat |
+| **GPT (OpenAI)** | – | **AI alat** za generiranje likova za video | komercijalni alat |
+| **Kling AI (Kuaishou)** | 4.0 | **AI alat** za generiranje dvaju kadrova s likovima u videu | komercijalni alat |
 
 <div style="page-break-after: always;"></div>
 

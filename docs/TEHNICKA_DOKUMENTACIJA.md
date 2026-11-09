@@ -151,7 +151,7 @@ Za svaku plohu, u koordinatama HTRS96/TM (EPSG:3765, metri):
 | Vrsta | Uvjet |
 |---|---|
 | krov | `n_z > 0,17` (nagib manji od ~80°) i ploha je više od 0,3 m iznad najniže točke zgrade |
-| zid | `|n_z| ≤ 0,17` |
+| zid | −0,17 ≤ `n_z` ≤ 0,17 (okomite plohe) |
 | ostalo | tlo zgrade, donje strane prepusta (`n_z < −0,17`) |
 
 **Posebnosti izvornih podataka riješene u obradi:**
@@ -170,7 +170,7 @@ ljuske poput tornjeva), što je ispravno.
 
 ### 3.3 Logika izračuna po plohi i zgradi
 
-![Slika 2. Logika izračuna](slike/izracun.png)
+<img src="slike/izracun.png" alt="Slika 2. Logika izračuna" width="68%">
 
 *Slika 2. Od 3D plohe do kandidata za zeleni krov i sunčanu elektranu.*
 

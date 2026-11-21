@@ -101,7 +101,11 @@ def main() -> None:
     yld = load_interpolator()
     parts = []
     for slug in DISTRICTS:
-        fp, bp = FACES_DIR / f"{slug}.parquet", BUILDINGS_DIR / f"{slug}.parquet"
+        # Eksperiment: krovne ravnine (spojena triangulacija) umjesto pojedinih ploha, ako postoje.
+        fp = PROCESSED / "planes" / f"{slug}.parquet"
+        if not fp.exists():
+            fp = FACES_DIR / f"{slug}.parquet"
+        bp = BUILDINGS_DIR / f"{slug}.parquet"
         if not (fp.exists() and bp.exists()):
             print(f"[preskačem] {slug}: nema obrađenih podataka")
             continue

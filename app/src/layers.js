@@ -27,6 +27,16 @@ export const fillColor = {
     COLORS.fn.umjeren],
 };
 
+// Eksperiment: krovne ravnine za fotonapon (od zooma 15), boja po plohi.
+export const PLANE_BAD = '#9cc3e4';
+export const PLANE_MINZOOM = 15;
+export const planeColor = ['case',
+  ['==', ['get', 'c'], 0], COLORS.fn.nije,
+  ['==', ['get', 'c'], 1], PLANE_BAD,
+  ['>=', ['get', 'y'], FN_BREAKS.odlican], COLORS.fn.odlican,
+  ['>=', ['get', 'y'], FN_BREAKS.dobar], COLORS.fn.dobar,
+  COLORS.fn.umjeren];
+
 /** Je li zgrada kandidat u odabranom sloju (za prozirnost). */
 export const isCandidate = {
   zk: ['match', ['get', 'zk'], ['visoka', 'srednja'], true, false],
@@ -55,8 +65,9 @@ export const LEGEND = {
       { color: COLORS.fn.odlican, label: 'Odličan', desc: `≥ ${FN_BREAKS.odlican} kWh po kWp godišnje` },
       { color: COLORS.fn.dobar, label: 'Dobar', desc: `${FN_BREAKS.dobar}–${FN_BREAKS.odlican} kWh/kWp` },
       { color: COLORS.fn.umjeren, label: 'Umjeren', desc: `900–${FN_BREAKS.dobar} kWh/kWp` },
-      { color: COLORS.fn.nije, label: 'Nije pogodno', desc: 'manje od 3 kWp ili loša orijentacija' },
+      { color: PLANE_BAD, label: 'Ploha se ne koristi', desc: 'sjever, strmo ili manje od 5 m² (vidljivo od zooma 15)' },
+      { color: COLORS.fn.nije, label: 'Nije pogodno', desc: 'na krov stane manje od 3 kWp' },
     ],
-    foot: 'Prinos prema PVGIS-u za nagib i orijentaciju svake plohe.',
+    foot: 'Prinos prema PVGIS-u za nagib i orijentaciju svake plohe. Približite kartu za prikaz po krovnim plohama.',
   },
 };

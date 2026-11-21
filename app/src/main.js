@@ -12,9 +12,10 @@ import { Protocol } from 'pmtiles';
 
 import { renderCard } from './card.js';
 import { gwh, ha, num } from './format.js';
-import { LEGEND, LEGEND_TAGS, TAG_COLORS, fillColor, isCandidate } from './layers.js';
+import { LEGEND, LEGEND_TAGS, TAG_COLORS, fillColor, isCandidate, planeColor, PLANE_MINZOOM } from './layers.js';
 import { SORTS, renderDistricts, renderKpis, renderSortOptions } from './panel.js';
 import { initSearch } from './search.js';
+import { RoofsLayer, ROOFS_MINZOOM } from './roofs3d.js';
 import { startOnboarding } from './onboarding.js';
 
 setWorkerUrl(workerUrl);
@@ -39,6 +40,7 @@ const state = {
 };
 
 let city;
+const roofs = new RoofsLayer(() => ({ mode: state.mode, pub: state.pub }));
 let districts = [];
 const bySlug = new Map();
 
@@ -106,6 +108,32 @@ function addLayers() {
     id: 'bld-fill', type: 'fill', ...src,
     paint: { 'fill-color': fillColor.zk, 'fill-opacity': opacityExpr() },
   }, before);
+  // Eksperiment: krovne ravnine (sloj fotonapona, od zooma 15)
+  map.addSource('pl', { type: 'vector', url: `pmtiles://${dataUrl('planes.pmtiles')}`, attribution: '' });
+  map.addLayer({
+    id: 'pl-fill', type: 'fill', source: 'pl', 'source-layer': 'planes', minzoom: PLANE_MINZOOM,
+    layout: { visibility: 'none' },
+    paint: { 'fill-color': planeColor, 'fill-opacity': planeOpacity() },
+  }, before);
+  map.addLayer({
+    id: 'pl-3d', type: 'fill-extrusion', source: 'pl', 'source-layer': 'planes', minzoom: PLANE_MINZOOM,
+    layout: { visibility: 'none' },
+    paint: {
+      'fill-extrusion-color': planeColor,
+      'fill-extrusion-height': ['get', 'h'],
+      'fill-extrusion-opacity': 0.92,
+      'fill-extrusion-vertical-gradient': true,
+    },
+  });
+  map.addLayer({
+    id: 'pl-load', type: 'fill', source: 'pl', 'source-layer': 'planes', minzoom: PLANE_MINZOOM,
+    paint: { 'fill-opacity': 0 },
+  }, before);
+  map.addLayer({
+    id: 'pl-line', type: 'line', source: 'pl', 'source-layer': 'planes', minzoom: 17,
+    layout: { visibility: 'none' },
+    paint: { 'line-color': '#ffffff', 'line-width': 0.5, 'line-opacity': 0.55 },
+  }, before);
   map.addLayer({
     id: 'bld-line', type: 'line', ...src, minzoom: 15,
     paint: {
@@ -133,6 +161,7 @@ function addLayers() {
       'fill-extrusion-vertical-gradient': true,
     },
   });
+  map.addLayer(roofs);
   map.addLayer({
     id: 'bld-sel', type: 'line', ...src,
     filter: ['==', ['get', 'id'], ''],
@@ -181,6 +210,21 @@ function addLayers() {
     map.on('mouseenter', id, () => { map.getCanvas().style.cursor = 'pointer'; });
     map.on('mouseleave', id, () => { map.getCanvas().style.cursor = ''; });
   }
+  // 3D s krovovima: klik bira zgradu čiji je tlocrt pod pokazivačem (približno, bez visine).
+  map.on('click', (e) => {
+    if (!state.threeD || map.getZoom() < ROOFS_MINZOOM) return;
+    const id = map.queryRenderedFeatures(e.point, { layers: ['pl-load'] })[0]?.properties.id;
+    const f = id && map.querySourceFeatures('bld', { sourceLayer: 'buildings', filter: ['==', ['get', 'id'], id] })[0];
+    if (f) selectBuilding(f.properties);
+  });
+  // Klik na plohu u 3D otvara karticu njezine zgrade (atributi zgrade iz izvora 'bld').
+  map.on('click', 'pl-3d', (e) => {
+    const id = e.features[0]?.properties.id;
+    const f = id && map.querySourceFeatures('bld', { sourceLayer: 'buildings', filter: ['==', ['get', 'id'], id] })[0];
+    if (f) selectBuilding(f.properties);
+  });
+  map.on('mouseenter', 'pl-3d', () => { map.getCanvas().style.cursor = 'pointer'; });
+  map.on('mouseleave', 'pl-3d', () => { map.getCanvas().style.cursor = ''; });
   for (const id of ['d-circle', 'd-label']) {
     map.on('click', id, (e) => {
       const slug = e.features[0]?.properties.slug;
@@ -189,6 +233,27 @@ function addLayers() {
     map.on('mouseenter', id, () => { map.getCanvas().style.cursor = 'pointer'; });
     map.on('mouseleave', id, () => { map.getCanvas().style.cursor = ''; });
   }
+}
+
+function planeOpacity() {
+  const name = state.district ? bySlug.get(state.district)?.naziv : null;
+  let base = ['case', ['==', ['get', 'c'], 0], 0.6, 0.95];
+  if (state.pub) base = ['case', ['==', ['get', 'j'], 1], base, 0.1];
+  if (name) base = ['case', ['==', ['get', 'd'], name], base, state.pub ? 0.06 : 0.18];
+  return ['interpolate', ['linear'], ['zoom'], PLANE_MINZOOM, 0, PLANE_MINZOOM + 0.6, base];
+}
+
+function applyPlanes() {
+  if (!map.getLayer('pl-fill')) return;
+  const fn = state.mode === 'fn';
+  const vis = fn && !state.threeD ? 'visible' : 'none';
+  map.setLayoutProperty('pl-fill', 'visibility', vis);
+  map.setLayoutProperty('pl-line', 'visibility', vis);
+  map.setPaintProperty('pl-fill', 'fill-opacity', planeOpacity());
+  // 3D: od zooma 15 stvarna geometrija krovova (kose plohe i zidovi) zamjenjuje kutije zgrada, u oba sloja
+  map.setLayoutProperty('pl-3d', 'visibility', 'none');
+  map.setLayerZoomRange('bld-3d', BUILDINGS_MINZOOM, ROOFS_MINZOOM);
+  roofs.setActive(state.threeD);
 }
 
 function opacityExpr() {
@@ -234,6 +299,7 @@ function refreshMapStyle() {
   map.setPaintProperty('bld-fill', 'fill-opacity', opacityExpr());
   map.setPaintProperty('bld-3d', 'fill-extrusion-color', fillColor[state.mode]);
   map.setFilter('bld-3d', state.pub ? IS_PUBLIC : null);
+  applyPlanes();
   map.setFilter('bld-tag', tagFilter()); // prozirnost 3D sloja ne ovisi o atributima
   map.setPaintProperty('d-circle', 'circle-color', state.mode === 'zk' ? '#2f9a55' : '#ef8a1f');
   map.setPaintProperty('d-circle', 'circle-radius', circleRadius());
@@ -250,6 +316,7 @@ function applyThreeD() {
   map.setLayoutProperty('bld-fill', 'visibility', on ? 'none' : 'visible');
   map.setLayoutProperty('bld-line', 'visibility', on ? 'none' : 'visible');
   map.setLayoutProperty('bld-tag', 'visibility', on ? 'none' : 'visible');
+  applyPlanes();
 }
 
 function setThreeD(on) {

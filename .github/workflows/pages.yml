@@ -2,7 +2,7 @@
 #
 # buildings.pmtiles (~80 MB) nije u gitu, nego je prilog GitHub Releasea s oznakom
 # `podaci`. Nakon novog izvoza (python -m pipeline.export_app) zamijeniti ga s:
-#   gh release upload podaci app/public/data/buildings.pmtiles --clobber
+#   gh release upload podaci app/public/data/buildings.pmtiles app/public/data/planes.pmtiles --clobber
 # i ponovno pokrenuti ovaj workflow (Actions -> Objava aplikacije -> Run workflow).
 name: Objava aplikacije
 
@@ -36,8 +36,10 @@ jobs:
           cache: npm
           cache-dependency-path: app/package-lock.json
 
-      - name: Preuzmi pločice zgrada (GitHub Release)
-        run: gh release download "$PODACI_TAG" --pattern buildings.pmtiles --dir app/public/data
+      - name: Preuzmi pločice zgrada i krovnih ploha (GitHub Release)
+        run: |
+          gh release download "$PODACI_TAG" --pattern buildings.pmtiles --dir app/public/data
+          gh release download "$PODACI_TAG" --pattern planes.pmtiles --dir app/public/data
         env:
           GH_TOKEN: ${{ github.token }}
 

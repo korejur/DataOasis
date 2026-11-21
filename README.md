@@ -8,7 +8,20 @@ krovove** i **fotonapon**, procjenjuje njihov doprinos (zadržana oborinska
 voda, proizvedena energija, smanjenje CO₂, trošak) i pomaže odrediti gdje
 krenuti prvo.
 
-**Aplikacija:** https://korejur.github.io/DataOasis/
+**Aplikacija (ova varijanta):** https://mariomrvcic.github.io/DataOasis/
+**Izvorni projekt predan na Datathon:** https://github.com/korejur/DataOasis (aplikacija: https://korejur.github.io/DataOasis/)
+
+> **Eksperimentalna varijanta: krovne plohe i 3D krovovi.** Nastala nakon natjecanja, nije predana verzija.
+> Razlike od izvornog projekta:
+>
+> * `pipeline/planes.py`: triangulacija ZG3D-a spaja se u krovne ravnine (ista zgrada, nagib unutar 0,5°,
+>   azimut unutar 2°, ista visina). Pravilo „ploha ≥ 5 m²“ za fotonapon tada vrijedi za cijelu ravninu,
+>   a ne za pojedini trokut, pa potencijal fotonapona raste s 3,82 na **4,14 TWh/god (+8,5 %)**.
+>   Brojke za zelene krovove su nepromijenjene. Brojke u dokumentaciji (`docs/`) odnose se na izvorni izračun.
+> * Karta u sloju fotonapona od zooma 15 prikazuje svaku krovnu plohu zasebno (kao solarni katastri).
+> * U 3D prikazu od zooma 15 krovovi imaju stvarnu geometriju (kose plohe i zidovi, `app/src/roofs3d.js`)
+>   umjesto prizmi s ravnim vrhom.
+> * Sloj ploha `planes.pmtiles` (~140 MB) je, kao i `buildings.pmtiles`, prilog Releasea `podaci`.
 
 ## Tim
 

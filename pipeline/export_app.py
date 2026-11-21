@@ -22,6 +22,7 @@ import geopandas as gpd
 import numpy as np
 import pandas as pd
 import pyogrio
+import shapely
 
 from .config import CRS_WGS84, PARAMS, PROCESSED, ROOT
 from .metrics import summarize
@@ -164,6 +165,7 @@ def district_json(b: gpd.GeoDataFrame, public: dict[str, dict]) -> list[dict]:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--samo-json", action="store_true", help="samo districts.json i city.json, bez pločica")
+    ap.add_argument("--samo-plohe", action="store_true", help="samo planes.pmtiles (eksperiment)")
     args = ap.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     t = time.time()
@@ -184,6 +186,9 @@ def main() -> None:
     print(f"[ok] districts.json ({len(districts)} četvrti), city.json")
     if args.samo_json:
         return
+    if args.samo_plohe:
+        export_planes(building_table(b))
+        return
 
     # --- vektorske pločice ---------------------------------------------------------
     t2 = building_table(b).to_crs("EPSG:3857")
@@ -200,6 +205,62 @@ def main() -> None:
         },
     )
     print(f"[ok] buildings.pmtiles {dst.stat().st_size / 1e6:.1f} MB, {time.time() - t:.0f} s")
+    export_planes(t2)
+
+
+PLANES_MINZOOM = 15
+
+
+def export_planes(t2: pd.DataFrame) -> None:
+    """Eksperiment: sloj krovnih ravnina za fotonapon (prikaz po plohama, kao Solarna karta).
+
+    Atributi: y = prinos [kWh/kWp], c = 2 koristi se / 1 loša orijentacija ili premala /
+    0 zgrada nije kandidat (< 3 kWp), j = objekt Grada, d = četvrt (za prigušivanje).
+    """
+    from .config import DISTRICTS
+    from .metrics import face_metrics
+    from .pvgis import load_interpolator
+
+    t = time.time()
+    yld = load_interpolator()
+    y_flat = float(yld(PARAMS["pv_flat_tilt"], PARAMS["pv_flat_azimuth"]))
+    info = pd.DataFrame({"fn": t2["fn"].to_numpy(), "cetvrt": t2["cetvrt"].to_numpy(),
+                         "j": (t2["javno"].notna().to_numpy() if "javno" in t2 else False)}, index=t2["id"].to_numpy())
+    info = info[~info.index.duplicated()]
+    parts = []
+    for slug in DISTRICTS:
+        fp = PROCESSED / "planes" / f"{slug}.parquet"
+        if not fp.exists():
+            continue
+        g = gpd.read_parquet(fp)
+        g = g[g["bldg_id"].isin(info.index)]
+        fm = face_metrics(g.drop(columns="geometry"), yld)
+        flat = g["slope"].to_numpy() <= PARAMS["pv_flat_max_slope"]
+        y = np.where(flat, y_flat, yld(g["slope"].to_numpy(), g["azimuth"].to_numpy()))
+        bi = info.loc[g["bldg_id"].to_numpy()]
+        # 3D: referentna točka plohe (WGS84, ×1e7), visina u njoj [cm] i nagib ravnine (×1e4, m/m)
+        rp = shapely.point_on_surface(g.geometry.values)
+        xr, yr = shapely.get_x(rp), shapely.get_y(rp)
+        z0 = g["c"].to_numpy() + g["gx"].to_numpy() * (xr - g["bx"].to_numpy()) + g["gy"].to_numpy() * (yr - g["by"].to_numpy())
+        ll = gpd.GeoSeries(rp, crs=g.crs).to_crs(CRS_WGS84)
+        c = np.where(bi["fn"].to_numpy() == 0, 0, np.where(fm["pv_kwp"].to_numpy() > 0, 2, 1))
+        parts.append(gpd.GeoDataFrame({
+            "y": np.round(y).astype("int16"), "c": c.astype("int8"),
+            "j": bi["j"].to_numpy().astype("int8"), "d": bi["cetvrt"].to_numpy(),
+            "h": g["h_top"].clip(lower=0.5).round(1).to_numpy(),
+            "id": g["bldg_id"].to_numpy(),  # za odabir zgrade klikom na plohu u 3D
+            "x0": np.round(ll.x.to_numpy() * 1e7).astype("int64"), "y0": np.round(ll.y.to_numpy() * 1e7).astype("int64"),
+            "z0": np.round(np.clip(z0, 0, None) * 100).astype("int32"),
+            "gx": np.round(g["gx"].to_numpy() * 1e4).astype("int32"), "gy": np.round(g["gy"].to_numpy() * 1e4).astype("int32"),
+            "s": np.round(g["slope"].to_numpy()).astype("int16"),
+        }, geometry=g.geometry.simplify(0.05, preserve_topology=True).values, crs=g.crs))
+    pl = gpd.GeoDataFrame(pd.concat(parts, ignore_index=True), crs=parts[0].crs).to_crs("EPSG:3857")
+    dst = OUT / "planes.pmtiles"
+    dst.unlink(missing_ok=True)
+    pyogrio.write_dataframe(pl, dst, driver="PMTiles", layer="planes", encoding="UTF-8", dataset_options={
+        "MINZOOM": PLANES_MINZOOM, "MAXZOOM": MAXZOOM, "NAME": "Krov+ - krovne ravnine (eksperiment)",
+        "MAX_SIZE": MAX_TILE_BYTES, "MAX_FEATURES": 400_000})
+    print(f"[ok] planes.pmtiles {len(pl)} ravnina, {dst.stat().st_size / 1e6:.1f} MB, {time.time() - t:.0f} s")
 
 
 if __name__ == "__main__":

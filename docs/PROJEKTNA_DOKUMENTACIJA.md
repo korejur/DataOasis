@@ -10,8 +10,8 @@
 **Tim:** Korina Jurić, Marko Ćurković, Mario Mrvčić  
 **Mentor:** prof. dr. sc. Boris Milašinović  
 **Aplikacija:** https://korejur.github.io/DataOasis/  
-**Izvorni kod:** https://github.com/korejur/DataOasis (licenca MIT)  
-**Izvedeni podaci:** CC BY 4.0  
+**Izvorni kod:** https://github.com/korejur/DataOasis (licenca PolyForm Noncommercial 1.0.0, do 23. 11. 2026. MIT)  
+**Izvedeni podaci:** CC BY-NC 4.0 (do 23. 11. 2026. CC BY 4.0)  
 **Verzija dokumenta:** 1.0, studeni 2026.  
 **Povezani dokument:** Krov+ – Tehnička dokumentacija
 
@@ -475,7 +475,7 @@ potencijal svih krovova, a ne preporuka. Zato aplikacija nudi scenarije od 10 % 
 * **Povezivanje podataka koji inače stoje odvojeno.** 3D model zgrada, potrošnja energije i zaštita
   baštine nalaze se na istoj karti, na razini pojedine zgrade.
 * **Bez troška korištenja.** Aplikacija je statička, radi u pregledniku bez prijave, a hosting je besplatan.
-* **Otvoreno i ponovljivo.** Kod (MIT) i izvedeni podaci (CC BY 4.0) su javni. Kad Grad objavi novu verziju
+* **Otvoreno i ponovljivo.** Kod (PolyForm Noncommercial 1.0.0) i izvedeni podaci (CC BY-NC 4.0) su javni i slobodni za nekomercijalnu upotrebu. Kad Grad objavi novu verziju
   3D modela, izračun se ponovno pokreće bez izmjene koda. Isti postupak primjenjiv je na svaki grad s LoD 2 modelom.
 
 <div style="page-break-after: always;"></div>

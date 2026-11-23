@@ -149,7 +149,11 @@ gh workflow run "Objava aplikacije"
 
 ## Licenca
 
-* **Kod** (pipeline i aplikacija): [MIT](LICENSE)
-* **Izvedeni podaci** (`app/public/data/`, tablice iz `pipeline/`): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.hr)
-  uz navođenje izvora iz tablice „Izvori podataka“
+* **Kod** (pipeline i aplikacija): [PolyForm Noncommercial 1.0.0](LICENSE). Kod se smije slobodno koristiti, kopirati
+  i mijenjati u nekomercijalne svrhe, a smiju ga koristiti i javne, obrazovne i neprofitne ustanove.
+  **Komercijalna upotreba, uključujući prodaju, nije dopuštena bez pisanog dopuštenja autora.**
+* **Izvedeni podaci** (`app/public/data/`, tablice iz `pipeline/`): [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.hr)
+  uz navođenje izvora iz tablice „Izvori podataka“. Podaci dobiveni geokodiranjem preko Nominatima (OpenStreetMap)
+  podliježu licenci [ODbL](https://opendatacommons.org/licenses/odbl/).
 * **Izvorni podaci** u `data/reference/` zadržavaju licence svojih izdavatelja
+* Verzije objavljene do 23. 11. 2026. bile su pod licencama MIT (kod) i CC BY 4.0 (izvedeni podaci).

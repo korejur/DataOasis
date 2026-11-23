@@ -4,7 +4,7 @@
 > (u istom commitu kao i sam rad). Pravila ažuriranja su na dnu.
 > Plan i podjela uloga: [`docs/PLAN_RADA.md`](docs/PLAN_RADA.md) · kriteriji i bodovi: [`docs/NATJECANJE.md`](docs/NATJECANJE.md) · upute za agente: [`AGENTS.md`](AGENTS.md)
 
-**Zadnje ažuriranje:** 2026-11-08 · uloga: aplikacija · projektna i tehnička dokumentacija za PDF, sa snimkama zaslona i dijagramima
+**Zadnje ažuriranje:** 2026-11-23 · uloga: aplikacija · nekomercijalna licenca (PolyForm Noncommercial 1.0.0, CC BY-NC 4.0)
 **Predaja:** pon 9. 11. 2026. do 24:00 · **Zamrzavanje funkcionalnosti:** ned 8. 11. u 18:00
 **Najviše bodova (30/60):** izvedivost (radni prototip na javnom linku), dojam UI/UX, video
 
@@ -37,6 +37,7 @@
 | 2026-11-08 | aplikacija | Kartica zgrade: za razred „visoka“ kod pretežno kosog krova tekst više ne piše „Pretežno ravan krov“, nego da su pogodni ravni dijelovi; legenda „ravni dijelovi krova (0–10°)“ | `app/src/card.js`, `app/src/layers.js` |
 | 2026-11-09 | aplikacija | Tehnička dokumentacija: slika 2 smanjena da stane ispod naslova 3.3 (u PDF-u naslov više ne ostaje sam na stranici); ispravljen redak „zid“ u tablici klasifikacije ploha | `docs/TEHNICKA_DOKUMENTACIJA.md` |
 | 2026-11-09 | aplikacija | Imena tima i mentora na naslovnicama dokumentacije i u README → „Tim“ (odluka tima); pravilo o imenima u AGENTS.md prilagođeno | README, `docs/PROJEKTNA_DOKUMENTACIJA.md`, `docs/TEHNICKA_DOKUMENTACIJA.md`, AGENTS.md |
+| 2026-11-23 | aplikacija | **Licenca promijenjena:** kod PolyForm Noncommercial 1.0.0, izvedeni podaci CC BY-NC 4.0 (geokodiranje ODbL); README, „O projektu“ u aplikaciji, dokumentacija | `LICENSE`, README, `app/index.html`, `docs/` |
 
 ## U tijeku
 
@@ -92,6 +93,7 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 | 2026-11-07 | **Hosting: GitHub Pages**; `buildings.pmtiles` je prilog GitHub Releasea `podaci` (ne u gitu) | besplatno, isti repo, HTTP Range; nakon novog izvoza `gh release upload podaci … --clobber` |
 | 2026-11-07 | **Repo javan** od 7. 11. | Pages na besplatnom računu traži javni repo; ionako uvjet predaje |
 | 2026-11-07 | **Licenca:** MIT za kod, CC BY 4.0 za izvedene podatke | prijedlog iz otvorenih pitanja, boduje se |
+| 2026-11-23 | **Licenca:** PolyForm Noncommercial 1.0.0 za kod, CC BY-NC 4.0 za izvedene podatke (zamjenjuje MIT / CC BY 4.0) | rezultati objavljeni; komercijalna upotreba samo uz dopuštenje autora |
 | 2026-11-07 | Tuđi PDF (LANUV NRW) uklonjen iz repoa, poveznica u `PREGLED_LITERATURE.md` | autorska prava u javnom repou |
 | 2026-11-08 | Geokodiranje preko Nominatima uz predmemoriju u gitu; prihvaća se samo pogodak s kućnim brojem | nema otvorenog adresnog registra s koordinatama pri ruci; bolje bez oznake nego s krivom |
 | 2026-11-08 | ISGE: potrošnja **struje u 2023.** (2024. ima samo 6 mjeseci); udio FN samo za objekte s ≥ 20 MWh/god | manji potrošači koriste dio zgrade, omjer prema cijelom krovu bio bi višestruko prevelik |
@@ -117,7 +119,7 @@ Kad tablica postoji, upiši je ovdje – aplikacija je tada spaja u `export_app.
 | # | Stavka | Uloga | Stanje |
 |---|---|---|---|
 | 1 | Javni GitHub repozitorij s izvornim kodom | aplikacija | ✔ javan od 7. 11. (github.com/korejur/DataOasis) |
-| 2 | Licenca otvorenog koda (`LICENSE`) | svi – odluka | ✔ MIT (kod), CC BY 4.0 (podaci) |
+| 2 | Licenca otvorenog koda (`LICENSE`) | svi – odluka | ✔ MIT (kod), CC BY 4.0 (podaci); od 23. 11. PolyForm Noncommercial 1.0.0 / CC BY-NC 4.0 |
 | 3 | Tehnička dokumentacija: dijagram, standardi, integracija s javnim sustavima, tehnički/organizacijski/pravni preduvjeti | aplikacija | ✔ `docs/TEHNICKA_DOKUMENTACIJA.md` |
 | 4 | Projektna dokumentacija: problem, ciljni korisnici, vrijednost, daljnji razvoj | aplikacija | ✔ `docs/PROJEKTNA_DOKUMENTACIJA.md` |
 | 5 | **Popis svih skupova podataka** s izdavateljem, poveznicom i licencom | metodologija + podaci | ✔ `docs/TEHNICKA_DOKUMENTACIJA.md` pogl. 8 |

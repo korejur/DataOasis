@@ -8,8 +8,8 @@
 **Tim:** Korina Jurić, Marko Ćurković, Mario Mrvčić  
 **Mentor:** prof. dr. sc. Boris Milašinović  
 **Aplikacija:** https://korejur.github.io/DataOasis/  
-**Izvorni kod:** https://github.com/korejur/DataOasis (licenca MIT)  
-**Izvedeni podaci:** CC BY 4.0, prilog Releasea [`podaci`](https://github.com/korejur/DataOasis/releases/tag/podaci)  
+**Izvorni kod:** https://github.com/korejur/DataOasis (licenca PolyForm Noncommercial 1.0.0, do 23. 11. 2026. MIT)  
+**Izvedeni podaci:** CC BY-NC 4.0 (do 23. 11. 2026. CC BY 4.0), prilog Releasea [`podaci`](https://github.com/korejur/DataOasis/releases/tag/podaci)  
 **Verzija dokumenta:** 1.0, studeni 2026.  
 **Povezani dokument:** Krov+ – Projektna dokumentacija
 
@@ -416,7 +416,7 @@ Izdavatelji i licence skupova s Portala otvorenih podataka provjereni su preko C
 
 **Navođenje izvora prema Otvorenoj dozvoli.** Izdavatelj i Portal otvorenih podataka navode se u
 aplikaciji (prozor „O projektu i izvorima podataka“), u README-u i u ovoj dokumentaciji. Izvorni podaci se
-ne mijenjaju; izvedeni podaci objavljuju se pod CC BY 4.0 uz navođenje ovih izvora.
+ne mijenjaju; izvedeni podaci objavljuju se pod CC BY-NC 4.0 uz navođenje ovih izvora.
 
 ### 8.2 Ostali javni izvori (tijela javnog sektora i EU)
 

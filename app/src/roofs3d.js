@@ -1,4 +1,4 @@
-// Eksperiment: stvarna 3D geometrija krovova (kose plohe + zidovi do tla) kao WebGL sloj.
+// Stvarna 3D geometrija krovova (kose plohe + zidovi do tla) kao WebGL sloj.
 //
 // MapLibre `fill-extrusion` zna samo prizme s ravnim vrhom („kocke“). Ovdje se iz sloja
 // krovnih ravnina (planes.pmtiles) za svaku plohu računa visina u svakom vrhu iz jednadžbe

@@ -165,7 +165,7 @@ def district_json(b: gpd.GeoDataFrame, public: dict[str, dict]) -> list[dict]:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--samo-json", action="store_true", help="samo districts.json i city.json, bez pločica")
-    ap.add_argument("--samo-plohe", action="store_true", help="samo planes.pmtiles (eksperiment)")
+    ap.add_argument("--samo-plohe", action="store_true", help="samo planes.pmtiles")
     args = ap.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     t = time.time()
@@ -212,7 +212,7 @@ PLANES_MINZOOM = 15
 
 
 def export_planes(t2: pd.DataFrame) -> None:
-    """Eksperiment: sloj krovnih ravnina za fotonapon (prikaz po plohama, kao Solarna karta).
+    """Sloj krovnih ravnina za fotonapon (prikaz po plohama, kao Solarna karta).
 
     Atributi: y = prinos [kWh/kWp], c = 2 koristi se / 1 loša orijentacija ili premala /
     0 zgrada nije kandidat (< 3 kWp), j = objekt Grada, d = četvrt (za prigušivanje).
@@ -258,7 +258,7 @@ def export_planes(t2: pd.DataFrame) -> None:
     dst = OUT / "planes.pmtiles"
     dst.unlink(missing_ok=True)
     pyogrio.write_dataframe(pl, dst, driver="PMTiles", layer="planes", encoding="UTF-8", dataset_options={
-        "MINZOOM": PLANES_MINZOOM, "MAXZOOM": MAXZOOM, "NAME": "Krov+ - krovne ravnine (eksperiment)",
+        "MINZOOM": PLANES_MINZOOM, "MAXZOOM": MAXZOOM, "NAME": "Krov+ - krovne ravnine",
         "MAX_SIZE": MAX_TILE_BYTES, "MAX_FEATURES": 400_000})
     print(f"[ok] planes.pmtiles {len(pl)} ravnina, {dst.stat().st_size / 1e6:.1f} MB, {time.time() - t:.0f} s")
 

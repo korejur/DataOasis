@@ -27,7 +27,7 @@ export const fillColor = {
     COLORS.fn.umjeren],
 };
 
-// Eksperiment: krovne ravnine za fotonapon (od zooma 15), boja po plohi.
+// Krovne ravnine za fotonapon (od zooma 15), boja po plohi.
 export const PLANE_BAD = '#9cc3e4';
 export const PLANE_MINZOOM = 15;
 export const planeColor = ['case',

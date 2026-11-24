@@ -101,7 +101,7 @@ def main() -> None:
     yld = load_interpolator()
     parts = []
     for slug in DISTRICTS:
-        # Eksperiment: krovne ravnine (spojena triangulacija) umjesto pojedinih ploha, ako postoje.
+        # Krovne ravnine (spojena triangulacija) umjesto pojedinih ploha, ako postoje.
         fp = PROCESSED / "planes" / f"{slug}.parquet"
         if not fp.exists():
             fp = FACES_DIR / f"{slug}.parquet"

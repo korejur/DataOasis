@@ -108,7 +108,7 @@ function addLayers() {
     id: 'bld-fill', type: 'fill', ...src,
     paint: { 'fill-color': fillColor.zk, 'fill-opacity': opacityExpr() },
   }, before);
-  // Eksperiment: krovne ravnine (sloj fotonapona, od zooma 15)
+  // Krovne ravnine (sloj fotonapona, od zooma 15)
   map.addSource('pl', { type: 'vector', url: `pmtiles://${dataUrl('planes.pmtiles')}`, attribution: '' });
   map.addLayer({
     id: 'pl-fill', type: 'fill', source: 'pl', 'source-layer': 'planes', minzoom: PLANE_MINZOOM,

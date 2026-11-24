@@ -1,4 +1,4 @@
-"""Spajanje triangulacije ZG3D-a u krovne ravnine (eksperiment, lokalna kopija).
+"""Spajanje triangulacije ZG3D-a u krovne ravnine.
 
 ZG3D zapisuje krov kao mrežu trokuta i četverokuta. Pravilo „ploha ≥ 5 m²“ tada se
 primjenjuje na pojedini trokut, pa sitni dijelovi velikih krovova ispadaju iz izračuna

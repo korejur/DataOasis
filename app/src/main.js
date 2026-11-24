@@ -484,7 +484,12 @@ function goToPlace({ lon, lat }) {
 // O projektu (na klik; uvod za prvi posjet je u panelu, onboarding.js)
 // ---------------------------------------------------------------------------
 const about = $('about');
-const openAbout = () => about.showModal();
+// Fokus na naslov (ne na prvu poveznicu ili gumb niže), pa se otvara na vrhu.
+const openAbout = () => {
+  about.showModal();
+  about.querySelector('h2').focus();
+  about.scrollTop = 0;
+};
 $('open-about').addEventListener('click', openAbout);
 about.addEventListener('click', (e) => { if (e.target === about) about.close(); });
 

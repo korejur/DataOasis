@@ -40,6 +40,7 @@
 | 2026-11-23 | aplikacija | **Licenca promijenjena:** kod PolyForm Noncommercial 1.0.0, izvedeni podaci CC BY-NC 4.0 (geokodiranje ODbL); README, „O projektu“ u aplikaciji, dokumentacija | `LICENSE`, README, `app/index.html`, `docs/` |
 | 2026-11-24 | aplikacija | Naslovna slika kod dijeljenja linka: Open Graph i Twitter oznake, slika 1200×630: ikona, „Krov+“ i krilatica na tamnozelenoj pozadini (Source Serif 4) | `app/index.html`, `app/public/og-slika.jpg` |
 | 2026-11-24 | aplikacija | „O projektu“: odjeljak **Pretpostavke izračuna** (11 parametara s izvorom, procjene označene, napomena da su vrijednosti okvirne); trošak FN 1 300 €/kWp ostaje kao oprezna procjena (cjenici instalatera ~700–1 500 €/kWp, sada imenovani); u metodologiji dodani retci za snagu modula, pokrivenost i gubitke; README bez „za urbaniste“ | `app/index.html`, `app/src/style.css`, `docs/METODOLOGIJA.md`, `docs/TEHNICKA_DOKUMENTACIJA.md`, `pipeline/config.py`, README, AGENTS.md |
+| 2026-11-24 | aplikacija | „O projektu“ se otvara na vrhu (fokus na naslov); zatvara se samo × gore desno (kao kartica zgrade), Esc ili klikom izvan prozora | `app/index.html`, `app/src/main.js`, `app/src/style.css` |
 
 ## U tijeku
 

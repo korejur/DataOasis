@@ -249,6 +249,10 @@ h1, h2, h3, p { margin: 0; }
 .about::backdrop { background: rgba(31, 30, 27, .4); }
 .about-inner { padding: 28px 30px 24px; display: grid; gap: 12px; font-size: 14.5px; line-height: 1.55; }
 .about h2 { font-family: var(--serif); font-size: 32px; font-weight: 600; letter-spacing: -0.01em; }
+.about h2:focus { outline: none; }
+/* Zatvaranje: × gore desno (ghost), uz Esc i klik izvan prozora */
+.about-inner { position: relative; }
+.about-x { position: absolute; top: 14px; right: 14px; padding: 0; color: var(--ink); cursor: pointer; }
 .about h3 { font-family: var(--serif); font-size: 18px; font-weight: 600; margin-top: 4px; }
 .about .lead { font-family: var(--serif); font-size: 19px; line-height: 1.45; }
 .about ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }

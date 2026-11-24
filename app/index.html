@@ -108,7 +108,10 @@
   <!-- O projektu, metodologija i izvori (otvara se na klik) -->
   <dialog id="about" class="about">
     <form method="dialog" class="about-inner">
-      <h2>Krov+</h2>
+      <button class="icon-btn about-x" value="close" aria-label="Zatvori">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <h2 tabindex="-1">Krov+</h2>
       <p class="lead">Koji krovovi mogu postati <strong>zeleni</strong> ili dobiti <strong>solarne panele</strong>, i koliko bi to pomoglo gradu?
         Postupak se oslanja samo na otvorene podatke, pa se može primijeniti na svaki grad s 3D modelom zgrada. Zagreb je prvi.</p>
       <p>Za svih ~357 000 zgrada iz otvorenog 3D modela Grada Zagreba izračunati su nagib i orijentacija svake krovne plohe.
@@ -163,7 +166,6 @@
       <p class="small">Datathon Portala otvorenih podataka 2026. · izazov B – Okoliš i održivi prostor<br />
         Izvorni kod (PolyForm Noncommercial 1.0.0) i izvedeni podaci (CC BY-NC 4.0), bez komercijalne upotrebe:
         <a href="https://github.com/korejur/DataOasis" target="_blank" rel="noopener">github.com/korejur/DataOasis</a></p>
-      <button class="primary" value="ok" autofocus>Zatvori</button>
     </form>
   </dialog>
 

@@ -97,7 +97,9 @@ PARAMS = {
     "grid_co2_kg_per_kwh": 0.134,
     # eMajstor (2026.): 108-180 EUR/m2 kompletna izvedba bez hidroizolacije
     "green_cost_eur_m2": 130.0,
-    # Hrvatski izvori 2025.: ~1.200-1.500 EUR/kWp prije subvencija (FZOEU do 600 EUR/kW)
+    # Cjenici instalatera 2025.-2026. (Solarna Hrvatska, Obnovi.hr, Zenerg): ~700-1.500 EUR/kWp,
+    # veći sustavi jeftiniji po kWp. Oprezna procjena u gornjem dijelu raspona, prije subvencija
+    # (FZOEU do 600 EUR/kW).
     "pv_cost_eur_kwp": 1300.0,
     # Eurostat nrg_pc_204: kućanstva, razred 2500-4999 kWh, sa svim porezima, HR 2026-S1:
     # 0,1816 EUR/kWh (2025-S2: 0,1652).

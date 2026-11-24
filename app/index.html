@@ -122,6 +122,37 @@
       </ul>
       <p class="small">Brojke su <em>tehnički potencijal</em>: gornja granica prije statičke provjere krova, zaštite kulturnih dobara i vlasničkih odnosa.
         Dio modela potječe iz snimanja 2008., pa novije promjene na krovovima nisu vidljive.</p>
+      <h3>Pretpostavke izračuna</h3>
+      <p class="small">Uz geometriju krova izračun koristi nekoliko pretpostavki. Većina je preuzeta iz literature i službene statistike,
+        a one označene kao procjena odabrane su kao razumna sredina i mogu se promijeniti.
+        Sve su <strong>okvirne vrijednosti</strong>: rezultati služe kao referentni okvir za usporedbu zgrada i četvrti i odabir gdje krenuti,
+        a ne kao projektna procjena za pojedini krov, koja traži pregled na terenu.</p>
+      <dl class="params">
+        <dt>Nagib za zeleni krov</dt>
+        <dd>0–10° visoka, 10–20° srednja, 20–35° niska pogodnost <span>FLL (2018), preko LANUV NRW</span></dd>
+        <dt>Iskoristivo 75 % pogodne plohe</dt>
+        <dd>25 % se odbija za rubove (sigurnosni pojas), instalacije, svjetlarnike i izlaze na krov <span>procjena</span></dd>
+        <dt>Oborina 880 mm/god.</dt>
+        <dd>između postaja Zagreb-Grič (887 mm) i Zagreb-Maksimir (868 mm) <span>DHMZ</span></dd>
+        <dt>Zadržavanje kišnice 50 %</dt>
+        <dd>ekstenzivni krov s oko 10 cm supstrata <span>FLL (2018); Mentens i sur. (2006)</span></dd>
+        <dt>Zeleni krov 130 €/m²</dt>
+        <dd>raspon 108–180 €/m² za izvedbu bez hidroizolacije <span>eMajstor (2026.)</span></dd>
+        <dt>Moduli 0,20 kWp/m²</dt>
+        <dd>tipični modul od 400–450 W na oko 2 m²; pokriveno 70 % kosog i 50 % ravnog krova (razmak redova) <span>procjena</span></dd>
+        <dt>Proizvodnja struje</dt>
+        <dd>prema nagibu i orijentaciji svake plohe, uz 14 % gubitaka sustava <span>PVGIS 5.3, JRC</span></dd>
+        <dt>Sunčana elektrana 1 300 €/kWp</dt>
+        <dd>oprezna procjena prije subvencija: gornji dio raspona od oko 700–1 500 €/kWp iz cjenika instalatera; veći sustavi su jeftiniji po kWp <span>procjena (Solarna Hrvatska, Obnovi.hr, Zenerg; 2025.–2026.)</span></dd>
+        <dt>Struja 0,18 €/kWh</dt>
+        <dd>cijena za kućanstva sa svim porezima, 2026. <span>Eurostat</span></dd>
+        <dt>Emisije 0,134 kg CO₂/kWh</dt>
+        <dd>proizvodnja električne energije u Hrvatskoj <span>EEA (2020.)</span></dd>
+        <dt>Kućanstvo 4 630 kWh/god.</dt>
+        <dd>potrošnja kućanstava podijeljena s brojem kućanstava, 2024. <span>Eurostat</span></dd>
+      </dl>
+      <p class="small">Poveznice na izvore i formule su u
+        <a href="https://github.com/korejur/DataOasis/blob/main/docs/METODOLOGIJA.md#8-izvori-parametara" target="_blank" rel="noopener">metodologiji</a>.</p>
       <h3>Izvori podataka</h3>
       <ul class="sources">
         <li>3D model zgrada ZG3D (LoD 2.2) – Grad Zagreb, <a href="https://data.gov.hr" target="_blank" rel="noopener">data.gov.hr</a></li>

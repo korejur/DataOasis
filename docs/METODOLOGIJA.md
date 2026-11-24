@@ -125,7 +125,7 @@ Optimum: 35° prema jugu, 1242 kWh/kWp. Vodoravno: 1053 kWh/kWp.
   novije godine EEA objavljuje samo u interaktivnom grafikonu)
 * **Ekvivalent kućanstava** = `E / 4630 kWh` (Eurostat: potrošnja el. energije kućanstava u RH 2024.
   6 818 GWh / 1 471,9 tis. kućanstava). Za cijeli grad je to tehnički potencijal, veći od broja kućanstava u Zagrebu.
-* **Investicija** = `P × 1300 €/kWp` (hrvatski izvori 2025.: 1200–1500 €/kWp)
+* **Investicija** = `P × 1300 €/kWp` (oprezna procjena; cjenici instalatera 2025.–2026.: ~700–1 500 €/kWp, veći sustavi jeftiniji po kWp; vidi pogl. 8)
 * **Jednostavni povrat** = `investicija / (E × 0,18 €/kWh)` (Eurostat, cijena za kućanstva u RH,
   razred 2 500–4 999 kWh, sa svim porezima, 1. pol. 2026.). Bez subvencija. Pretpostavlja da se
   sva proizvedena energija troši na mjestu, pa je za zgrade s viškom proizvodnje optimistično.
@@ -242,7 +242,10 @@ Provjereno 8. 11. 2026. Vrijednosti su u `pipeline/config.py` (`PARAMS`).
 | Godišnje zadržavanje (ekstenzivni krov) | 50 % | FLL (2018) preko LANUV NRW (50 % za 10 cm supstrata); Mentens, Raes i Hermy (2006), *Landscape and Urban Planning* 77(3), 217–226 (~45 %) |
 | Trošak zelenog krova | 130 €/m² | eMajstor (2026.): 108–180 €/m² bez hidroizolacije |
 | Prinos FN | PVGIS | [PVGIS 5.3, JRC](https://re.jrc.ec.europa.eu/pvg_tools/en/) (SARAH3, 2005.–2023.) |
-| Trošak FN | 1 300 €/kWp | hrvatski izvori 2025.: 1 200–1 500 €/kWp |
+| Snaga modula | 0,20 kWp/m² | tipični modul 400–450 W na ~2 m² (podatkovni listovi proizvođača) |
+| Pokrivenost modulima | 70 % kose plohe, 50 % ravnog krova | procjena: rubovi i prepreke na kosom krovu; razmak redova zbog sjene na ravnom krovu |
+| Gubici sustava | 14 % | zadana vrijednost PVGIS-a |
+| Trošak FN | 1 300 €/kWp | cjenici instalatera 2025.–2026.: [Solarna Hrvatska](https://solarnahrvatska.hr/novosti/vodic-za-2025-ovo-su-prosjecne-cijene-kucnih-solarnih-elektrana-u-hrvatskoj) 700–1 500 €/kW, [Obnovi.hr](https://www.obnovi.hr/obnovljivi-izvori-energije-solarni-paneli/) 900–1 100 €/kW, [Zenerg](https://zenerg.hr/blog/koliko-stvarno-kosta-solarna-elektrana-u-2026-transparentni-cjenik-od-instalera/) ~1 140 €/kW (4,5 kW) do ~840 €/kW (13,6 kW). Oprezna procjena u gornjem dijelu raspona, prije subvencija |
 | Emisije el. energije | 0,134 kg CO₂e/kWh | [EEA: intenzitet emisija proizvodnje el. energije](https://www.eea.europa.eu/en/analysis/indicators/greenhouse-gas-emission-intensity-of-1/greenhouse-gas-emission-intensity-of-electricity-generation-country-level), RH 2020.: 133,8 g/kWh |
 | Cijena el. energije za kućanstva | 0,18 €/kWh | [Eurostat nrg_pc_204](https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204/default/table): RH, 2 500–4 999 kWh, svi porezi, 2026-S1: 0,1816 (2025-S2: 0,1652) |
 | Potrošnja kućanstva | 4 630 kWh/god | [Eurostat nrg_bal_c](https://ec.europa.eu/eurostat/databrowser/view/nrg_bal_c/default/table) (kućanstva, el. energija, RH 2024.: 6 818 GWh) / [Eurostat lfst_hhnhtych](https://ec.europa.eu/eurostat/databrowser/view/lfst_hhnhtych/default/table) (1 471,9 tis. kućanstava, 2024.) |

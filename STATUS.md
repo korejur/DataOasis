@@ -4,7 +4,7 @@
 > (u istom commitu kao i sam rad). Pravila ažuriranja su na dnu.
 > Plan i podjela uloga: [`docs/PLAN_RADA.md`](docs/PLAN_RADA.md) · kriteriji i bodovi: [`docs/NATJECANJE.md`](docs/NATJECANJE.md) · upute za agente: [`AGENTS.md`](AGENTS.md)
 
-**Zadnje ažuriranje:** 2026-11-23 · uloga: aplikacija · nekomercijalna licenca (PolyForm Noncommercial 1.0.0, CC BY-NC 4.0)
+**Zadnje ažuriranje:** 2026-11-24 · uloga: aplikacija · nekomercijalna licenca (PolyForm Noncommercial 1.0.0, CC BY-NC 4.0)
 **Predaja:** pon 9. 11. 2026. do 24:00 · **Zamrzavanje funkcionalnosti:** ned 8. 11. u 18:00
 **Najviše bodova (30/60):** izvedivost (radni prototip na javnom linku), dojam UI/UX, video
 
@@ -38,6 +38,7 @@
 | 2026-11-09 | aplikacija | Tehnička dokumentacija: slika 2 smanjena da stane ispod naslova 3.3 (u PDF-u naslov više ne ostaje sam na stranici); ispravljen redak „zid“ u tablici klasifikacije ploha | `docs/TEHNICKA_DOKUMENTACIJA.md` |
 | 2026-11-09 | aplikacija | Imena tima i mentora na naslovnicama dokumentacije i u README → „Tim“ (odluka tima); pravilo o imenima u AGENTS.md prilagođeno | README, `docs/PROJEKTNA_DOKUMENTACIJA.md`, `docs/TEHNICKA_DOKUMENTACIJA.md`, AGENTS.md |
 | 2026-11-23 | aplikacija | **Licenca promijenjena:** kod PolyForm Noncommercial 1.0.0, izvedeni podaci CC BY-NC 4.0 (geokodiranje ODbL); README, „O projektu“ u aplikaciji, dokumentacija | `LICENSE`, README, `app/index.html`, `docs/` |
+| 2026-11-24 | aplikacija | Naslovna slika kod dijeljenja linka: Open Graph i Twitter oznake, slika 1200×630: ikona, „Krov+“ i krilatica na tamnozelenoj pozadini (Source Serif 4) | `app/index.html`, `app/public/og-slika.jpg` |
 
 ## U tijeku
 

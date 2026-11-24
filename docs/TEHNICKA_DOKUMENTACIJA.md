@@ -574,7 +574,7 @@ Vrijednosti su u `pipeline/config.py` (`PARAMS`), provjereno 8. 11. 2026. Detalj
 | Najmanja elektrana po zgradi | 3 kWp | vlastita pretpostavka |
 | Gubici sustava FN | 14 % | zadana vrijednost PVGIS-a |
 | Prinos FN | po plohi | [PVGIS 5.3, JRC](https://re.jrc.ec.europa.eu/pvg_tools/en/) (SARAH3, 2005.–2023.) |
-| Trošak FN | 1 300 €/kWp | hrvatski izvori 2025.: 1 200–1 500 €/kWp |
+| Trošak FN | 1 300 €/kWp | cjenici instalatera 2025.–2026.: [Solarna Hrvatska](https://solarnahrvatska.hr/novosti/vodic-za-2025-ovo-su-prosjecne-cijene-kucnih-solarnih-elektrana-u-hrvatskoj) 700–1 500 €/kW, [Obnovi.hr](https://www.obnovi.hr/obnovljivi-izvori-energije-solarni-paneli/) 900–1 100 €/kW, [Zenerg](https://zenerg.hr/blog/koliko-stvarno-kosta-solarna-elektrana-u-2026-transparentni-cjenik-od-instalera/) ~1 140 €/kW (4,5 kW) do ~840 €/kW (13,6 kW). Oprezna procjena u gornjem dijelu raspona, prije subvencija |
 | Emisije el. energije | 0,134 kg CO₂e/kWh | EEA, RH 2020.: 133,8 g/kWh |
 | Cijena el. energije za kućanstva | 0,18 €/kWh | Eurostat nrg_pc_204, RH, 2 500–4 999 kWh, svi porezi, 2026-S1 |
 | Potrošnja kućanstva | 4 630 kWh/god | Eurostat nrg_bal_c (6 818 GWh, 2024.) / lfst_hhnhtych (1 471,9 tis. kućanstava) |

@@ -2,7 +2,7 @@
 
 *Krov za zelenije sutra.* Zelenilo, zadržana kišnica i struja sa sunčanih elektrana na krovovima.
 
-Datathon Portala otvorenih podataka 2026. Alat za urbaniste koji iz 3D modela
+Datathon Portala otvorenih podataka 2026. Alat koji iz 3D modela
 zgrada Grada Zagreba (ZG3D, LoD 2.2) pronalazi krovove pogodne za **zelene
 krovove** i **fotonapon**, procjenjuje njihov doprinos (zadržana oborinska
 voda, proizvedena energija, smanjenje CO₂, trošak) i pomaže odrediti gdje
@@ -115,7 +115,9 @@ npm run build     # statički build u app/dist/ (može na bilo koji statički ho
 
 To je *tehnički* potencijal, odnosno gornja granica. U aplikaciji se
 prikazuju scenariji (npr. 10 % ili 30 % kandidata, samo javne zgrade).
-Pretpostavke su u `docs/METODOLOGIJA.md`.
+Pretpostavke su u `docs/METODOLOGIJA.md` (pogl. 8, s izvorom za svaki parametar) i ukratko u aplikaciji
+(„O projektu“ → „Pretpostavke izračuna“). Vrijednosti su okvirne i služe kao referentni okvir, a ne kao
+projektna procjena za pojedini krov.
 
 ## Izvori podataka
 
@@ -127,7 +129,7 @@ Puni popis s izdavateljima, poveznicama i licencama: [Tehnička dokumentacija, p
 | [Podaci o potrošnji i trošku za objekte Grada Zagreba](https://data.gov.hr/ckan/dataset/podaci-o-potrosnji-i-trosku-za-objekte-grada-zagreba) (ISGE) | Grad Zagreb, data.gov.hr | Otvorena dozvola |
 | [Registar kulturnih dobara](https://data.gov.hr/ckan/dataset/kulturna-dobra) | Ministarstvo kulture i medija, data.gov.hr | Otvorena dozvola |
 | [PVGIS 5.3](https://re.jrc.ec.europa.eu/pvg_tools/en/) | JRC, Europska komisija | uz navođenje izvora |
-| Parametri: DHMZ (oborine), EEA (emisije), Eurostat (cijena struje, potrošnja kućanstva) | DHMZ, EEA, Eurostat | uz navođenje izvora |
+| Parametri: DHMZ (oborine), EEA (emisije), Eurostat (cijena struje, potrošnja kućanstva), cjenici instalatera (trošak FN) | DHMZ, EEA, Eurostat, vidi `docs/METODOLOGIJA.md` | uz navođenje izvora |
 | OpenStreetMap: podloga [OpenFreeMap](https://openfreemap.org), geokodiranje [Nominatim](https://nominatim.org) | suradnici OSM-a | ODbL |
 
 ## Korišteni alati

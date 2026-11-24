@@ -10,6 +10,19 @@ krenuti prvo.
 
 **Aplikacija:** https://korejur.github.io/DataOasis/
 
+> **Nadogradnja nakon natjecanja (studeni 2026.): krovne plohe i 3D krovovi.**
+> Stanje prije nadogradnje je commit `179a4fc`. Razlike:
+>
+> * `pipeline/planes.py`: triangulacija ZG3D-a spaja se u krovne ravnine (ista zgrada, nagib unutar 0,5°,
+>   azimut unutar 2°, ista visina). Pravilo „ploha ≥ 5 m²“ za fotonapon tada vrijedi za cijelu ravninu,
+>   a ne za pojedini trokut, pa potencijal fotonapona raste s 3,82 na **4,14 TWh/god (+8,5 %)**.
+>   Brojke za zelene krovove su nepromijenjene. Brojke u dokumentaciji (`docs/`) odnose se na predani izračun.
+> * Karta u sloju fotonapona od zooma 15 prikazuje svaku krovnu plohu zasebno (kao solarni katastri).
+> * U 3D prikazu od zooma 15 krovovi imaju stvarnu geometriju (kose plohe i zidovi, `app/src/roofs3d.js`)
+>   umjesto prizmi s ravnim vrhom.
+> * Sloj ploha `planes.pmtiles` (~140 MB) je, kao i `buildings.pmtiles`, prilog Releasea `podaci`.
+>   Pločice predane verzije ostaju u istom Releaseu kao `buildings_predano.pmtiles`.
+
 ## Tim
 
 * Korina Jurić
